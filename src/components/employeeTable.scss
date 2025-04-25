@@ -1,0 +1,26 @@
+table {
+    border-collapse: collapse; /* Ensures no spacing between borders */
+    border: none; /* Removes table border */
+    width: 100%; /* Ensures full width */
+    margin-top: 100px;
+}
+
+table tr th {
+    background-color: white;
+    font-weight: bold;
+}
+
+/* Apply alternating row colors starting from the second row */
+table tr:nth-child(odd) {
+    background-color: #f2f2f2; /* Light gray */
+}
+
+table tr:nth-child(even) {
+    background-color: #ffffff; /* White */
+}
+
+/* Hide the 2nd column */
+// table td:nth-child(2),
+// table th:nth-child(2) {
+//     display: none;
+// }

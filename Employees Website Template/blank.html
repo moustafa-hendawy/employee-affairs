@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+
+
+
+    <title>الصفحة الرئيسية</title>
+    <!-- favourite icon -->
+    <link rel="icon" type="image/x-icon" href="img/icon.png" />
+
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="lib/font-awesome-4.7.0/css/font-awesome.css" />
+    <link rel="stylesheet" href="css/bootstrap.css">
+    
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/dataTables.bootstrap5.css">
+    <link rel="stylesheet" href="css/buttons.bootstrap5.css">
+
+
+    <!-- Link to css file-->
+    <link rel="stylesheet" href="css/style.css" />
+
+</head>
+
+<body>
+
+
+    <header>
+
+        <div class="container">
+
+            <img src="img/imgl.png" alt="" class="imgl">
+            <img src="img/logor.png" alt="" class="imgr">
+        </div>
+
+    </header>
+
+
+    <main>
+
+        <section>
+            <div class="container">
+                <div class="cover">
+                    <div class="circle"></div>
+                </div>
+            </div>
+            </div>
+        </section>
+        
+    </main>
+
+    <footer>
+
+
+
+    </footer>
+
+</body>
+
+<script src="js/jquery-3.7.1.min.js"></script>
+
+
+<script src="js/bootstrap.bundle.js"></script>
+<script src="js/dataTables.js"></script>
+<script src="js/dataTables.bootstrap5.js"></script>
+<script src="js/dataTables.buttons.js"></script>
+<script src="js/buttons.bootstrap5.js"></script>
+<script src="js/jszip.js"></script>
+<script src="js/pdfmake.js"></script>
+<script src="js/vfs_fonts.js"></script>
+<script src="js/buttons.html5.js"></script>
+<script src="js/buttons.print.js"></script>
+<script src="js/buttons.colVis.js"></script>
+
+<script>
+
+    $('#example').DataTable({
+        layout: {
+            topStart: {
+                buttons: ['copy', 'excel', 'print','colvis']
+            }
+        }
+    });
+</script>
+
+</html>

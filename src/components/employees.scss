@@ -1,0 +1,71 @@
+
+.employees {
+    .header {
+       padding: 10px;
+        
+        .header-img {
+            display: flex;
+        justify-content: space-between;
+        .human {
+            width: 190px;
+            height: 60px;
+        }
+    
+    .employee-image {
+        width: 190px;
+        height: 60px;
+    }
+    
+}
+// .border {
+//     margin-top: 20px;
+//     border-bottom: solid 1px;
+//         // boxShadow: 0px 4px 6px rgba(0, 0, 0, 0.1); // Shadow for the border
+//          width: 500px;;
+//         padding-left: 400px;
+//         line-height: 100px;
+//         // margin-right: 15%;
+//         margin: 20px auto; /* Centers the line */
+//         border: none;
+//         height: 3px; /* Thickness of the line */
+//     background: rgba(0, 0, 0, 0.2); /* Line color */
+//     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Adds shadow effect */
+//     border-radius: 5px; /* Smooth edges */
+    
+// }
+
+// .border {
+//     width: 80%; /* Adjust width as needed */
+//     margin: 20px auto; /* Centers the line */
+//     border: none;
+//     height: 3px; /* Thickness of the line */
+//     background: rgba(0, 0, 0, 0.7); /* Base color */
+//     border-radius: 5px; /* Smooth edges */
+//     position: relative;
+// }
+
+
+// /* Creates a thicker shadow in the middle */
+// .border::after {
+//     content: "";
+//     position: absolute;
+//     left: 50%;
+//     transform: translateX(-50%);
+//     top: 50%;
+//     width: 100%;
+//     height: 10px; /* Adjust thickness */
+//     background: radial-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0)); /* Gradual fade */
+//     border-radius: 10px;
+// }
+
+.border {
+    width: 100%; /* Full width */
+    margin: 10px 0; /* Spacing above and below */
+    border: none;
+    height: 3px; /* Thin line */
+    background: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0)); 
+}
+    
+    }
+
+}
