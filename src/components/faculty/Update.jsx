@@ -1,9 +1,33 @@
 import { InputText } from 'primereact/inputtext';
-import React from 'react'
-import { useParams } from 'react-router-dom'
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom'
+import { editFacultyData, updateFaculty } from '../redux/Reducers';
 
 function Update() {
     const {id} = useParams();
+    const faculty = useSelector(state => state.faculty);
+    console.log(faculty);
+    const dispatch = useDispatch();
+    const existingFaculty = faculty.filter((i) => i.id == id);
+    console.log(existingFaculty)
+    const {name, code} = existingFaculty[0];
+    const [uname, setUname] = useState(name);
+    const [ucode, setUcode] = useState(code);
+    const navigate = useNavigate();
+
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      dispatch(editFacultyData({ 
+      id: id,
+        updateFaculty: {
+          code: ucode,
+          name: uname
+        }
+      })
+      )
+      navigate('/faculty');
+    }
   return (
     <div>
       
@@ -14,15 +38,15 @@ function Update() {
    <h2>تعديل الكلية والكود</h2>
        <div className="flex flex-wrap align-items-center mb-3 gap-2">
        <label htmlFor="username" className="p-hidden-accessible">الكلية</label>
-       <InputText id="username" placeholder="الكلية" className="p-invalid mr-2"/>
+       <InputText id="username" placeholder="الكلية" className="p-invalid mr-2" value={uname} onChange={e => setUname(e.target.value)}/>
       
    </div>
    <div className="flex flex-wrap align-items-center gap-2 my-3">
        <label htmlFor="email" className="p-hidden-accessible">الكود</label>
-       <InputText id="email" placeholder="الكود" className="p-invalid mr-2"/>
+       <InputText placeholder="الكود" className="p-invalid mr-2" value={ucode} onChange={e => setUcode(e.target.value)}/>
    
    </div>
-   <button className='btn btn-primary'>Update</button>
+   <button className='btn btn-primary' onClick={handleSubmit}>تحـديث</button>
    </div>
     </div>
 

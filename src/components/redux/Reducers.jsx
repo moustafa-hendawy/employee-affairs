@@ -7,19 +7,27 @@ export const fetchFacultyData = createAsyncThunk('facultySlice/fetchFacultyData'
     const data = await res.json();
     return data;
  })
-
+// Edit
+export const editFacultyData = createAsyncThunk('facultySlice/editFacultyData', async ({ id, updateFaculty }) => {
+    const res = await fetch(`http://193.227.24.29/api/Faculty/${id}`, {
+        method: 'PUT',
+        body: JSON.stringify(updateFaculty),
+        headers: { 'Content-Type': 'application/json' }
+    });
+    const data = await res.json();
+    return data;
+});
 //delete
-export const deleteFacultyData = createAsyncThunk('productsSlice/deleteFacultyData', async (id) => {
+export const deleteFacultyData = createAsyncThunk('facultySlice/deleteFacultyData', async (id) => {
     await fetch(`http://193.227.24.29/api/Faculty/${id}`, {
       method: 'DELETE'
     });
     return id             // نرجع الـ id عشان نحذفه من الـ state
-    
   });
 
 
 
-export const facultySlice = createSlice({
+ const facultySlice = createSlice({
     name: 'facultySlice',
     initialState: [],
     reducers: {
@@ -38,6 +46,12 @@ export const facultySlice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(fetchFacultyData.fulfilled, (state, action) => {
             return action.payload;
+        })
+        .addCase(editFacultyData.fulfilled, (state, action) => {
+            const index = state.findIndex(i => i.id === action.payload.id);
+            if (index !== -1) {
+                state[index] = action.payload;
+            }
         })
          .addCase(deleteFacultyData.fulfilled, (state, action) => {
             return state.filter((i) => i.id !== action.payload );

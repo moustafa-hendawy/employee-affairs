@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import { deleteFacultyData, fetchFacultyData } from '../redux/Reducers';
 // import { useSelector } from 'react-redux';
 import Swal from 'sweetalert2'
+import './faculty.scss';
 
 function Faculty() {
   //  const [faculty,setFaculty] = useState([]);
@@ -57,9 +58,9 @@ let icons = (i) => {
   return (
     <div>
       <h1 style={{textAlign: 'center'}}>Facult ##</h1>
-    <DataTable value={faculty} tableStyle={{ minWidth: '60rem' }} style={{paddingRight: '20px'}}>
+    <DataTable className='dataTable' value={faculty} tableStyle={{ minWidth: '50rem'}} style={{paddingRight: '20px'}}>
         <Column field="id" header="Id"></Column>
-        <Column field="name" header="الإســـــم"></Column>
+        <Column field="name" header="الإســـــم" style={{width: '500px'}}></Column>
         <Column field="code" header="الكود"></Column>
         <Column body={icons} header="التعديل والحذف"/>
     </DataTable>

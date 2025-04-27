@@ -16,8 +16,8 @@ export function getEmployeeData() {
 //  )
 // }
 
-
-
+// http://193.227.24.29/swagger/index.html
+// https://fakestoreapi.com/products
 // http://193.227.24.29/api/Faculty
 
 
