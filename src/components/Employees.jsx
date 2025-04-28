@@ -2,6 +2,7 @@
 import React from 'react'
 import './employees.scss';
 import EmployeeTable from './employeeTable';
+import BackToMenu from './BackToMenu';
 
 function Employees() {
   return (
@@ -12,10 +13,9 @@ function Employees() {
                 <img className='employee-image' src='img/logor.png' alt=''/>
                 <img className='human' src='img/imgl.png' alt=''/>
             </div>
-            <div className="border">
-
-            </div>
+            <hr />
         </div>
+            <BackToMenu />
         <EmployeeTable />
     </div>
    </>

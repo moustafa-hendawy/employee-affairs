@@ -10,6 +10,7 @@ import { deleteFacultyData, fetchFacultyData } from '../redux/Reducers';
 // import { useSelector } from 'react-redux';
 import Swal from 'sweetalert2'
 import './faculty.scss';
+import BackToMenu from '../BackToMenu';
 
 function Faculty() {
   //  const [faculty,setFaculty] = useState([]);
@@ -58,6 +59,7 @@ let icons = (i) => {
   return (
     <div>
       <h1 style={{textAlign: 'center'}}>Facult ##</h1>
+      <BackToMenu />
     <DataTable className='dataTable' value={faculty} tableStyle={{ minWidth: '50rem'}} style={{paddingRight: '20px'}}>
         <Column field="id" header="Id"></Column>
         <Column field="name" header="الإســـــم" style={{width: '500px'}}></Column>
