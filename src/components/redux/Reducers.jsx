@@ -3,13 +3,13 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 // Fetch
 export const fetchFacultyData = createAsyncThunk('facultySlice/fetchFacultyData', async () => {
-    const res = await fetch('http://193.227.24.29/api/Faculty');
-    const data = await res.json();
+    const res = await fetch('http://193.227.24.29:5000/api/Faculty');
+    const data = await res.json(); 
     return data;
  })
 // Edit
 export const editFacultyData = createAsyncThunk('facultySlice/editFacultyData', async ({ id, updateFaculty }) => {
-    const res = await fetch(`http://193.227.24.29/api/Faculty/${id}`, {
+    const res = await fetch(`http://193.227.24.29:5000/api/Faculty/${id}`, {
         method: 'PUT',
         body: JSON.stringify(updateFaculty),
         headers: { 'Content-Type': 'application/json' }
@@ -19,7 +19,7 @@ export const editFacultyData = createAsyncThunk('facultySlice/editFacultyData', 
 });
 //delete
 export const deleteFacultyData = createAsyncThunk('facultySlice/deleteFacultyData', async (id) => {
-    await fetch(`http://193.227.24.29/api/Faculty/${id}`, {
+    await fetch(`http://193.227.24.29:5000/api/Faculty/${id}`, {
       method: 'DELETE'
     });
     return id             // نرجع الـ id عشان نحذفه من الـ state
