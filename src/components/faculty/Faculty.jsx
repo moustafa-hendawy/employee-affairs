@@ -29,9 +29,9 @@ function Faculty() {
   // Delete
   const handleDelete = (id) => {
     Swal.fire({
-        title: "Do you want to delete?",
+        title: "هل تريد الحذف فعلا ؟",
         showCancelButton: true,
-        confirmButtonText: "Delete",
+        confirmButtonText: "حـذف",
         confirmButtonColor: "#d33", // أحمر
         cancelButtonColor: "#3085d6"
       }).then((result) => {

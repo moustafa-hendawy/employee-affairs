@@ -6,11 +6,12 @@ import { editFacultyData, updateFaculty } from '../redux/Reducers';
 
 function Update() {
     const {id} = useParams();
+    console.log({id});
     const faculty = useSelector(state => state.faculty);
     console.log(faculty);
     const dispatch = useDispatch();
     const existingFaculty = faculty.filter((i) => i.id == id);
-    console.log(existingFaculty)
+    console.log(existingFaculty);
     const {name, code} = existingFaculty[0];
     const [uname, setUname] = useState(name);
     const [ucode, setUcode] = useState(code);

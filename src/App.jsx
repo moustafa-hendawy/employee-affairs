@@ -5,6 +5,7 @@ import Faculty from "./components/faculty/Faculty";
 import Update from "./components/faculty/Update";
 import MainPage from "./components/MainPage";
 
+
 function App() {
   
   return (
