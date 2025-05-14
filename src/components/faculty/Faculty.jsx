@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import { deleteFacultyData, fetchFacultyData } from '../redux/Reducers';
 // import { useSelector } from 'react-redux';
 import Swal from 'sweetalert2'
-import './Faculty.scss';
+import './Faculty.css';
 import BackToMenu from '../BackToMenu';
 
 function Faculty() {
