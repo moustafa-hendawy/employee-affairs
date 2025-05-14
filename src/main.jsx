@@ -4,16 +4,9 @@ import { createRoot } from 'react-dom/client'
 import App from './App.jsx'
 import { BrowserRouter } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
-
-import { configureStore } from '@reduxjs/toolkit'
 import { Provider } from 'react-redux'
-import facultySlice  from './components/redux/Reducers.jsx'
+import { store } from './components/redux/Store.jsx';
 
-export const store = configureStore({
-  reducer: {
-      faculty: facultySlice
-  },
-})
 
 
 createRoot(document.getElementById('root')).render(

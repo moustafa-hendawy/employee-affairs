@@ -1,4 +1,4 @@
-import './employeeTable.scss';
+import './employeeTable.css';
 import React, { useEffect, useState } from "react";
 import { getEmployeeData } from "../services/EmployeeService";
 import { DataTable } from 'primereact/datatable';

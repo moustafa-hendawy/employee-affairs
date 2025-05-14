@@ -19,8 +19,3 @@ table tr:nth-child(even) {
     background-color: #ffffff; /* White */
 }
 
-/* Hide the 2nd column */
-// table td:nth-child(2),
-// table th:nth-child(2) {
-//     display: none;
-// }

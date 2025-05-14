@@ -9,12 +9,18 @@ export function getEmployeeData() {
   )
 }
 
-// export function getFacultydata() {
-//  return(
-//   fetch('http://193.227.24.29/api/Faculty')
-//   .then((res) => res.json())
-//  )
-// }
+export function fetchJobGroups() {
+  return(
+   fetch('http://193.227.24.29:5000/api/JobGroup')
+   .then((res) => res.json())
+  )
+ }
+export function fetchJobSubGroups() {
+  return(
+   fetch('http://193.227.24.29:5000/api/JobSubGroup')
+   .then((res) => res.json())
+  )
+ }
 
 // http://193.227.24.29/swagger/index.html
 // https://fakestoreapi.com/products

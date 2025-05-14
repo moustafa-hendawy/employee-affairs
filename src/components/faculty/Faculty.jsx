@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import { deleteFacultyData, fetchFacultyData } from '../redux/Reducers';
 // import { useSelector } from 'react-redux';
 import Swal from 'sweetalert2'
-import './faculty.scss';
+import './Faculty.scss';
 import BackToMenu from '../BackToMenu';
 
 function Faculty() {
@@ -55,7 +55,7 @@ let icons = (i) => {
     </div>
   )
 }
-
+``
   return (
     <div>
       <h1 style={{textAlign: 'center'}}>Facult ##</h1>

@@ -1,6 +1,6 @@
 
 import React from 'react'
-import './employees.scss';
+import './employees.css';
 import EmployeeTable from './employeeTable';
 import BackToMenu from './BackToMenu';
 
