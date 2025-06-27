@@ -7,6 +7,17 @@ export const fetchFacultyData = createAsyncThunk('facultySlice/fetchFacultyData'
     const data = await res.json(); 
     return data;
  })
+
+// Add
+export const addFacultyData = createAsyncThunk('facultySlice/addFacultyData', async({id, name, code}) => {
+    const res = await fetch('http://193.227.24.29:5000/api/Faculty', {
+        method: 'POST',
+        headers: {"Content-Type": "application/json"},
+        body:JSON.stringify({id, name, code})
+    });
+    const data = await res.json();
+    return data;
+})
 // Edit
 export const editFacultyData = createAsyncThunk('facultySlice/editFacultyData', async ({ id, updateFaculty }) => {
     const res = await fetch(`http://193.227.24.29:5000/api/Faculty/${id}`, {
@@ -41,8 +52,9 @@ export const deleteFacultyData = createAsyncThunk('facultySlice/deleteFacultyDat
                uf.name = name,
                uf.code = code
             }
-        }
-    },
+        },
+        add: (state, action) => state.push(action.payload)
+     },
     extraReducers: (builder) => {
         builder.addCase(fetchFacultyData.fulfilled, (state, action) => {
             return action.payload;
@@ -58,6 +70,10 @@ export const deleteFacultyData = createAsyncThunk('facultySlice/deleteFacultyDat
             if (index !== -1) {
                 state[index] = action.payload;
             }
+        }) 
+        .addCase(addFacultyData.fulfilled, (state, action) => {
+             state.push(action.payload);
+           
         })
     }
 })

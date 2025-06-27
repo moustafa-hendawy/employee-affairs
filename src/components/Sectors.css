@@ -1,0 +1,25 @@
+.sector-title {
+    display: flex;
+    /* border: 1px solid;
+    border-radius: 6px;
+    padding: 5px;
+    margin: 30px; */
+}
+
+.first {
+    border: 1px solid;
+    border-radius: 6px;
+    padding: 5px;
+    margin: 30px 30px 30px 0 ;
+    background-color: aqua;
+}
+.units {
+
+    border: 1px solid;
+    border-radius: 6px;
+    padding: 5px;
+   margin: 30px 2px 30px 0 ;
+}
+p {
+    color: blue;
+}

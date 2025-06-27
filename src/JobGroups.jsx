@@ -17,7 +17,7 @@ setJobGroups(data);
     
   return (
     <div className='job'>
-        <h1>Job Groups</h1>
+        <h1 className='text-center'>المجموعة الوظيفية</h1>
     <DataTable className='dataTable' value={jobGroubs} tableStyle={{ minWidth: '35rem'}} style={{paddingRight: '20px'}}>
            <Column field="id" header="رقم المسلسل"></Column>
            <Column field="name" header="اسم المجموعة الوظيفية"></Column>

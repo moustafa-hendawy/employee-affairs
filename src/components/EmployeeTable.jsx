@@ -78,7 +78,7 @@ const EmployeeTable = () => {
 
     <div className="card--">
             <DataTable value={fakeApi} tableStyle={{ minWidth: '50rem' }}>
-                <Column field="id" header="الاسم"></Column>
+                <Column field="name" header="الاسم"></Column>
                 <Column field="title" header="الوظيفة"></Column>
                 <Column field="price" header="الإدارة"></Column>
                 <Column field="description" header="العمر"></Column>/

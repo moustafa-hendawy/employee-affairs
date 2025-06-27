@@ -132,7 +132,7 @@ function MainPage() {
               <div className="col-md-4 col-sm-6">
                 <div className="d-flex flex-column gap-2">
                   <Link to='/job-groups' className="btn btn-outline-primary">المجموعات الوظيفية</Link>
-                  <Link to='/jobs' className="btn btn-outline-primary">المجموعات النوعية</Link>
+                  <Link to='/job-subGroups' className="btn btn-outline-primary">المجموعات النوعية</Link>
                   <Link to='/job-names' className="btn btn-outline-primary">المسميات الوظيفية</Link>
                   <Link to='non-existance-type' className="btn btn-outline-primary">حالات عدم الوجود في العمل</Link>
                   <button className="btn btn-outline-primary">المسؤولون بالجهة</button>
@@ -145,7 +145,7 @@ function MainPage() {
                   <Link to='/educational-level' className="btn btn-outline-primary">المستوى العلمي</Link>
                   <Link to='qualification' className="btn btn-outline-primary">المؤهل الدراسي</Link>
                   <Link to='/military-state-type' className="btn btn-outline-primary">الموقف من التجنيد</Link>
-                  <Link to='/vacation' className="btn btn-outline-primary">الاجازات</Link>
+                  <Link to='/vacation-type' className="btn btn-outline-primary">الاجازات</Link>
                 </div>
               </div>
             </div>
