@@ -1,0 +1,7 @@
+.all-container {
+  /* position: fixed; */
+  display: flex;
+  flex-direction: column;
+  /* gap: 23px; */
+  width: 100%;
+}

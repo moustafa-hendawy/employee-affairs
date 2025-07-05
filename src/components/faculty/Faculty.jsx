@@ -169,96 +169,96 @@
 // export default Faculty;
 
 
-import React, { useEffect, useState } from 'react';
-import { DataTable } from 'primereact/datatable';
-import { Column } from 'primereact/column';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
-import { useDispatch, useSelector } from 'react-redux';
-import { deleteFacultyData, editFacultyData, fetchFacultyData } from '../redux/Reducers';
-import Swal from 'sweetalert2';
-import './Faculty.css';
-import BackToMenu from '../BackToMenu';
-import { Dialog } from 'primereact/dialog';
-import { InputText } from 'primereact/inputtext';
-import AddFaculty from './AddFaculty';
+// import React, { useEffect, useState } from 'react';
+// import { DataTable } from 'primereact/datatable';
+// import { Column } from 'primereact/column';
+// import EditIcon from '@mui/icons-material/Edit';
+// import DeleteIcon from '@mui/icons-material/Delete';
+// import { useDispatch, useSelector } from 'react-redux';
+// import { deleteFacultyData, editFacultyData, fetchFacultyData } from '../redux/Reducers';
+// import Swal from 'sweetalert2';
+// import './Faculty.css';
+// import BackToMenu from '../BackToMenu';
+// import { Dialog } from 'primereact/dialog';
+// import { InputText } from 'primereact/inputtext';
+// import AddFaculty from './AddFaculty';
 
-function Faculty() {
-  const faculty = useSelector(state => state.faculty);
-  const dispatch = useDispatch();
+// function Faculty() {
+//   const faculty = useSelector(state => state.faculty);
+//   const dispatch = useDispatch();
 
-  const [addVisible, setAddVisible] = useState(false);
-  const [editVisible, setEditVisible] = useState(false);
+//   const [addVisible, setAddVisible] = useState(false);
+//   const [editVisible, setEditVisible] = useState(false);
 
-  const [selectedFaculty, setSelectedFaculty] = useState(null);
-  const [editName, setEditName] = useState('');
-  const [editCode, setEditCode] = useState('');
+//   const [selectedFaculty, setSelectedFaculty] = useState(null);
+//   const [editName, setEditName] = useState('');
+//   const [editCode, setEditCode] = useState('');
 
-  useEffect(() => {
-    dispatch(fetchFacultyData());
-  }, [dispatch]);
+//   useEffect(() => {
+//     dispatch(fetchFacultyData());
+//   }, [dispatch]);
 
-  const handleDelete = (id) => {
-    Swal.fire({
-      title: "هل تريد الحذف فعلا ؟",
-      showCancelButton: true,
-      confirmButtonText: "حـذف",
-      confirmButtonColor: "#d33",
-      cancelButtonColor: "#3085d6"
-    }).then((result) => {
-      if (result.isConfirmed) {
-        dispatch(deleteFacultyData(id));
-        dispatch(fetchFacultyData());
-      }
-    });
-  };
+//   const handleDelete = (id) => {
+//     Swal.fire({
+//       title: "هل تريد الحذف فعلا ؟",
+//       showCancelButton: true,
+//       confirmButtonText: "حـذف",
+//       confirmButtonColor: "#d33",
+//       cancelButtonColor: "#3085d6"
+//     }).then((result) => {
+//       if (result.isConfirmed) {
+//         dispatch(deleteFacultyData(id));
+//         dispatch(fetchFacultyData());
+//       }
+//     });
+//   };
 
-  const handleEdit = (rowData) => {
-    setSelectedFaculty(rowData);
-    setEditName(rowData.name);
-    setEditCode(rowData.code);
-    setEditVisible(true);
-  };
+//   const handleEdit = (rowData) => {
+//     setSelectedFaculty(rowData);
+//     setEditName(rowData.name);
+//     setEditCode(rowData.code);
+//     setEditVisible(true);
+//   };
 
-  const handleUpdate = () => {
-    dispatch(editFacultyData({
-      id: selectedFaculty.id,
-      updateFaculty: {
-        name: editName,
-        code: editCode
-      }
-    }));
-    setEditVisible(false);
-    dispatch(fetchFacultyData()); // لتحديث الجدول بعد التعديل
-  };
+//   const handleUpdate = () => {
+//     dispatch(editFacultyData({
+//       id: selectedFaculty.id,
+//       updateFaculty: {
+//         name: editName,
+//         code: editCode
+//       }
+//     }));
+//     setEditVisible(false);
+//     dispatch(fetchFacultyData()); // لتحديث الجدول بعد التعديل
+//   };
 
-  const icons = (rowData) => (
-    <div className='icon-container' style={{ display: 'flex', gap: '10px' }}>
-      <button onClick={() => handleEdit(rowData)} style={{ background: 'none', border: 'none', color: '#1976d2' }}>
-        <EditIcon />
-      </button>
-      <button onClick={() => handleDelete(rowData.id)} style={{ background: 'none', border: 'none', color: 'red' }}>
-        <DeleteIcon />
-      </button>
-    </div>
-  );
+//   const icons = (rowData) => (
+//     <div className='icon-container' style={{ display: 'flex', gap: '10px' }}>
+//       <button onClick={() => handleEdit(rowData)} style={{ background: 'none', border: 'none', color: '#1976d2' }}>
+//         <EditIcon />
+//       </button>
+//       <button onClick={() => handleDelete(rowData.id)} style={{ background: 'none', border: 'none', color: 'red' }}>
+//         <DeleteIcon />
+//       </button>
+//     </div>
+//   );
 
-  return (
-    <div className="faculty-page">
-      <h2 className="page-title">إدارة الكليات</h2>
+  // return (
+    // <div className="faculty-page">
+    //   <h2 className="page-title">إدارة الكليات</h2>
 
-      <div className="action-bar">
+      {/* <div className="action-bar">
         <BackToMenu className='back-faculty' style={{ position: 'relative', left: '-65px' }} />
         <button className='add-btn' onClick={() => setAddVisible(true)}>+ إضــــــافــــــة </button>
-      </div>
+      </div> */}
 
       {/* Dialog الإضافة */}
-      <Dialog className="custom-dialog" header="إضافــة كلية" style={{ width: '50vw', borderRadius: '15px' }} visible={addVisible} onHide={() => setAddVisible(false)}>
+      {/* <Dialog className="custom-dialog" header="إضافــة كلية" style={{ width: '50vw', borderRadius: '15px' }} visible={addVisible} onHide={() => setAddVisible(false)}>
         <AddFaculty onClose={() => setAddVisible(false)} />
-      </Dialog>
+      </Dialog> */}
 
       {/* Dialog التعديل */}
-      <Dialog className='edit-dialog' header="تعديل بيانات الكلية" visible={editVisible} style={{ width: '30vw' }} onHide={() => setEditVisible(false)}>
+      {/* <Dialog className='edit-dialog' header="تعديل بيانات الكلية" visible={editVisible} style={{ width: '30vw' }} onHide={() => setEditVisible(false)}>
         <div className='p-fluid'>
           <div className="field">
             <label htmlFor="name">الاسم</label>
@@ -270,16 +270,133 @@ function Faculty() {
           </div>
           <button className='btn btn-primary mt-3' onClick={handleUpdate}>تحـديث</button>
         </div>
-      </Dialog>
+      </Dialog> */}
 
       {/* جدول الكليات */}
-      <DataTable className='dataTable' value={faculty} tableStyle={{ minWidth: '50rem' }}>
+      {/* <DataTable className='dataTable' value={faculty} tableStyle={{ minWidth: '50rem' }}>
         <Column field="id" header="Id" />
         <Column field="name" header="الاسم" style={{ width: '400px' }} />
         <Column field="code" header="الكود" />
         <Column body={icons} header="الإجـــراءات" />
-      </DataTable>
-    </div>
+      </DataTable> */}
+    // </div>
+
+
+
+
+//   );
+// }
+
+// export default Faculty;
+
+
+
+// import React, { useEffect } from 'react'
+// import { fetchFacultyData } from '../redux/Reducers';
+// import { useDispatch, useSelector } from 'react-redux';
+// import { Table } from 'react-bootstrap';
+
+// function Faculty() {
+//     const faculty = useSelector(state => state.faculty);
+//   const dispatch = useDispatch();
+
+//     useEffect(() => {
+//     dispatch(fetchFacultyData());
+//   }, [dispatch]);
+//   return (
+//     <div className='faculty'>
+//         <h1>الجهات التابع لها كل موظف</h1>
+//         <button><img src='img\mingcute_add-fill.png'/></button>
+//         <Table>
+          
+//             <tr>
+//                   <th>الرقم الأكاديمي</th>
+//                   <th> الكلية</th>
+//                   <th> الاجراءات</th>
+//             </tr>
+//             <tr>
+//               { faculty.map((i) => (  
+//                <>
+//                 <td>{i.code}</td>
+//                 <td>{i.name}</td>
+//                 <td><img src="img\ic_sharp-edit.png" alt="" /> <img src="img\ic_outline-delete.png" alt="" /></td>
+//                </>
+//               ))}
+//             </tr>
+//         </Table>
+//     </div>
+//   )
+// }
+
+// export default Faculty
+
+
+import React, { useEffect, useState } from 'react';
+import { fetchFacultyData } from '../redux/Reducers';
+import { useDispatch, useSelector } from 'react-redux';
+import './Faculty.css';
+// import { Dialog } from '@mui/material';
+import { Dialog } from 'primereact/dialog';
+import AddFaculty from './AddFaculty';
+
+
+function Faculty() {
+  const faculty = useSelector(state => state.faculty);
+  const dispatch = useDispatch();
+    const [addVisible, setAddVisible] = useState(false);
+  const [editVisible, setEditVisible] = useState(false);
+
+  useEffect(() => {
+    dispatch(fetchFacultyData());
+  }, [dispatch]);
+
+  return (
+    <div className='faculty-container'>
+              <h2 className='title'>الجهات التابع لها كل موظف</h2>
+     <div className="button-and-table">
+       <button onClick={() => setAddVisible(true)} className='add-btn'> <img src='img/mingcute_add-fill.png' alt='add' /></button>
+
+        {/* Dialog الإضافة */}
+     <Dialog className="custom-dialog" header='Add' 
+  visible={addVisible} onHide={() => setAddVisible(false)}>
+        <AddFaculty onClose={() => setAddVisible(false)} />
+      </Dialog> 
+
+   {/* <Dialog></Dialog> */}
+     
+
+      <table>
+        <thead>
+          <tr>
+            <th>الرقم الأكاديمي</th>
+            <th>الكلية</th>
+            <th>الإجراءات</th>
+          </tr>
+        </thead>
+        <tbody>
+          {faculty.map((i, index) => (
+            <tr key={index}>
+              <td>{i.code}</td>
+              <td>{i.name}</td>
+              <td>
+                <img
+                  src="img/ic_sharp-edit.png"
+                  alt="edit"
+                  className="icon-action"
+                />
+                <img
+                  src="img/ic_outline-delete.png"
+                  alt="delete"
+                  className="icon-action"
+                />
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+     </div>
+        </div>
+
   );
 }
 

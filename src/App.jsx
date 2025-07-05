@@ -13,21 +13,22 @@ import Department from "./components/Department";
 import GeneralAd from "./components/GeneralAd";
 import SubAd from "./components/SubAd";
 import NonExistanceType from "./components/NonExistanceType";
-// import EducationalLevel from "./components/EducationalLevel";
+import OfficialInTheRegion from './components/OfficialInTheRegion'
 import Vacation from "./components/Vacation";
 import Qualification from "./components/Qualification";
 import MilitaryStateType from "./components/MilitaryStateType";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import VacationType from "./components/VacationType";
+import Header from "./components/Header/Header";
 // import MilitaryState from "./components/MilitaryState";
 
 function App() {
   
   return (
 <div>
-
+    <MainPage />
 <Routes>
-    <Route path="/" element={<MainPage />} />
+    {/* <Route path="/" element={<MainPage />} /> */}
     <Route path="/employee" element={<Employees />}/>
     <Route path="/faculty" element={<Faculty />}/>
     {/* <Route path="/faculty/update/:id" element={<Update />}/> */}
@@ -39,7 +40,7 @@ function App() {
     <Route path="/generalAd" element={<GeneralAd />}/>
     <Route path="/subAd" element={<SubAd />}/>
     <Route path="/non-existance-type" element={<NonExistanceType />}/>
-    {/* <Route path="/educational-level" element={<EducationalLevel />}/> */}
+    <Route path="/official-in-region" element={<OfficialInTheRegion />}/>
     {/* <Route path="/vacation" element={<Vacation />}/> */}
     <Route path="/military-state-type" element={<MilitaryStateType />}/>
     <Route path="/qualification" element={<Qualification />}/>

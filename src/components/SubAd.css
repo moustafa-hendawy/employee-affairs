@@ -1,0 +1,65 @@
+.sub-ad {
+  padding: 30px;
+  font-family: 'Arial', sans-serif;
+  direction: rtl;
+  display: flex;
+  flex-direction: column;
+}
+.back-btn {
+  position: relative;
+  right: 300px;
+  bottom: -38px;
+    
+}
+.selct-sub-ad-sector {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.selct-sub-ad-sector h6 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.selct-sub-ad-sector select {
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  min-width: 200px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  cursor: pointer;
+}
+
+.third-level {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+.third-level :first-child{
+  border: 1px black solid;
+    padding: 5px;
+    border-radius: 15px;
+    background-color: rgb(23, 109, 106);
+    color: white;
+     font-weight: 800;
+}
+.third-level :last-child{
+  border: 1px black solid;
+    padding: 5px;
+    border-radius: 15px;
+    background-color: white ;
+    color: rgb(23, 109, 106);
+    font-weight: 800;
+}
+/* تنسيق جدول البيانات */
+.dataTable {
+  border: 1px solid #eee;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #fff;
+}
