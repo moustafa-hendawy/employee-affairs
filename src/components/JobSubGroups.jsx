@@ -49,7 +49,6 @@ function JobSubGroups() {
       </div>
 
       <div>
-        {/* طريقة عرض شرطية صحيحة داخل JSX */}
       
           <DataTable
             className='dataTable'

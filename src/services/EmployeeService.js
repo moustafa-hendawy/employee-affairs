@@ -51,6 +51,24 @@ export function fetchVacationType() {
    .then((res) => res.json())
   )
  }
+export function fetchVacation() {
+  return(
+   fetch('http://193.227.24.29:5000/api/Vacation')
+   .then((res) => res.json())
+  )
+ }
+export function fetchGeneralAd() {
+  return(
+   fetch('http://193.227.24.29:5000/api/GeneralAd')
+   .then((res) => res.json())
+  )
+ }
+export function fetchSubAd() {
+  return(
+   fetch('http://193.227.24.29:5000/api/SubAd')
+   .then((res) => res.json())
+  )
+ }
 
 // http://193.227.24.29/swagger/index.html
 // https://fakestoreapi.com/products

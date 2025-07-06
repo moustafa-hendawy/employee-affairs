@@ -10,12 +10,3 @@ table tr th {
     font-weight: bold;
 }
 
-/* Apply alternating row colors starting from the second row */
-table tr:nth-child(odd) {
-    background-color: #f2f2f2; /* Light gray */
-}
-
-table tr:nth-child(even) {
-    background-color: #ffffff; /* White */
-}
-
