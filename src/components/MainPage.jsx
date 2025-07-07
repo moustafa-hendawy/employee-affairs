@@ -1,17 +1,29 @@
-
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 // import SettingsIcon from '@mui/icons-material/Settings';
-import './MainPage.css';
-import Header from './Header/Header';
-
+import "./MainPage.css";
+import Header from "./Header/Header";
 
 function MainPage() {
+  const dropdownRef = useRef(null);
   // const [showSetup, setShowSetup] = useState(false);
 
   // const handleToggle = () => {
   //   setShowSetup(!showSetup);
   // };
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     // <div className="mainPage bg-light min-vh-100 p-4">
@@ -19,7 +31,6 @@ function MainPage() {
     //     <h1 className="text-primary fw-bold"style={{ fontSize: '2.5rem' }}>برنامج العاملين بالكادر العام</h1>
     //   </div>
 
-   
     //   <div className="highList d-flex flex-wrap justify-content-center gap-2 mb-4" >
     //     <button className="btn btn-danger headerButton">إدخال الرقم القومي</button>
     //     <button className="btn btn-primary headerButton">نبذة عن البرنامج</button>
@@ -30,7 +41,6 @@ function MainPage() {
     //     <button className="btn btn-primary headerButton">البحث بالإســم</button>
     //   </div>
 
-     
     //   {showSetup && (
     //     <div className="program-setup">
     //       <div className="text-center d-flex justify-content-center align-items-center gap-2 mb-3">
@@ -40,7 +50,7 @@ function MainPage() {
 
     //       <div className="container">
     //         <div className="row g-3">
-        
+
     //           <div className="col-md-4 col-sm-6">
     //             <div className="d-flex flex-column gap-2">
     //               <Link to='/faculty' className="btn btn-outline-primary">الجهات التابع لها الموظف</Link>
@@ -51,7 +61,6 @@ function MainPage() {
     //             </div>
     //           </div>
 
-           
     //           <div className="col-md-4 col-sm-6">
     //             <div className="d-flex flex-column gap-2">
     //               <Link to='/job-groups' className="btn btn-outline-primary">المجموعات الوظيفية</Link>
@@ -62,7 +71,6 @@ function MainPage() {
     //             </div>
     //           </div>
 
-           
     //           <div className="col-md-4 col-sm-6">
     //             <div className="d-flex flex-column gap-2">
     //               <Link to='/educational-level' className="btn btn-outline-primary">المستوى العلمي</Link>
@@ -77,10 +85,9 @@ function MainPage() {
     //   )}
     // </div>
     <div className="main-page">
-        <Header />
+      <Header />
     </div>
   );
 }
 
 export default MainPage;
-
