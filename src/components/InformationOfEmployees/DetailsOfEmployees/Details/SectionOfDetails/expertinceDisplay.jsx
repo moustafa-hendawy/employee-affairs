@@ -2,7 +2,7 @@ const ExperienceDisplay = ({ formData }) => {
   return (
     <>
       <div className="experince-information w-[98%] mx-auto mt-3">
-        <div className="text-[15px] text-white mb-6 p-3 bg-blue-500 text-right">
+        <div className="text-[15px] text-white mb-6 p-3 bg-[#176d6a] text-right">
           بيانات خاصه بالخبره والانتداب
         </div>
         <div className="bg-white p-6 rounded-lg shadow-md grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 rtl">

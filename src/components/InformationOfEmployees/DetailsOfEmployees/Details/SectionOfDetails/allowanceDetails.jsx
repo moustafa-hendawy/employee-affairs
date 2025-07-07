@@ -40,7 +40,7 @@ const AllowanceDetails = ({ empId }) => {
   return (
     <>
       <div className=" w-[98%] mx-auto mt-3">
-        <div className="text-[15px] text-white mb-2 p-3 bg-blue-500 text-right">
+        <div className="text-[15px] text-white mb-2 p-3 bg-[#176d6a] text-right">
           العلاوات
         </div>
         <div className="allowance-details">

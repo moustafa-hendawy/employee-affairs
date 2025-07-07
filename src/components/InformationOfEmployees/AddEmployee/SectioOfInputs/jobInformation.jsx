@@ -94,7 +94,7 @@ const JobInformation = ({ formData, handleChange, setFormData }) => {
   return (
     <>
       <div className="job-information">
-        <div className="text-[15px] text-white mb-6 p-3 bg-blue-500 text-right">
+        <div className="text-[15px] text-white mb-6 p-3 bg-[#176D6A] text-right">
           البيانات الوظيفية
         </div>
 
@@ -229,7 +229,7 @@ const JobInformation = ({ formData, handleChange, setFormData }) => {
         </div>
 
         <div className="structure-of-employee">
-          <div className="text-[15px] text-white mb-6 p-3 bg-blue-500 text-right">
+          <div className="text-[15px] text-white mb-6 p-3 bg-[#176D6A] text-right">
             الهيكل التنظيمي للموظف
           </div>
 
@@ -474,13 +474,13 @@ const JobInformation = ({ formData, handleChange, setFormData }) => {
               </select>
             </div>
           </div>
-          <div className="bg-[#717f98] text-white p-4 rounded-lg ">
+          <div className="bg-[#176D6A] text-white p-4 rounded-lg ">
             <div className="block text-right font-medium mb-1 ">
               المده المحتفظ بها للموظف
             </div>
             <div className="inputs flex justify-between">
               <div>
-                <label>يوم</label>
+                <label className="mb-1 text-white semi-bold">يوم</label>
                 <input
                   type="text"
                   className="border border-gray-300 rounded-md p-2 w-full"
@@ -490,7 +490,7 @@ const JobInformation = ({ formData, handleChange, setFormData }) => {
                 />
               </div>
               <div>
-                <label className="ml-2">شهر</label>
+                <label className="mb-1 text-white semi-bold">شهر</label>
                 <input
                   type="text"
                   className="border border-gray-300 rounded-md p-2 w-full"
@@ -500,7 +500,7 @@ const JobInformation = ({ formData, handleChange, setFormData }) => {
                 />
               </div>
               <div>
-                <label className="ml-2">سنة</label>
+                <label className="mb-1 text-white semi-bold">سنة</label>
                 <input
                   type="text"
                   className="border border-gray-300 rounded-md p-2 w-full"

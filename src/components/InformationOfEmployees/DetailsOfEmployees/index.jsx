@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const Index = () => {
   const [jobGroups, setJobGroups] = useState([]);
@@ -100,7 +101,7 @@ const Index = () => {
   return (
     <>
       <div className="max-w-5xl mx-auto p-4" dir="rtl">
-        <h2 className="text-2xl font-bold mb-6 text-right">الموظفين</h2>
+        <h2 className="text-2xl font-bold mb-6 text-right">تفاصيل الموظفين </h2>
       </div>
 
       <div className="max-w-5xl mx-auto p-4" dir="rtl">
@@ -181,9 +182,7 @@ const Index = () => {
               ))}
           </select>
         </div>
-      </div>
 
-      <div className="max-w-5xl mx-auto p-4" dir="rtl">
         <div className="flex items-center mb-4">
           <label className="w-48 text-right font-medium">الاسم</label>
           <input
@@ -194,9 +193,6 @@ const Index = () => {
             className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 ml-4"
           />
         </div>
-      </div>
-
-      <div className="max-w-5xl mx-auto p-4" dir="rtl">
         <div className="flex items-center mb-4">
           <label className="w-48 text-right font-medium">الرقم القومي</label>
           <input
@@ -207,9 +203,7 @@ const Index = () => {
             className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 ml-4"
           />
         </div>
-      </div>
 
-      <div className="max-w-5xl mx-auto p-4" dir="rtl">
         <div className="flex items-center mb-4">
           <label className="w-48 text-right font-medium">
             لديه الدرجة الحالية
@@ -225,9 +219,7 @@ const Index = () => {
             <option value="false">لا</option>
           </select>
         </div>
-      </div>
 
-      <div className="max-w-5xl mx-auto p-4" dir="rtl">
         <div className="flex items-center mb-4">
           <label className="w-48 text-right font-medium">رقم الهاتف</label>
           <input
@@ -249,26 +241,41 @@ const Index = () => {
         </button>
       </div>
 
-      <div className="w-full mx-auto p-4 mt-6" dir="rtl">
+      <div className="w-full mx-auto p-4 mt-6 " dir="rtl">
         <h3 className="text-xl font-bold mb-4 text-right">نتائج البحث</h3>
         <table className="min-w-full bg-white border border-gray-300">
           <thead>
             <tr>
-              <th className="px-6 py-3 border-b text-right">م</th>
-              <th className="px-6 py-3 border-b text-right">اسم الموظف</th>
-              <th className="px-6 py-3 border-b text-right">الرقم القومي</th>
-              <th className="px-6 py-3 border-b text-right">الجهة</th>
-              <th className="px-6 py-3 border-b text-right">الدرجة الوظيفية</th>
-              <th className="px-6 py-3 border-b text-right"> تاريخ الدرجة</th>
-              <th className="px-6 py-3 border-b text-right">
+              <th className="px-6 py-3 border-b text-right font-semibold">م</th>
+              <th className="px-6 py-3 border-b text-right font-semibold">
+                اسم الموظف
+              </th>
+              <th className="px-6 py-3 border-b text-right font-semibold">
+                الرقم القومي
+              </th>
+              <th className="px-6 py-3 border-b text-right font-semibold">
+                الجهة
+              </th>
+              <th className="px-6 py-3 border-b text-right font-semibold">
+                الدرجة الوظيفية
+              </th>
+              <th className="px-6 py-3 border-b text-right font-semibold">
+                {" "}
+                تاريخ الدرجة
+              </th>
+              <th className="px-6 py-3 border-b text-right font-semibold">
                 المجموعة الوظيفية
               </th>
-              <th className="px-6 py-3 border-b text-right">
+              <th className="px-6 py-3 border-b text-right font-semibold">
                 المجموعة النوعية
               </th>
-              <th className="px-6 py-3 border-b text-right">المسمى الوظيفي</th>
+              <th className="px-6 py-3 border-b text-right font-semibold">
+                المسمى الوظيفي
+              </th>
 
-              <th className="px-6 py-3 border-b text-right">التفاصيل</th>
+              <th className="px-6 py-3 border-b text-right font-semibold">
+                التفاصيل
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -281,45 +288,50 @@ const Index = () => {
             ) : (
               searchResults.map((employee, i) => (
                 <tr key={employee.nationalId} className="hover:bg-gray-100">
-                  <td className="px-6 py-3 border-b">{i + 1 || "غير محدد"}</td>
-                  <td className="px-6 py-3 border-b">{employee.name}</td>
-                  <td className="px-6 py-3 border-b">{employee.nationalId}</td>
-                  <td className="px-6 py-3 border-b">
+                  <td className="px-6 py-3 border-b text-black font-semibold">
+                    {i + 1 || "غير محدد"}
+                  </td>
+                  <td className="px-6 py-3 border-b text-black font-semibold">
+                    {employee.name}
+                  </td>
+                  <td className="px-6 py-3 border-b text-black font-semibold">
+                    {employee.nationalId}
+                  </td>
+                  <td className="px-6 py-3 border-b text-black font-semibold">
                     {faculties.find(
                       (faculty) => faculty.id === employee.facultyId
                     )?.name || "غير محدد"}
                   </td>
-                  <td className="px-6 py-3 border-b">
+                  <td className="px-6 py-3 border-b text-black font-semibold">
                     {fincialDegrees.find(
                       (degree) => degree.id === employee.fincialDegreeId
                     )?.name || "غير محدد"}
                   </td>
-                  <td className="px-6 py-3 border-b whitespace-nowrap">
+                  <td className="px-6 py-3 border-b whitespace-nowrap text-black font-semibold">
                     {employee.fincialDegreeDate || "غير محدد"}
                   </td>
-                  <td className="px-6 py-3 border-b">
+                  <td className="px-6 py-3 border-b text-black font-semibold">
                     {jobGroups.find((group) => group.id === employee.jobGroupId)
                       ?.name || "غير محدد"}
                   </td>
-                  <td className="px-6 py-3 border-b">
+                  <td className="px-6 py-3 border-b text-black font-semibold">
                     {jobSubGroups.find(
                       (subGroup) => subGroup.id === employee.jobSubGroupId
                     )?.name || "غير محدد"}
                   </td>
-                  <td className="px-6 py-3 border-b">
+                  <td className="px-6 py-3 border-b text-black font-semibold">
                     {" "}
                     {jobNames.find((job) => job.id === employee.jobNameId)
                       ?.name || "غير محدد"}
                   </td>
-                  <td className="px-6 py-3 border-b">
-                    <button
-                      onClick={() =>
-                        (window.location.href = `/detailOfemployee/${employee.nationalId}`)
-                      }
-                      className="text-blue-600 "
+                  <td className="px-6 py-3 border-b text-black font-semibold">
+                    <Link
+                      to={`/details/${employee.nationalId}`}
+                      className="text-blue-600"
+                      style={{ textDecoration: "none", color: "#176d6a" }}
                     >
                       التفاصيل
-                    </button>
+                    </Link>
                   </td>
                 </tr>
               ))

@@ -55,7 +55,7 @@ const PenaltyDetails = ({ empId }) => {
   return (
     <>
       <div className="w-[98%] mx-auto mt-3">
-        <div className="text-[15px] text-white   p-3 bg-blue-500 text-right ">
+        <div className="text-[15px] text-white   p-3 bg-[#176d6a] text-right ">
           بيانات الجزاءات
         </div>
 

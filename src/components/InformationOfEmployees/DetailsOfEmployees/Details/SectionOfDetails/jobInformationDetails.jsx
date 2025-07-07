@@ -105,7 +105,7 @@ const JobInformationDisplay = ({ formData }) => {
   return (
     <>
       <div className="job-information w-[98%] mx-auto mt-3">
-        <div className="text-[15px] text-white mb-6 p-3 bg-blue-500 text-right">
+        <div className="text-[15px] text-white mb-6 p-3 bg-[#176d6a] text-right">
           البيانات الوظيفية
         </div>
 
@@ -196,7 +196,7 @@ const JobInformationDisplay = ({ formData }) => {
         </div>
 
         <div className="structure-of-employee">
-          <div className="text-[15px] text-white mb-6 p-3 bg-blue-500 text-right">
+          <div className="text-[15px] text-white mb-6 p-3 bg-[#176d6a] text-right">
             الهيكل التنظيمي للموظف
           </div>
 
@@ -322,26 +322,26 @@ const JobInformationDisplay = ({ formData }) => {
             </div>
           </div>
 
-          <div className="text-[15px] text-white mb-6 p-3 bg-blue-500 text-right">
+          <div className="text-[15px] text-white mb-6 p-3 bg-[#176d6a] text-right">
             <div className="block text-right font-medium mb-1 ">
               المده المحتفظ بها للموظف
             </div>
             <div className="inputs flex justify-between text-black">
               <div>
-                <label>يوم</label>
-                <span className="p-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
+                <label className="mb-1 text-white semi-bold">يوم</label>
+                <span className="px-4 py-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
                   {formData.reservedDays || "0"}
                 </span>
               </div>
               <div>
-                <label className="ml-2">شهر</label>
-                <span className="p-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
+                <label className="mb-1 text-white semi-bold">شهر</label>
+                <span className="px-4 py-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
                   {formData.reservedMonths || "0"}
                 </span>
               </div>
               <div>
-                <label className="ml-2">سنة</label>
-                <span className="p-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
+                <label className="mb-1 text-white semi-bold">سنة</label>
+                <span className="px-4 py-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
                   {formData.reservedYears || "0"}
                 </span>
               </div>
