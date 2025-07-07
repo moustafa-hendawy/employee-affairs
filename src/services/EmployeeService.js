@@ -5,7 +5,6 @@ export function getEmployeeData() {
   return (
     fetch("http://193.227.24.29:5000/api/Employee")
     .then(res => res.json())
-    // .then(data => {console.log(data)})
   )
 }
 
@@ -21,12 +20,13 @@ export function fetchJobSubGroups(jobGroupId) {
    .then((res) => res.json())
   )
  }
-export function fetchSectors() {
+export function fetchJobNames(jobSubGroupId) {
   return(
-   fetch('http://193.227.24.29:5000/api/Sector')
+   fetch(`http://193.227.24.29:5000/api/JobNames/ByJobSubGroup/${jobSubGroupId}`)
    .then((res) => res.json())
   )
  }
+
 export function fetchNonExistenceType() {
   return(
    fetch('http://193.227.24.29:5000/api/NonExistanceType')
@@ -57,18 +57,26 @@ export function fetchVacation() {
    .then((res) => res.json())
   )
  }
-export function fetchGeneralAd() {
+export function fetchGeneralAd(sectorId) {
   return(
-   fetch('http://193.227.24.29:5000/api/GeneralAd')
+   fetch(`http://193.227.24.29:5000/api/GeneralAd/BySector/${sectorId}`)
    .then((res) => res.json())
   )
  }
-export function fetchSubAd() {
+export function fetchSubAd(generalAdId) {
   return(
-   fetch('http://193.227.24.29:5000/api/SubAd')
+   fetch(`http://193.227.24.29:5000/api/SubAd/ByGeneralAd/${generalAdId}`)
    .then((res) => res.json())
   )
  }
+export function fetchDepartment(subAdId) {
+  return(
+   fetch(`http://193.227.24.29:5000/api/Department/BySubAd/${subAdId}`)
+   .then((res) => res.json())
+  )
+ }
+
+
 
 // http://193.227.24.29/swagger/index.html
 // https://fakestoreapi.com/products

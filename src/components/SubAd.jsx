@@ -1,91 +1,71 @@
 
-import React, { useEffect, useState } from 'react'
-import './SubAd.css';
-import BackToMenu from './BackToMenu';
+import './faculty/Faculty.css'
+import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { fetchSubAd } from '../services/EmployeeService';
+// import './JobSubGroups.css';
+import { useParams } from 'react-router-dom';
 
 function SubAd() {
-//  const [jobGroups, setJobGroups] = useState([]); 
-//    const [jobSubGroups, setJobSubGroups] = useState([]); 
-//    const [selectedGroup, setSelectedGroup] = useState(null);
- 
-//    useEffect(() => {
-//      fetchJobGroups().then((data) => {
-//        console.log(data);
-//        setJobGroups(data);
-//      });
-//    }, []);
- 
-//    useEffect(() => {
-//      if (selectedGroup !== null) {
-//        fetchJobSubGroups(selectedGroup.id).then((data) => {
-//           data.forEach((e) => e.jobGroupCode = selectedGroup.code);
-//           setJobSubGroups(data);
-//        }).catch(() => setJobSubGroups([]));
-//      }
-//    },[selectedGroup])
- 
-   return (
-     <div className='sub-ad'>
-       {/* <BackToMenu className='back-btn' />
-       <div className='selct-sub-ad-sector'>
-         <h6> القطاع (مستوى 1)</h6>
-         <select 
-           onChange={(e) => setSelectedGroup(jobGroups.find((x) => x.id == e.target.value ))}
-           value={selectedGroup ? selectedGroup.id : ''}
-           name=""
-           id=""
-         >
-           <option value="" disabled>اختر المجموعة</option>
-           {jobGroups && jobGroups.map((group) => (
-             <option style={{cursor: 'pointer'}} key={group.id} value={group.id}>
-               {group.name}
-             </option>
-           ))}
-         </select>
-       <div className='selct-sub-ad-management'>
-         <h6> الادارة العامة أو الوحدات (مستوى 2)</h6>
-         <select 
-           onChange={(e) => setSelectedGroup(jobGroups.find((x) => x.id == e.target.value ))}
-           value={selectedGroup ? selectedGroup.id : ''}
-           name=""
-           id=""
-         >
-           <option value="" disabled>اختر المجموعة</option>
-           {jobGroups && jobGroups.map((group) => (
-             <option style={{cursor: 'pointer'}} key={group.id} value={group.id}>
-               {group.name}
-             </option>
-           ))}
-         </select>
-       </div>
- <div className="third-level">
-  <span>المستوى التنظيمي الثالث</span>
-  <span>الادارات الفرعية أو الأقسام</span>
- </div>
- <br />
+const [subAd, setSubAd] = useState([])
+const navigate = useNavigate(); 
+const {id} = useParams();
 
-       <div>
+  useEffect(() => {
+    fetchSubAd(id).then((data) => setSubAd(data))
+  }, []);
+
+  return (
+ <div className='faculty-container'>
+              <h2 className='title'>  الادارة الفرعية</h2>
+     <div className="button-and-table">
        
-       
-          {selectedSectorId ? 
-            <div className=""> 
-                  <p>ادخال الادارات العامة</p>
-                  <DataTable className='dataTable' value={generalAd} tableStyle={{ minWidth: '50rem' }}>
-                        <Column field="name" header="الادارة العامة" />
-                        <Column field="id" header="كود " style={{ width: '400px' }} />
-                        <Column field="level" header="مستوى الادارة العامة" />
-                        <Column field="specialLevel" header="  كائن خاص" />
-                        <Column field="kind" header="  الادارة العامة حالة" />
-                      </DataTable> 
-                </div>
-                :
-                 <p>باختيار القطاع أولا ثم الاداة العامة أو الوحدة تظهر الادارات الفرعية او الاقسام التابعة لإمكانية التعديل والإضافة</p>
-          }
-        
-       </div>
-     </div> */}
+      <button className='add-btn'>
+        <img src='/img/mingcute_add-fill.png' alt='add' />
+      </button>
+
+      <table>
+        <thead>
+          <tr>
+            <th>   اسم الادارة الفرعية </th>
+            <th>كود الادارة الفرعية </th>
+            <th>   مستوى ادارة فرعية؟ </th>
+            <th>     كائن خاص </th>
+            <th> حالة الادارة الفرعية </th>
+            <th>الإجراءات</th>
+          </tr>
+        </thead>
+        <tbody>
+          {subAd.map((i, index) => (
+            <tr key={index} onClick={() => navigate(`/department/subAd-id/${id}`)} style={{cursor: 'pointer'}}>
+              <td>{i.name}</td>
+              <td>{i.code}</td>
+              {i.level?<td style={{color:'rgb(40, 167, 69)'}}>✔</td>: <td style={{color:'#DC4C64'}}>✖</td>}
+              {i.specialLevel?
+              <td style={{color:'rgb(40, 167, 69)'}}>✔</td>
+              :<td style={{color:'#DC4C64'}}>✖</td>
+              }
+
+              <td>{i.status}</td>
+              <td>
+                <img
+                  src="/img/ic_sharp-edit.png"
+                  alt="edit"
+                  className="icon-action"
+                />
+                <img
+                  src="/img/ic_outline-delete.png"
+                  alt="delete"
+                  className="icon-action"
+                />
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
      </div>
-   );
+        </div>
+  );
 }
 
-export default SubAd
+export default SubAd;

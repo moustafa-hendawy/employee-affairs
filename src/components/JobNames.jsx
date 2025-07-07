@@ -1,39 +1,63 @@
-import React from 'react'
+
+import './faculty/Faculty.css'
+import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { fetchJobNames } from '../services/EmployeeService';
+// import './JobNames.css';
+import { useParams } from 'react-router-dom';
 
 function JobNames() {
-    const [jobGroups, setJobGroups] = useState([]); 
-    const [jobSubGroups, setJobSubGroups] = useState([]); 
-    const [selectedGroup, setSelectedGroup] = useState(null);
+const [jobNames, setJobNames] = useState([])
+const navigate = useNavigate(); 
+const {id} = useParams();
+
+  useEffect(() => {
+    fetchJobNames(id).then((data) => setJobNames(data))
+  }, []);
+
   return (
-    <div>
-   <select 
-          onChange={(e) => setSelectedGroup(jobGroups.find((x) => x.id == e.target.value ))}
-          value={selectedGroup ? selectedGroup.id : ''}
-          name=""
-          id=""
-        >
-          <option value="" disabled>اختر المجموعة</option>
-          {jobGroups && jobGroups.map((group) => (
-            <option style={{cursor: 'pointer'}} key={group.id} value={group.id}>
-              {group.name}
-            </option>
+ <div className='faculty-container'>
+              <h2 className='title'>المجموعة النوعية</h2>
+     <div className="button-and-table">
+       
+      <button className='add-btn'>
+        <img src='/img/mingcute_add-fill.png' alt='add' />
+      </button>
+
+      <table>
+        <thead>
+          <tr>
+     <th>   المسمى الوظيفي</th>
+            <th> كود المسمى الوظيفي </th>
+            <th> مهام ومسئوليات الوظيفة </th>
+            <th>الإجراءات</th>
+          </tr>
+        </thead>
+        <tbody>
+          {jobNames.map((i, index) => (
+            <tr key={index}>
+              <td>{i.name}</td>
+              <td>{i.code}</td>
+              <td>{i.jobMission}</td>
+              <td>
+                <img
+                  src="/img/ic_sharp-edit.png"
+                  alt="edit"
+                  className="icon-action"
+                />
+                <img
+                  src="/img/ic_outline-delete.png"
+                  alt="delete"
+                  className="icon-action"
+                />
+              </td>
+            </tr>
           ))}
-        </select>
-   <select 
-          onChange={(e) => setSelectedGroup(jobGroups.find((x) => x.id == e.target.value ))}
-          value={selectedGroup ? selectedGroup.id : ''}
-          name=""
-          id=""
-        >
-          <option value="" disabled>اختر المجموعة</option>
-          {jobSubGroups && jobSubGroups.map((group) => (
-            <option style={{cursor: 'pointer'}} key={group.id} value={group.id}>
-              {group.name}
-            </option>
-          ))}
-        </select>
-    </div>
-  )
+        </tbody>
+      </table>
+     </div>
+        </div>
+  );
 }
 
-export default JobNames
+export default JobNames;

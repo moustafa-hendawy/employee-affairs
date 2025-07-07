@@ -1,11 +1,86 @@
 
-import React from 'react'
+// import { Column } from 'primereact/column'
+// import { DataTable } from 'primereact/datatable'
+// import React, { useEffect, useState } from 'react'
+// import { fetchNonExistenceType } from '../services/EmployeeService'
+// import BackToMenu from './BackToMenu';
+
+// function NonExistanceType() {
+//   const [nonExistence, setNonExistence] = useState([]);
+//   useEffect(() => {
+//     fetchNonExistenceType().then((data) => setNonExistence(data))
+//   }, [])
+//   return (
+//     <div>
+//        <BackToMenu style={{position: 'absolute',left: '14px',top: '32px'}} />
+//       <h4 className='non-exist' style={{padding: '20px',
+//    margin: '20px',
+//     textAlign: 'center'}}>حالات عدم الوجود في العمل</h4>
+//      <DataTable className='dataTable' value={nonExistence} tableStyle={{ minWidth: '30rem' }}>
+//              <Column field="name" header="حالة عدم الوجود" />
+//              <Column field="code" header="كود الحالة" style={{ width: '400px' }} />
+//              {/* <Column field="status" header="النوع" /> */}
+//            </DataTable>
+//     </div>
+//   )
+// }
+
+// export default NonExistanceType
+
+import React, { useEffect, useState } from 'react';
+import './faculty/Faculty.css'
+import { fetchJobGroups } from '../services/EmployeeService';
+import { useNavigate } from 'react-router-dom';
+// import { fetchJobGroups } from '../services/EmployeeService';
 
 function JobGroups() {
+const [jobGroups, setJobGroups] = useState([])
+const navigate = useNavigate(); 
+
+  useEffect(() => {
+    fetchJobGroups().then((data) => setJobGroups(data))
+  }, []);
   return (
-    <div>
-      <h1></h1>
-    </div>
+       <div className='faculty-container'>
+              <h2 className='title'>المجموعة الوظيفية</h2>
+     <div className="button-and-table">
+       
+      <button className='add-btn'>
+        <img src='img/mingcute_add-fill.png' alt='add' />
+      </button>
+
+      <table>
+        <thead>
+          <tr>
+            <th>  المجموعة الوظيفية</th>
+            <th> كود المجموعة الوظيفية </th>
+            <th>الإجراءات</th>
+          </tr>
+        </thead>
+        <tbody>
+          {jobGroups.map((i, index) => (
+            <tr key={index} onClick={() => navigate(`/job-subGroups/group-id/${i.id}/group-code/${i.code}`)} style={{cursor: 'pointer'}}>
+              <td>{i.name}</td>
+              <td>{i.code}</td>
+              <td>
+                <img
+                  src="/img/ic_sharp-edit.png"
+                  alt="edit"
+                  className="icon-action"
+                />
+                <img
+                  src="/img/ic_outline-delete.png"
+                  alt="delete"
+                  className="icon-action"
+                />
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+     </div>
+        </div>
+
   )
 }
 

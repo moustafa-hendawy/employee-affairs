@@ -62,12 +62,12 @@ const [exist, setExist] = useState([])
               <td>{i.name}</td>
               <td>
                 <img
-                  src="img/ic_sharp-edit.png"
+                  src="/img/ic_sharp-edit.png"
                   alt="edit"
                   className="icon-action"
                 />
                 <img
-                  src="img/ic_outline-delete.png"
+                  src="/img/ic_outline-delete.png"
                   alt="delete"
                   className="icon-action"
                 />

@@ -1,117 +1,71 @@
-import { Column } from 'primereact/column'
-import { DataTable } from 'primereact/datatable'
-import React, { useEffect, useState } from 'react'
-import './GeneralAd.css'
-import BackToMenu from './BackToMenu'
+
+import './faculty/Faculty.css'
+import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { fetchGeneralAd, fetchJobSubGroups } from '../services/EmployeeService';
+// import './JobSubGroups.css';
+import { useParams } from 'react-router-dom';
+
 function GeneralAd() {
-  const [generalAd, setGeneralAd] = useState([])
-  const [sectors, setSectors] = useState([]);
-  const [selectedSectorId, setSelectedSectorId] = useState("")
-  const   fakeSectors = 
-    [
-{
-  id: 1,
-  name: 'الجامعة',
-},
-{
-  id: 2,
-  name: 'المنوفية',
-},
-{
-  id: 3,
-  name: 'اسيوط',
+const [generalAd, setGenerAd] = useState([])
+const navigate = useNavigate(); 
+const {id} = useParams();
 
-},
-{
-  id: 4,
-  name: 'اسكندرية',
-},
-{
-  id: 5,
-  name: 'المدير',
-},
-    ]
-
-  const   fakeGeneralAd = 
-    [
-{
-  id: 1,
-  name: 'kdfmnkfm',
-  level:5,
-  specialLevel: 6,
-  kind: 'dfdkf'
-},
-{
-  id: 1,
-  name: 'klmsndckdf',
-  level:5,
-  specialLevel: 6,
-  kind: 'dfdkf'
-},
-{
-  id: 1,
-  name: 'knnfkdnmdfk',
-  level:5,
-  specialLevel: 6,
-  kind: 'dfdkf'
-},
-{
-  id: 1,
-  name: 'الجامعة',
-  level:5,
-  specialLevel: 6,
-  kind: 'dfdkf'
-}
-
-    ]
-  
   useEffect(() => {
-    setSectors(fakeSectors)
-      // fetchGeneralAd().then((data) => setGeneralAd(data))
-      
-  },[])
-  useEffect(() => {
-    selectedSectorId && setGeneralAd(fakeGeneralAd) 
-      // fetchGeneralAd().then((data) => setGeneralAd(data))
-      
-  },[selectedSectorId])
+    fetchGeneralAd(id).then((data) => setGenerAd(data))
+  }, []);
 
   return (
-    <div className='general-ad'>
-      <BackToMenu />
-      <div className="selector">
-      <h4>القطاعات أو الوحدات (مستوى 1)</h4>
-        <select name="" id="" value={selectedSectorId} onChange={(e) => setSelectedSectorId(+(e.target.value))}>
-          <option value="" disabled>احتر حاجة</option>
-          {sectors.map((i) => 
-          <option value={i.id}>{i.name}</option>
-          )}
-        </select>
-      </div>
-      <div className="level-two">
-  <span >المستوى التنظيمي الثاني</span>
-      <span>الإدارات العامة أو الوحدات</span>
-       </div>
-       <br />
+ <div className='faculty-container'>
+              <h2 className='title'>  الادارة العامة</h2>
+     <div className="button-and-table">
+       
+      <button className='add-btn'>
+        <img src='/img/mingcute_add-fill.png' alt='add' />
+      </button>
 
-{selectedSectorId ? 
-  <div className=""> 
-        <p>ادخال الادارات العامة</p>
-        <DataTable className='dataTable' value={generalAd} tableStyle={{ minWidth: '50rem' }}>
-              <Column field="name" header="الادارة العامة" />
-              <Column field="id" header="كود " style={{ width: '400px' }} />
-              <Column field="level" header="مستوى الادارة العامة" />
-              <Column field="specialLevel" header="  كائن خاص" />
-              <Column field="kind" header="  الادارة العامة حالة" />
-            </DataTable> 
-      </div>
-      :
-       <p>بادخال القطاع..</p>
-}
-    
-    
-    </div>
-  )
+      <table>
+        <thead>
+          <tr>
+            <th>  الادارة العامة </th>
+            <th> كود الادارة العامة  </th>
+            <th>   مستوى ادارة عامة </th>
+            <th>     كائن خاص </th>
+            <th> حالة الادارة العامة </th>
+            <th>الإجراءات</th>
+          </tr>
+        </thead>
+        <tbody>
+          {generalAd.map((i, index) => (
+            <tr key={index} onClick={() => navigate(`/subAd/generalAd-id/${i.id}`)} style={{cursor: 'pointer'}}>
+              <td>{i.name}</td>
+              <td>{i.code}</td>
+              {i.level?<td style={{color:'rgb(40, 167, 69)'}}>✔</td>: <td style={{color:'#DC4C64'}}>✖</td>}
+              {i.specialLevel?
+              <td style={{color:'rgb(40, 167, 69)'}}>✔</td>
+              :<td style={{color:'#DC4C64'}}>✖</td>
+              }
+
+              <td>{i.status}</td>
+              <td>
+                <img
+                  src="/img/ic_sharp-edit.png"
+                  alt="edit"
+                  className="icon-action"
+                />
+                <img
+                  src="/img/ic_outline-delete.png"
+                  alt="delete"
+                  className="icon-action"
+                />
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+     </div>
+        </div>
+  );
 }
 
-export default GeneralAd
+export default GeneralAd;

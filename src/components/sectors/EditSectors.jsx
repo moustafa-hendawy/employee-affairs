@@ -154,9 +154,9 @@ import { useDispatch } from 'react-redux';
 import { editFacultyData } from '../redux/FacultyReducers';
 import { Form } from 'react-bootstrap';
 import { Button } from 'primereact/button';
-import './AddFaculty.css';
+import './AddSectors.css';
 
-function Update({ data, onClose }) {
+function EditSectors({ data, onClose }) {
   const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [code, setCode] = useState('');
@@ -221,4 +221,4 @@ function Update({ data, onClose }) {
   );
 }
 
-export default Update;
+export default EditSectors;
