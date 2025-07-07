@@ -45,7 +45,7 @@ const PersonalInformationDisplay = ({ formData }) => {
   return (
     <>
       <div className="personal-information w-[98%] mx-auto mt-3">
-        <div className="text-[15px] text-white mb-6 p-3 bg-blue-500 text-right">
+        <div className="text-[15px] text-white mb-6 p-3 bg-[#176d6a] text-right">
           البيانات الشخصية
         </div>
 
