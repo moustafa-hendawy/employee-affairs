@@ -39,7 +39,7 @@ const PersonalInformation = ({ formData, handleChange }) => {
   return (
     <>
       <div className="add-employee">
-        <div className="text-[15px] text-white mb-6 p-3 bg-blue-500 text-right">
+        <div className="text-[15px] text-white mb-6 p-3 bg-[#176D6A] text-right">
           إضافة جديد
         </div>
         <div className="bg-white p-6 rounded-lg shadow-md grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 gap-4">
@@ -91,7 +91,7 @@ const PersonalInformation = ({ formData, handleChange }) => {
       </div>
 
       <div className="personal-information">
-        <div className="text-[15px] text-white mb-6 p-3 bg-blue-500 text-right">
+        <div className="text-[15px] text-white mb-6 p-3 bg-[#176D6A] text-right">
           البيانات الشخصية
         </div>
         <div className="bg-white p-6 rounded-lg shadow-md grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
