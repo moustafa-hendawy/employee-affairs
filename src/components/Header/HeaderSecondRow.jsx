@@ -17,13 +17,6 @@ function HeaderSecondRow() {
             <img src="img/logo 1.png" alt="logo" />
           </a>
 
- 
-     {/* <div className="menu-item">
-            <span>تهيئة البرنامج</span>
-            <img src="img/Iconly.png" alt="dropdown" />
-          </div> */}
-
-
         <div className="menu-item" onClick={toggleSetupMenu}>
           <span>تهيئة البرنامج</span>
           <img src="/img/Iconly.png" alt="dropdown" />
@@ -89,7 +82,7 @@ function HeaderSecondRow() {
 
         </div>
       </div>
-    </div>
+    // </div>
   );
 }
 
