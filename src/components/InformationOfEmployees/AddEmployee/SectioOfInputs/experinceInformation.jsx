@@ -33,7 +33,7 @@ const ExperienceInformation = ({ formData, handleChange }) => {
             </label>
             <div>
               <input
-                type="text"
+                type="number"
                 name="experanceDN"
                 value={formData.experanceDN}
                 onChange={handleChange}
@@ -91,7 +91,7 @@ const ExperienceInformation = ({ formData, handleChange }) => {
             </label>
             <div>
               <input
-                type="text"
+                type="number"
                 name="workEndDec"
                 value={formData.workEndDec}
                 onChange={handleChange}

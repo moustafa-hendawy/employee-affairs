@@ -258,7 +258,7 @@ const PersonalInformation = ({ formData, handleChange }) => {
               الرقم التأميني
             </label>
             <input
-              type="text"
+              type="number"
               name="taminNo"
               value={formData.taminNo}
               onChange={handleChange}
