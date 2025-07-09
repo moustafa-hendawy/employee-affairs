@@ -91,6 +91,54 @@ const JobInformation = ({ formData, handleChange, setFormData }) => {
       );
   }, []);
 
+  const handleSectorChange = (e) => {
+    const value = e.target.value;
+    setSectorId(value);
+    setGeneralId("");
+    setFormData((prev) => ({
+      ...prev,
+      subAdId: "",
+      departmentId: "",
+    }));
+  };
+
+  const handleGeneralChange = (e) => {
+    const value = e.target.value;
+    setGeneralId(value);
+    setFormData((prev) => ({
+      ...prev,
+      subAdId: "",
+      departmentId: "",
+    }));
+  };
+
+  const handleJobGroupChange = (e) => {
+    const value = e.target.value;
+    setFormData((prev) => ({
+      ...prev,
+      jobGroupId: value,
+      jobSubGroupId: "",
+      jobNameId: "",
+    }));
+  };
+
+  const handleJobSubGroupChange = (e) => {
+    const value = e.target.value;
+    setFormData((prev) => ({
+      ...prev,
+      jobSubGroupId: value,
+      jobNameId: "",
+    }));
+  };
+
+  const handleJobNameChange = (e) => {
+    const value = e.target.value;
+    setFormData((prev) => ({
+      ...prev,
+      jobNameId: value,
+    }));
+  };
+
   return (
     <>
       <div className="job-information">
@@ -240,9 +288,9 @@ const JobInformation = ({ formData, handleChange, setFormData }) => {
               </label>
               <select
                 className="border border-gray-300 rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-500"
-                onChange={(e) => setSectorId(e.target.value)}
+                onChange={handleSectorChange}
               >
-                <option>اختر قطاع</option>
+                <option value="">اختر قطاع</option>
                 {sectors.map((sector) => (
                   <option key={sector.code} value={sector.code}>
                     {sector.name}
@@ -251,69 +299,76 @@ const JobInformation = ({ formData, handleChange, setFormData }) => {
               </select>
             </div>
 
-            <div>
-              <label className="block text-right font-medium mb-1">
-                2- الإدارة العامة أو الوحدة التابعة للقطاع
-              </label>
-              <select
-                className="border border-gray-300 rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-500"
-                onChange={(e) => setGeneralId(e.target.value)}
-              >
-                <option value="">اختر اداره</option>
-                {generalAds
-                  .filter((ad) => ad.sectorID == sectoreId)
-                  .map((ad) => (
-                    <option key={ad.id} value={ad.id}>
-                      {ad.name}
-                    </option>
-                  ))}
-              </select>
-            </div>
+            {sectoreId !== "" && sectoreId !== "0" && (
+              <div>
+                <label className="block text-right font-medium mb-1">
+                  2- الإدارة العامة أو الوحدة التابعة للقطاع
+                </label>
+                <select
+                  className="border border-gray-300 rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-500"
+                  onChange={handleGeneralChange}
+                >
+                  <option value="">اختر اداره</option>
+                  {generalAds
+                    .filter((ad) => ad.sectorID == sectoreId)
+                    .map((ad) => (
+                      <option key={ad.id} value={ad.id}>
+                        {ad.name}
+                      </option>
+                    ))}
+                </select>
+              </div>
+            )}
 
-            <div>
-              <label className="block text-right font-medium mb-1">
-                3- الإدارة الفرعية
-              </label>
-              <select
-                name="subAdId"
-                value={formData.subAdId}
-                onChange={handleChange}
-                className="border border-gray-300 rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-500"
-              >
-                <option>اختر اداره فرعية</option>
-                {subAds
-                  .filter((subAd) => subAd.generalAdId == generalId)
-                  .map((subAd) => (
-                    <option key={subAd.id} value={subAd.id}>
-                      {subAd.name}
-                    </option>
-                  ))}
-              </select>
-            </div>
+            {generalId !== "" && generalId !== "0" && (
+              <div>
+                <label className="block text-right font-medium mb-1">
+                  3- الإدارة الفرعية
+                </label>
+                <select
+                  name="subAdId"
+                  value={formData.subAdId}
+                  onChange={handleChange}
+                  className="border border-gray-300 rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-500"
+                >
+                  <option value="">اختر اداره فرعية</option>
+                  {subAds
+                    .filter((subAd) => subAd.generalAdId == generalId)
+                    .map((subAd) => (
+                      <option key={subAd.id} value={subAd.id}>
+                        {subAd.name}
+                      </option>
+                    ))}
+                </select>
+              </div>
+            )}
 
-            <div>
-              <label className="block text-right font-medium mb-1">
-                4- القسم
-              </label>
-              <select
-                name="departmentId"
-                value={formData.departmentId}
-                onChange={handleChange}
-                className="border border-gray-300 rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-500"
-              >
-                <option>اختر قسم</option>
-                {departments
-                  .filter(
-                    (department) => department.subAdID == formData.subAdId
-                  )
-                  .map((department) => (
-                    <option key={department.id} value={department.id}>
-                      {department.name}
-                    </option>
-                  ))}
-              </select>
-            </div>
+            {formData.subAdId !== "" && (
+              <div>
+                <label className="block text-right font-medium mb-1">
+                  4- القسم
+                </label>
+                <select
+                  name="departmentId"
+                  value={formData.departmentId}
+                  onChange={handleChange}
+                  className="border border-gray-300 rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-500"
+                >
+                  <option value="">اختر قسم</option>
+                  {departments
+                    .filter(
+                      (department) => department.subAdID == formData.subAdId
+                    )
+                    .map((department) => (
+                      <option key={department.id} value={department.id}>
+                        {department.name}
+                      </option>
+                    ))}
+                </select>
+              </div>
+            )}
 
+            {/* المجموعات الوظيفية */}
             {/* المجموعات الوظيفية */}
             <div>
               <label className="block text-right font-medium mb-1">
@@ -322,10 +377,10 @@ const JobInformation = ({ formData, handleChange, setFormData }) => {
               <select
                 name="jobGroupId"
                 value={formData.jobGroupId}
-                onChange={handleChange}
+                onChange={handleJobGroupChange}
                 className="border border-gray-300 rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-500"
               >
-                <option>اختر مجموعة وظيفية</option>
+                <option value="">اختر مجموعة وظيفية</option>
                 {jobGroups.map((jobGroup) => (
                   <option key={jobGroup.id} value={jobGroup.id}>
                     {jobGroup.name}
@@ -335,52 +390,57 @@ const JobInformation = ({ formData, handleChange, setFormData }) => {
             </div>
 
             {/* المجموعات النوعية */}
-            <div>
-              <label className="block text-right font-medium mb-1">
-                المجموعات النوعية
-              </label>
-              <select
-                name="jobSubGroupId"
-                value={formData.jobSubGroupId}
-                onChange={handleChange}
-                className="border border-gray-300 rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-500"
-              >
-                <option>اختر مجموعة نوعية</option>
-                {jobSubGroups
-                  .filter(
-                    (subGroup) => subGroup.jobGroupId == formData.jobGroupId
-                  )
-                  .map((subGroup) => (
-                    <option key={subGroup.id} value={subGroup.id}>
-                      {subGroup.name}
-                    </option>
-                  ))}
-              </select>
-            </div>
+            {formData.jobGroupId !== "" && (
+              <div>
+                <label className="block text-right font-medium mb-1">
+                  المجموعات النوعية
+                </label>
+                <select
+                  name="jobSubGroupId"
+                  value={formData.jobSubGroupId}
+                  onChange={handleJobSubGroupChange}
+                  className="border border-gray-300 rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-500"
+                >
+                  <option value="">اختر مجموعة نوعية</option>
+                  {jobSubGroups
+                    .filter(
+                      (subGroup) => subGroup.jobGroupId == formData.jobGroupId
+                    )
+                    .map((subGroup) => (
+                      <option key={subGroup.id} value={subGroup.id}>
+                        {subGroup.name}
+                      </option>
+                    ))}
+                </select>
+              </div>
+            )}
 
             {/* مسمي الوظيفة */}
-            <div>
-              <label className="block text-right font-medium mb-1">
-                مسمي الوظيفة الحالية
-              </label>
-              <select
-                name="jobNameId"
-                value={formData.jobNameId}
-                onChange={handleChange}
-                className="border border-gray-300 rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-500"
-              >
-                <option>اختر مسمي وظيفي</option>
-                {jobNames
-                  .filter(
-                    (jobName) => jobName.jobSubGroupId == formData.jobSubGroupId
-                  )
-                  .map((jobName) => (
-                    <option key={jobName.id} value={jobName.id}>
-                      {jobName.name}
-                    </option>
-                  ))}
-              </select>
-            </div>
+            {formData.jobSubGroupId !== "" && (
+              <div>
+                <label className="block text-right font-medium mb-1">
+                  مسمي الوظيفة الحالية
+                </label>
+                <select
+                  name="jobNameId"
+                  value={formData.jobNameId}
+                  onChange={handleJobNameChange}
+                  className="border border-gray-300 rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-500"
+                >
+                  <option value="">اختر مسمي وظيفي</option>
+                  {jobNames
+                    .filter(
+                      (jobName) =>
+                        jobName.jobSubGroupId == formData.jobSubGroupId
+                    )
+                    .map((jobName) => (
+                      <option key={jobName.id} value={jobName.id}>
+                        {jobName.name}
+                      </option>
+                    ))}
+                </select>
+              </div>
+            )}
 
             <div>
               <label className="block text-right font-medium mb-1">
@@ -410,21 +470,6 @@ const JobInformation = ({ formData, handleChange, setFormData }) => {
                 name="fincialDegreeDate"
                 value={formData.fincialDegreeDate}
                 onChange={handleChange}
-              />
-            </div>
-
-            <div>
-              <label className="block text-right font-medium mb-1">
-                لديه الدرجة الحالية ؟
-              </label>
-              <input
-                type="checkbox"
-                className="border border-gray-300 rounded-md p-2 w-full"
-                name="currentDegree"
-                checked={formData.currentDegree}
-                onChange={(e) =>
-                  setFormData({ ...formData, currentDegree: e.target.checked })
-                }
               />
             </div>
 

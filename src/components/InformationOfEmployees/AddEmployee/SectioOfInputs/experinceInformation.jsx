@@ -3,7 +3,7 @@ const ExperienceInformation = ({ formData, handleChange }) => {
     <>
       <div className="experince-information mt-3">
         <div className="text-[15px] text-white mb-6 p-3 bg-[#176D6A] text-right">
-          بيانات خاصه بالخبره والانتداب
+          بيانات خاصه بالخبره
         </div>
         <div className="bg-white p-6 rounded-lg shadow-md grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 rtl">
           <div>
@@ -56,20 +56,7 @@ const ExperienceInformation = ({ formData, handleChange }) => {
               />
             </div>
           </div>
-          <div>
-            <label className="block text-right font-medium mb-1">
-              مجالات الخبره
-            </label>
-            <div>
-              <input
-                type="text"
-                name="experanceDomain"
-                value={formData.experanceDomain}
-                onChange={handleChange}
-                className="border border-gray-300 rounded-md p-2 w-full"
-              />
-            </div>
-          </div>
+
           <div>
             <label className="block text-right font-medium mb-1">
               تسلسل درحات القيد
@@ -122,6 +109,20 @@ const ExperienceInformation = ({ formData, handleChange }) => {
                 type="date"
                 name="workEndDeDate"
                 value={formData.workEndDeDate}
+                onChange={handleChange}
+                className="border border-gray-300 rounded-md p-2 w-full"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label className="block text-right font-medium mb-1">
+              مجالات الخبره
+            </label>
+            <div>
+              <textarea
+                name="experanceDomain"
+                value={formData.experanceDomain}
                 onChange={handleChange}
                 className="border border-gray-300 rounded-md p-2 w-full"
               />
