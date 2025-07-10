@@ -27,14 +27,14 @@ const sections = [
   { key: "job", label: "البيانات الوظيفية", Component: JobInformationDisplay },
   {
     key: "experience",
-    label: " بيانات خاصه بالخبره والانتداب",
+    label: " بيانات خاصه بالخبره ",
     Component: ExperienceDisplay,
   },
   { key: "allowance", label: "      العلاوات", Component: AllowanceDetails },
   { key: "finicial", label: "  بيانات الذمة المالية", Component: FinicialZema },
   {
     key: "yearReport",
-    label: "        بيانات سنة التقارير",
+    label: "      بيانات سنة التقارير",
     Component: YearReportDetails,
   },
   { key: "lagna", label: "        بيانات اللجنة", Component: LagnaDetails },
@@ -54,11 +54,7 @@ const sections = [
     label: "        بيانات الجزاءات",
     Component: PenaltyDetails,
   },
-  {
-    key: "yearLaw",
-    label: "   بيانات تقارير السنة ",
-    Component: YearReportLawDetails,
-  },
+
   {
     key: "vacation",
     label: "        بيانات الاجازات",
@@ -119,7 +115,7 @@ const DetailsOfEmployee = () => {
 
   return (
     <div className="mt-6 px-4">
-      <div className="text-3xl font-bold mb-8 text-right font-bold  text-gray-800">
+      <div className="text-3xl font-bold mb-8 text-right text-gray-800">
         تفاصيل الموظف
       </div>
       {employee &&
