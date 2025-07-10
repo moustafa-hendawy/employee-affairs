@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import ExperienceDisplay from "./SectionOfDetails/expertinceDisplay";
 import JobInformationDisplay from "./SectionOfDetails/jobInformationDetails";
 import PersonalInformationDisplay from "./SectionOfDetails/personalInformationDetails";
@@ -84,6 +84,7 @@ const sections = [
 
 const DetailsOfEmployee = () => {
   const { nationalId } = useParams();
+  const navigate = useNavigate();
   const [employee, setEmployee] = useState(null);
   const [openSections, setOpenSections] = useState(new Set());
 
@@ -115,8 +116,21 @@ const DetailsOfEmployee = () => {
 
   return (
     <div className="mt-6 px-4">
-      <div className="text-3xl font-bold mb-8 text-right text-gray-800">
-        تفاصيل الموظف
+      <div className=" mb-8   flex justify-between">
+        <div className="text-3xl text-right font-bold text-gray-800">
+          {" "}
+          تفاصيل الموظف
+        </div>
+        \
+        <button
+          className="bg-[#176D6A] text-white px-4 py-2  hover:opacity-90"
+          style={{ borderRadius: "6px" }}
+          onClick={() => {
+            navigate(-1);
+          }}
+        >
+          العودة
+        </button>
       </div>
       {employee &&
         employee.map((emp, index) => (

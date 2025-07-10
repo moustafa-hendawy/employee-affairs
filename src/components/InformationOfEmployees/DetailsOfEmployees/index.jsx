@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Index = () => {
   const [jobGroups, setJobGroups] = useState([]);
@@ -7,6 +7,7 @@ const Index = () => {
   const [jobSubGroups, setJobSubGroups] = useState([]);
   const [faculties, setFaculties] = useState([]);
   const [fincialDegrees, setFincialDegrees] = useState([]);
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     jobNameId: 0,
     jobSubGroupId: 0,
@@ -100,8 +101,17 @@ const Index = () => {
 
   return (
     <>
-      <div className="max-w-5xl mx-auto p-4" dir="rtl">
+      <div className="max-w-5xl mx-auto p-4 flex justify-between" dir="rtl">
         <h2 className="text-2xl font-bold mb-6 text-right">تفاصيل الموظفين </h2>
+        <button
+          className="bg-[#176D6A] text-white px-4 py-2  hover:opacity-90"
+          style={{ borderRadius: "6px" }}
+          onClick={() => {
+            navigate(-1);
+          }}
+        >
+          العودة
+        </button>
       </div>
 
       <div className="max-w-5xl mx-auto p-4 " dir="rtl">

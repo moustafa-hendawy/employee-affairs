@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import PersonalInformation from "./SectioOfInputs/personalInformation";
 import JobInformation from "./SectioOfInputs/jobInformation";
 import ExperienceInformation from "./SectioOfInputs/experinceInformation";
 
 const Index = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     nationalId: "",
     fileId: "",
@@ -200,6 +202,18 @@ const Index = () => {
   return (
     <>
       <div className="max-w-[90%] mx-auto p-4" dir="rtl">
+        <div className="w-full  p-4 flex justify-between" dir="rtl">
+          <h2 className="text-2xl font-bold mb-6 text-right">اضافة موظف </h2>
+          <button
+            className="bg-[#176D6A] text-white px-4 py-2  hover:opacity-90"
+            style={{ borderRadius: "6px" }}
+            onClick={() => {
+              navigate(-1);
+            }}
+          >
+            العودة
+          </button>
+        </div>
         <PersonalInformation formData={formData} handleChange={handleChange} />
         <JobInformation
           formData={formData}
