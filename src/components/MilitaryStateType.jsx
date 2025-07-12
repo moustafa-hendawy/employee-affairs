@@ -29,7 +29,6 @@
 
 import React, { useEffect, useState } from 'react';
 import {fetchMilitaryStateType} from '../services/EmployeeService';
-// import './Faculty.css'
 import './faculty/Faculty.css'
 
 function MilitaryState() {
@@ -61,7 +60,7 @@ const [militaryState, setMilitaryState] = useState([])
             <tr key={index}>
               <td>{i.code}</td>
               <td>{i.name}</td>
-              <td>
+              <td className='center-actions'>
                 <img
                   src="/img/ic_sharp-edit.png"
                   alt="edit"

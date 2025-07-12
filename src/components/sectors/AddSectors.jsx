@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addFacultyData } from '../redux/FacultyReducers';
+// import { addFacultyData } from '../redux/FacultyReducers';
 import { Form } from 'react-bootstrap';
 import { Button } from 'primereact/button';
 import './AddSectors.css';
@@ -15,18 +15,21 @@ function AddSectors({ onClose }) {
   
   const dispatch = useDispatch();
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+   e.preventDefault();
+    console.log('kdnfjdfnjf')
     dispatch(addSectorData({
-      id: (+sectors[sectors.length - 1]?.id + 1 || 1),
+      // id: (+sectors[sectors.length - 1]?.id + 1 || 1),
       name: sectorName,
-      status,
-      code
+      status: Number(status),
+      code: Number(code)
     })).then(() => {
       dispatch(fetchSectorData());
       setSectorName('');
     setCode('');
     setStatus('');
-      onClose()
+      onClose();
+      console.log('Ahmed Ali');
     })
     // setSectorName('');
     // setCode('');

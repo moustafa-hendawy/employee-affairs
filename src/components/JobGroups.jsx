@@ -1,31 +1,4 @@
 
-// import { Column } from 'primereact/column'
-// import { DataTable } from 'primereact/datatable'
-// import React, { useEffect, useState } from 'react'
-// import { fetchNonExistenceType } from '../services/EmployeeService'
-// import BackToMenu from './BackToMenu';
-
-// function NonExistanceType() {
-//   const [nonExistence, setNonExistence] = useState([]);
-//   useEffect(() => {
-//     fetchNonExistenceType().then((data) => setNonExistence(data))
-//   }, [])
-//   return (
-//     <div>
-//        <BackToMenu style={{position: 'absolute',left: '14px',top: '32px'}} />
-//       <h4 className='non-exist' style={{padding: '20px',
-//    margin: '20px',
-//     textAlign: 'center'}}>حالات عدم الوجود في العمل</h4>
-//      <DataTable className='dataTable' value={nonExistence} tableStyle={{ minWidth: '30rem' }}>
-//              <Column field="name" header="حالة عدم الوجود" />
-//              <Column field="code" header="كود الحالة" style={{ width: '400px' }} />
-//              {/* <Column field="status" header="النوع" /> */}
-//            </DataTable>
-//     </div>
-//   )
-// }
-
-// export default NonExistanceType
 
 import React, { useEffect, useState } from 'react';
 import './faculty/Faculty.css'
@@ -59,16 +32,18 @@ const navigate = useNavigate();
         </thead>
         <tbody>
           {jobGroups.map((i, index) => (
-            <tr key={index} onClick={() => navigate(`/job-subGroups/group-id/${i.id}/group-code/${i.code}`)} style={{cursor: 'pointer'}}>
+            <tr key={index} onClick={() => navigate(`/job-groups/${i.id}/job-sub-groups`)} style={{cursor: 'pointer'}}>
               <td>{i.name}</td>
               <td>{i.code}</td>
-              <td>
+              <td className='center-actions'>
                 <img
+                  onClick={(e) => e.stopPropagation()}
                   src="/img/ic_sharp-edit.png"
                   alt="edit"
                   className="icon-action"
                 />
                 <img
+                  onClick={(e) => e.stopPropagation()}
                   src="/img/ic_outline-delete.png"
                   alt="delete"
                   className="icon-action"

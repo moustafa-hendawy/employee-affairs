@@ -26,7 +26,7 @@
 // }
 
 // export default VacationType
-
+import './faculty/Faculty.css';
 import React, { useEffect, useState } from 'react';
 import {fetchVacationType} from '../services/EmployeeService';
 import './faculty/Faculty.css'
@@ -60,7 +60,7 @@ const [vacationType, VacationType] = useState([])
             <tr key={index}>
               <td>{i.code}</td>
               <td>{i.name}</td>
-              <td>
+              <td className='center-actions'>
                 <img
                   src="/img/ic_sharp-edit.png"
                   alt="edit"

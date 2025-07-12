@@ -26,7 +26,6 @@
 // }
 
 // export default NonExistanceType
-
 import React, { useEffect, useState } from 'react';
 import {fetchNonExistenceType} from '../services/EmployeeService';
 import './NonExistanceType.css'
@@ -60,7 +59,7 @@ const [exist, setExist] = useState([])
             <tr key={index}>
               <td>{i.code}</td>
               <td>{i.name}</td>
-              <td>
+              <td className='center-actions'>
                 <img
                   src="/img/ic_sharp-edit.png"
                   alt="edit"

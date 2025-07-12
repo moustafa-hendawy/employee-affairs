@@ -134,7 +134,9 @@ function AddFaculty({ onClose }) {
   const faculty = useSelector(state => state.faculty);
   const dispatch = useDispatch();
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+        e.preventDefault();
+
     dispatch(addSectorData({
       id: (+faculty[faculty.length - 1]?.id + 1 || 1),
       name,
@@ -151,10 +153,10 @@ function AddFaculty({ onClose }) {
         <span className="close-button" onClick={onClose}>×</span>
 
         <Form.Group className="mb-3">
-          <Form.Label className="label">الرقم الاكاديمي </Form.Label>
+          <Form.Label className="label">الكود  </Form.Label>
           <Form.Control
             type="number"
-            placeholder="الرقم الاكاديمي"
+            placeholder="الكود "
             value={code}
             onChange={(e) => setCode(e.target.value)}
           />
@@ -182,7 +184,8 @@ function AddFaculty({ onClose }) {
             borderRadius: '8px',
             fontWeight: 'bold',
             fontSize: '16px',
-            width: '100%'
+            width: '100%',
+            color: '#eee'
           }}
         />
       </Form>

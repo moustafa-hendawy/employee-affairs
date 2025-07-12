@@ -1,25 +1,25 @@
     
-// Faculty.js
+import './faculty/Faculty.css'
 import React, { useEffect, useState } from 'react';
-import { fetchFacultyData, deleteFacultyData } from '../redux/FacultyReducers';
+// import { fetchFacultyData, deleteFacultyData } from '../redux/FacultyReducers';
 import { useDispatch, useSelector } from 'react-redux';
-import './Faculty.css';
-import { Dialog } from 'primereact/dialog';
-import AddFaculty from './AddFaculty';
-import Update from './Update';
+import './faculty/Faculty.css';
+// import { Dialog } from 'primereact/dialog';
+// import AddFaculty from './AddFaculty';
+// import Update from './Update';
 import Swal from 'sweetalert2';
+import { fetchFincialDegrees } from '../services/EmployeeService';
 
-function Faculty() {
-  const faculty = useSelector(state => state.faculty);
-  const dispatch = useDispatch();
+function FincialDegrees() {
+ const [fintialDegrees, setFintialDegrees] = useState([]);
 
   const [addVisible, setAddVisible] = useState(false);
   const [editVisible, setEditVisible] = useState(false);
   const [selectedFaculty, setSelectedFaculty] = useState(null);
 
   useEffect(() => {
-    dispatch(fetchFacultyData());
-  }, [dispatch]);
+    fetchFincialDegrees().then((data) => setFintialDegrees(data))
+  }, []);
 
     // Delete
   const handleDelete = (id) => {
@@ -45,37 +45,39 @@ function Faculty() {
 
   return (
     <div className='faculty-container'>
-      <h2 className='title'>الجهات التابع لها كل موظف</h2>
+      <h2 className='title'>الدرجة الوظيفية</h2>
 
       <div className="button-and-table">
         <button onClick={() => setAddVisible(true)} className='add-btn'>
-          <img src='/img/mingcute_add-fill.png' alt='add' />
+          <img src='img/mingcute_add-fill.png' alt='add' />
         </button>
 
         {/* نافذة الإضافة */}
-        <Dialog className="custom-dialog" header='' visible={addVisible} onHide={() => setAddVisible(false)}>
+        {/* <Dialog className="custom-dialog" header='' visible={addVisible} onHide={() => setAddVisible(false)}>
           <AddFaculty onClose={() => setAddVisible(false)} />
-        </Dialog>
+        </Dialog> */}
 
         {/* نافذة التعديل */}
-        <Dialog className="custom-dialog" header='' visible={editVisible} onHide={() => setEditVisible(false)}>
+        {/* <Dialog className="custom-dialog" header='' visible={editVisible} onHide={() => setEditVisible(false)}>
           <Update data={selectedFaculty} onClose={() => setEditVisible(false)} />
-        </Dialog>
+        </Dialog> */}
 
         <table>
           <thead>
             <tr>
               <th> الكود</th>
-              <th>الكلية</th>
+              <th> الدرجة</th>
+              <th>رقم الدرجة</th>
               <th>الإجراءات</th>
             </tr>
           </thead>
           <tbody>
-            {faculty.map((i, index) => (
+            {fintialDegrees.map((i, index) => (
               <tr key={index}>
                 <td>{i.code}</td>
                 <td>{i.name}</td>
-                <td className='center-actions'>
+                <td>{i.fincialDegreeTypeId}</td>
+                <td style={{ display: 'flex', justifyContent: 'center' }}>
                   <img
                     onClick={() => {
                       setSelectedFaculty(i);
@@ -101,4 +103,4 @@ function Faculty() {
   );
 }
 
-export default Faculty;
+export default FincialDegrees;

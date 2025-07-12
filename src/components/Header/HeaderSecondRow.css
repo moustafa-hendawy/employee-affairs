@@ -124,7 +124,8 @@ body {
 }
 
 .link-and-select:hover img{
-  background-color: rgba(23, 109, 106, 1);
+  /* background-color: rgba(23, 109, 106, 1); */
+  background-color: black;
   border: none;
 }
 

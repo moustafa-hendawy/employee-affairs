@@ -2,14 +2,14 @@
 import React, { useEffect, useState } from 'react';
 import { fetchSectorData, deleteSectorData } from '../redux/SectorReducers';
 import { useDispatch, useSelector } from 'react-redux';
-import './Sectors.css';
 import { Dialog } from 'primereact/dialog';
 import AddSectors from './AddSectors';
 import EditSectors from './EditSectors';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
-
-
+// import '../faculty/Faculty.css'
+// import '../faculty/Faculty.css'
+import './Sectors.css'
 function Sectors() {
   const sectors = useSelector(state => state.sectors);
   const dispatch = useDispatch();
@@ -69,7 +69,7 @@ const navigate = useNavigate();
         </thead>
         <tbody>
           {sectors.map((i, index) => (
-            <tr key={index} onClick={() => navigate(`/generalAd/sector-id/${i.id}`)} style={{cursor: 'pointer'}}>
+            <tr key={index} onClick={() => navigate(`/sectors/${i.id}/generalAd`) } style={{cursor: 'pointer'}}>
               <td>{i.code}</td>
               <td>{i.name}</td>
 
@@ -80,18 +80,22 @@ const navigate = useNavigate();
               }
 
               <td>{i.status}</td> */}
-              <td>
+              <td style={{display: 'flex', justifyContent: 'center'}}>
                 <img
-                      onClick={() => {
+                      onClick={(e) => {
                       setSelectedFaculty(i);
                       setEditVisible(true);
+                      e.stopPropagation();
                     }}
                   src="/img/ic_sharp-edit.png"
                   alt="edit"
                   className="icon-action"
                 />
                 <img
-                  onClick={() => handleDelete(i.id)}
+                  onClick={(e) => {
+                    handleDelete(i.id);
+                    e.stopPropagation();
+                  }}
                   src="/img/ic_outline-delete.png"
                   alt="delete"
                   className="icon-action"

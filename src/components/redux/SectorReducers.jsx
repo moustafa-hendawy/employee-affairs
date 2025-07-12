@@ -9,11 +9,11 @@ export const fetchSectorData = createAsyncThunk('sectorSlice/fetchSectorData', a
  })
 
 // Add
-export const addSectorData = createAsyncThunk('sectorSlice/addSectorData', async({id, name, code,status}) => {
+export const addSectorData = createAsyncThunk('sectorSlice/addSectorData', async({ name, code,status}) => {
     const res = await fetch('http://193.227.24.29:5000/api/Sector', {
         method: 'POST',
         headers: {"Content-Type": "application/json"},
-        body:JSON.stringify({id, name, code,status})
+        body:JSON.stringify({ name, code,status})
     });
     const data = await res.json();
     return data;

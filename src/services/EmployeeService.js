@@ -33,9 +33,17 @@ export function fetchNonExistenceType() {
    .then((res) => res.json())
   )
  }
+//  المؤهل العلمي
 export function fetchEducationalLevel() {
   return(
    fetch('http://193.227.24.29:5000/api/EducationalLevel')
+   .then((res) => res.json())
+  )
+ }
+//  المؤهل الدراسي
+export function fetchCertificate(educationalId) {
+  return(
+   fetch(`http://193.227.24.29:5000/api/Department/BySubAd/${educationalId}`)
    .then((res) => res.json())
   )
  }
@@ -75,6 +83,13 @@ export function fetchDepartment(subAdId) {
    .then((res) => res.json())
   )
  }
+export function fetchFincialDegrees() {
+  return(
+   fetch(`http://193.227.24.29:5000/api/FincialDegrees`)
+   .then((res) => res.json())
+  )
+ }
+
 
 
 
