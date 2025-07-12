@@ -108,6 +108,7 @@ const PersonalInformation = ({ formData, handleChange }) => {
             />
           </div>
 
+          {/* الحالة الصحية */}
           <div>
             <label className="block text-right font-medium mb-1">
               الحالة الصحية
@@ -127,19 +128,23 @@ const PersonalInformation = ({ formData, handleChange }) => {
             </select>
           </div>
 
-          <div>
-            <label className="block text-right font-medium mb-1">
-              نوع الإعاقة
-            </label>
-            <input
-              type="text"
-              name="disabilityType"
-              value={formData.disabilityType}
-              onChange={handleChange}
-              className="border border-gray-300 rounded-md p-2 w-full"
-            />
-          </div>
+          {/* نوع الإعاقة (يظهر فقط إذا كان معاق، مثلاً healthStateId == '2') */}
+          {["2", "3"].includes(formData.healthStateId) && (
+            <div>
+              <label className="block text-right font-medium mb-1">
+                نوع الإعاقة
+              </label>
+              <input
+                type="text"
+                name="disabilityType"
+                value={formData.disabilityType}
+                onChange={handleChange}
+                className="border border-gray-300 rounded-md p-2 w-full"
+              />
+            </div>
+          )}
 
+          {/* الحالة الاجتماعية */}
           <div>
             <label className="block text-right font-medium mb-1">
               الحالة الاجتماعية
@@ -159,18 +164,20 @@ const PersonalInformation = ({ formData, handleChange }) => {
             </select>
           </div>
 
-          <div>
-            <label className="block text-right font-medium mb-1">
-              عدد أفراد الأسرة
-            </label>
-            <input
-              type="text"
-              name="disabilityFamilyMember"
-              value={formData.disabilityFamilyMember}
-              onChange={handleChange}
-              className="border border-gray-300 rounded-md p-2 w-full"
-            />
-          </div>
+          {["2", "3", "4", "5"].includes(formData.socialStateId) && (
+            <div>
+              <label className="block text-right font-medium mb-1">
+                عدد أفراد الأسرة
+              </label>
+              <input
+                type="text"
+                name="disabilityFamilyMember"
+                value={formData.disabilityFamilyMember}
+                onChange={handleChange}
+                className="border border-gray-300 rounded-md p-2 w-full"
+              />
+            </div>
+          )}
 
           <div>
             <label className="block text-right font-medium mb-1">
@@ -205,6 +212,11 @@ const PersonalInformation = ({ formData, handleChange }) => {
               name="mobile"
               value={formData.mobile}
               onChange={handleChange}
+              onBlur={(e) => {
+                if (e.target.value && !/^\d+$/.test(e.target.value)) {
+                  alert("الرجاء إدخال أرقام فقط في حقل المحمول");
+                }
+              }}
               className="border border-gray-300 rounded-md p-2 w-full"
             />
           </div>
@@ -218,6 +230,11 @@ const PersonalInformation = ({ formData, handleChange }) => {
               name="tel"
               value={formData.tel}
               onChange={handleChange}
+              onBlur={(e) => {
+                if (e.target.value && !/^\d+$/.test(e.target.value)) {
+                  alert("الرجاء إدخال أرقام فقط في حقل هاتف السكن");
+                }
+              }}
               className="border border-gray-300 rounded-md p-2 w-full"
             />
           </div>
@@ -241,7 +258,7 @@ const PersonalInformation = ({ formData, handleChange }) => {
               الرقم التأميني
             </label>
             <input
-              type="text"
+              type="number"
               name="taminNo"
               value={formData.taminNo}
               onChange={handleChange}
