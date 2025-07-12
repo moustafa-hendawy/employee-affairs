@@ -1,6 +1,4 @@
 
-
-
 .faculty-container {
   margin: 97px auto;
   direction: rtl;
@@ -70,7 +68,7 @@ thead th {
 }
 
 tbody tr {
-  background-color: #fff;
+  /* background-color: #fff; */
   border-bottom: 1px solid rgba(23, 109, 106, 0.3);
   transition: background-color 0.2s ease;
   cursor: pointer;

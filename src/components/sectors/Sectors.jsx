@@ -73,13 +73,7 @@ const navigate = useNavigate();
               <td>{i.code}</td>
               <td>{i.name}</td>
 
-            {i.status == 0?<td>ذكر</td>: <td>أنثى</td>}
-              {/* {i.specialLevel?
-              <td style={{color:'rgb(40, 167, 69)'}}>✔</td>
-              :<td style={{color:'#DC4C64'}}>✖</td>
-              }
-
-              <td>{i.status}</td> */}
+            {i.status == 0?<td>معتمد</td>: <td>مستحدث</td>}
               <td style={{display: 'flex', justifyContent: 'center'}}>
                 <img
                       onClick={(e) => {

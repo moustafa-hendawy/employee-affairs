@@ -173,8 +173,8 @@ const navigate = useNavigate();
                 <img src="/img/Iconly.svg" alt="submenu" />
                 {showQualification && (
                   <div className="submenu">
-                    <a className="dropdown-item" href="#">المؤهل العلمي</a>
-                    <a className="dropdown-item" href="#">المؤهل الدراسي</a>
+                    <a className="dropdown-item" href="/educational-level">المؤهل العلمي</a>
+                    <a className="dropdown-item" href="/educational-level/all/certificate">المؤهل الدراسي</a>
                   </div>
                 )}
               </div>

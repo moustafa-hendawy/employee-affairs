@@ -24,6 +24,8 @@ import AddEmployee from "./components/InformationOfEmployees/AddEmployee";
 import DetailsOfEmployee from "./components/InformationOfEmployees/DetailsOfEmployees/Details/DetailsOfEmployee";
 import Sectors from './components/sectors/Sectors'
 import FintialDegrees from './components/FincialDegrees';
+import EducationalLevel from "./components/EducationalLevel";
+import Certificate from "./components/Certificate";
 
 
 function App() {
@@ -46,6 +48,8 @@ function App() {
     <Route path="/military-state-type" element={<MilitaryStateType />}/>
     <Route path="/qualification" element={<Qualification />}/>
     <Route path="/vacation-type" element={<VacationType />}/>
+    <Route path="/educational-level" element={<EducationalLevel />}/>
+    <Route path="/educational-level/:educationalLevelId/certificate" element={<Certificate />}/>
       <Route path="/details-of-employees" element={<DetailsOfEmployees />} />
       <Route path="/add-employee" element={<AddEmployee />} />
       <Route path="/details/:nationalId" element={<DetailsOfEmployee />} />

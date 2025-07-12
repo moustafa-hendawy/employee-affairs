@@ -41,9 +41,9 @@ export function fetchEducationalLevel() {
   )
  }
 //  المؤهل الدراسي
-export function fetchCertificate(educationalId) {
+export function fetchCertificate(educationalLevelId) {
   return(
-   fetch(`http://193.227.24.29:5000/api/Department/BySubAd/${educationalId}`)
+   fetch(`http://193.227.24.29:5000/api/Certificate/BySubAd/${educationalLevelId}`)
    .then((res) => res.json())
   )
  }
