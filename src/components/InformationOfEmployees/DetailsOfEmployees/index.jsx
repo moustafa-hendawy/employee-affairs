@@ -151,7 +151,7 @@ const Index = () => {
         setSearchResults(Array.isArray(data) ? data : []);
       })
       .catch((error) => {
-        console.error("حدث خطأ أثناء جلب البيانات:", error);
+        console.error("حدث خطأ أثناء جلب البيانات: ", error);
         setSearchResults([]); // تأكيد أن الداتا تصبح فاضية في حالة حدوث أي خطأ
       });
   };
