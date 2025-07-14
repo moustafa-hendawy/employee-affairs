@@ -214,8 +214,8 @@ function JobNames() {
           <table>
             <thead>
               <tr>
-                <th>المسمى الوظيفي</th>
                 <th>كود المسمى الوظيفي</th>
+                <th>المسمى الوظيفي</th>
                 <th>مهام ومسئوليات الوظيفة</th>
                 <th>الإجراءات</th>
               </tr>
@@ -223,8 +223,8 @@ function JobNames() {
             <tbody>
               {jobNames.map((i, index) => (
                 <tr key={index}>
-                  <td>{i.name}</td>
                   <td>{i.code}</td>
+                  <td>{i.name}</td>
                   <td>{i.jobMission}</td>
                   <td className='center-actions'>
                     <img

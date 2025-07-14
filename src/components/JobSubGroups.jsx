@@ -102,7 +102,7 @@
 
 // export default JobSubGroups;
 
-import './SubAd.css';
+import './subAd/SubAd.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import { fetchJobGroups, fetchJobSubGroups } from '../services/EmployeeService';
@@ -162,16 +162,16 @@ function JobSubGroups() {
           <table>
             <thead>
               <tr>
-                <th>المجموعة النوعية</th>
                 <th>كود المجموعة النوعية</th>
+                <th>المجموعة النوعية</th>
                 <th>الإجراءات</th>
               </tr>
             </thead>
             <tbody>
               {jobSubGroups.map((i, index) => (
                 <tr key={index} onClick={() => navigate(`/job-groups/job-sub-groups/${jobGroupsId}/job-names`)} style={{ cursor: 'pointer' }}>
-                  <td>{i.name}</td>
                   <td>{i.code}</td>
+                  <td>{i.name}</td>
                   <td className='center-actions'>
                     <img
                       onClick={(e) => e.stopPropagation()}

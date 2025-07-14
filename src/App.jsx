@@ -10,28 +10,31 @@ import JobGroups from "./components/JobGroups";
 // import JobGroups from "./JobGroups";
 import JobSubGroups from "./components/JobSubGroups";
 import JobNames from "./components/JobNames";
-import Department from "./components/Department";
+import Department from "./components/department/Department";
 import GeneralAd from "./components/generalAd/GeneralAd";
-import SubAd from "./components/SubAd";
+import SubAd from "./components/subAd/SubAd";
 import NonExistanceType from "./components/NonExistanceType";
 import OfficialInTheRegion from "./components/OfficialInTheRegion";
 import Qualification from "./components/Qualification";
 import MilitaryStateType from "./components/MilitaryStateType";
 import "bootstrap/dist/css/bootstrap.min.css";
-import VacationType from "./components/VacationType";
+import VacationType from "./components/vacations/VacationType";
 import DetailsOfEmployees from "./components/InformationOfEmployees/DetailsOfEmployees";
 import AddEmployee from "./components/InformationOfEmployees/AddEmployee";
 import DetailsOfEmployee from "./components/InformationOfEmployees/DetailsOfEmployees/Details/DetailsOfEmployee";
 import Sectors from './components/sectors/Sectors'
-import FintialDegrees from './components/FincialDegrees';
+import FintialDegrees from './components/fintialDegrees/FincialDegrees';
 import EducationalLevel from "./components/EducationalLevel";
 import Certificate from "./components/Certificate";
+import SignIn from "./components/SignIn";
 
 
 function App() {
   return (
  <div>
     <MainPage />
+    {/* <Route path="/" element={<SignIn />}/> */}
+
 <Routes>
     {/* <Route path="/employee" element={<Employees />}/> */}
     <Route path="/faculty" element={<Faculty />}/>

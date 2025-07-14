@@ -25,6 +25,7 @@ const navigate = useNavigate();
   // Delete
   const handleDelete = (id) => {
     Swal.fire({
+        title: "هل تريد الحذف فعلا ؟",
       showCancelButton: true,
       confirmButtonText: "حذف",
       cancelButtonText: "لا",
@@ -73,7 +74,8 @@ const navigate = useNavigate();
               <td>{i.code}</td>
               <td>{i.name}</td>
 
-            {i.status == 0?<td>معتمد</td>: <td>مستحدث</td>}
+            {i.status == 1?<td>معتمد</td>: <td>مستحدث</td>}
+                  {/* <td>{i.status}</td> */}
               <td style={{display: 'flex', justifyContent: 'center'}}>
                 <img
                       onClick={(e) => {

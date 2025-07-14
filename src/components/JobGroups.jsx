@@ -25,16 +25,16 @@ const navigate = useNavigate();
       <table>
         <thead>
           <tr>
-            <th>  المجموعة الوظيفية</th>
             <th> كود المجموعة الوظيفية </th>
+            <th>  المجموعة الوظيفية</th>
             <th>الإجراءات</th>
           </tr>
         </thead>
         <tbody>
           {jobGroups.map((i, index) => (
             <tr key={index} onClick={() => navigate(`/job-groups/${i.id}/job-sub-groups`)} style={{cursor: 'pointer'}}>
-              <td>{i.name}</td>
               <td>{i.code}</td>
+              <td>{i.name}</td>
               <td className='center-actions'>
                 <img
                   onClick={(e) => e.stopPropagation()}

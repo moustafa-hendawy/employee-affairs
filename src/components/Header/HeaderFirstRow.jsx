@@ -1,5 +1,6 @@
 import React from 'react'
 import './HeaderFirstRow.css'
+import { Link } from 'react-router-dom'
 
 function HeaderFirstRow() {
   return (
@@ -21,7 +22,7 @@ function HeaderFirstRow() {
             <span>عربي</span>
             <img src="/img/ri_arrow-down-s-fill.png" alt="arrow" />
           </div>
-          <button className="login-button">الدخول</button>
+          <Link to='/sign-in' className="login-button" style={{textDecoration: 'none'}}>الدخول</Link>
         </div>
       </div>
   )

@@ -1,25 +1,38 @@
     
-import './faculty/Faculty.css'
+// import '../faculty/Faculty.css'
 import React, { useEffect, useState } from 'react';
 // import { fetchFacultyData, deleteFacultyData } from '../redux/FacultyReducers';
 import { useDispatch, useSelector } from 'react-redux';
-import './faculty/Faculty.css';
-// import { Dialog } from 'primereact/dialog';
-// import AddFaculty from './AddFaculty';
+import { Dialog } from 'primereact/dialog';
+// import AddFaculty from '../faculty/AddFaculty.css';
 // import Update from './Update';
 import Swal from 'sweetalert2';
-import { fetchFincialDegrees } from '../services/EmployeeService';
+
+import { deleteDegreeData, fetchDegreeData } from '../redux/FinintialDegeeReducer';
+import { fetchDegreeTypeData } from '../redux/FinintialDegeeTypeReducer';
+import AddFincialDegrees from './AddFincialdegrees';
+import EditFincialDegrees from './EditFincialDegrees';
+
+// import { fetchFincialDegrees } from '../../services/EmployeeService';
 
 function FincialDegrees() {
- const [fintialDegrees, setFintialDegrees] = useState([]);
+//  const [fintialDegrees, set  ialDegrees] = useState([]);
+const fincialDegrees = useSelector(state => state.fincialDegree);
+const fincialTypeDegrees = useSelector(state => state.fincialDegreeType);
 
+const dispatch = useDispatch()
   const [addVisible, setAddVisible] = useState(false);
   const [editVisible, setEditVisible] = useState(false);
   const [selectedFaculty, setSelectedFaculty] = useState(null);
 
   useEffect(() => {
-    fetchFincialDegrees().then((data) => setFintialDegrees(data))
+    dispatch(fetchDegreeData())
+    dispatch(fetchDegreeTypeData())
   }, []);
+
+  //   useEffect(() => {
+  //   console.log("........." , fincialTypeDegrees)
+  // }, [fincialTypeDegrees]);
 
     // Delete
   const handleDelete = (id) => {
@@ -33,8 +46,8 @@ function FincialDegrees() {
       }).then((result) => {
          if (result.isConfirmed) {
         //   dispatch(deleteUser({id: id}));
-        dispatch(deleteFacultyData(id));
-             dispatch(fetchFacultyData());
+        dispatch(deleteDegreeData(id));
+             dispatch(fetchDegreeData());
         } 
         else if (result.isDenied) {
           Swal.fire("Changes are not saved", "", "info");
@@ -53,30 +66,30 @@ function FincialDegrees() {
         </button>
 
         {/* نافذة الإضافة */}
-        {/* <Dialog className="custom-dialog" header='' visible={addVisible} onHide={() => setAddVisible(false)}>
-          <AddFaculty onClose={() => setAddVisible(false)} />
-        </Dialog> */}
+        <Dialog className="custom-dialog" header='' visible={addVisible} onHide={() => setAddVisible(false)}>
+          <AddFincialDegrees types={fincialTypeDegrees} onClose={() => setAddVisible(false)} />
+        </Dialog>
 
         {/* نافذة التعديل */}
-        {/* <Dialog className="custom-dialog" header='' visible={editVisible} onHide={() => setEditVisible(false)}>
-          <Update data={selectedFaculty} onClose={() => setEditVisible(false)} />
-        </Dialog> */}
+        <Dialog className="custom-dialog" header='' visible={editVisible} onHide={() => setEditVisible(false)}>
+          <EditFincialDegrees types={fincialTypeDegrees} degree={selectedFaculty} onClose={() => setEditVisible(false)} />
+        </Dialog>
 
         <table>
           <thead>
             <tr>
               <th> الكود</th>
               <th> الدرجة</th>
-              <th>رقم الدرجة</th>
+              <th>نوع الدرجة</th>
               <th>الإجراءات</th>
             </tr>
           </thead>
           <tbody>
-            {fintialDegrees.map((i, index) => (
+            {fincialDegrees.map((i, index) => (
               <tr key={index}>
                 <td>{i.code}</td>
                 <td>{i.name}</td>
-                <td>{i.fincialDegreeTypeId}</td>
+                <td>{(fincialTypeDegrees || []).find((type) => type.id === i.fincialDegreeTypeId)?.name}</td>
                 <td style={{ display: 'flex', justifyContent: 'center' }}>
                   <img
                     onClick={() => {

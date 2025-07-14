@@ -61,7 +61,7 @@ function AddSectors({ onClose }) {
             onChange={(e) => setSectorName(e.target.value)}
           />
         </Form.Group>
-
+{/* 
         <Form.Group className="mb-3">
           <Form.Label className="label">النوع</Form.Label>
           <Form.Control
@@ -70,7 +70,20 @@ function AddSectors({ onClose }) {
             value={status}
             onChange={(e) => setStatus(e.target.value)}
           />
-        </Form.Group>
+        </Form.Group> */}
+
+
+       <Form.Group className="mb-3">
+                  <Form.Label className="label">  النوع</Form.Label>
+                  <Form.Select
+                    value={status}
+                    onChange={(e) => setStatus((e.target.value))}
+                  >
+                    <option value={2}>مستحدث</option>
+                    <option value={1}>معتمد</option>
+                  </Form.Select>
+                </Form.Group>
+
 
         <Button
           label="إرسال"

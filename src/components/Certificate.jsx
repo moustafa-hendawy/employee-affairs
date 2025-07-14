@@ -1,10 +1,10 @@
 
-import './SubAd.css';
+import './subAd/SubAd.css';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Dropdown } from 'primereact/dropdown';
-import { fetchCertificate, fetchEducationalLevel, fetchGeneralAd } from '../services/EmployeeService';
+import { fetchCertificate, fetchEducationalLevel } from '../services/EmployeeService';
 import { fetchSectorData } from './redux/SectorReducers';
 
 function Certificate() {
@@ -15,14 +15,7 @@ console.log(educationalLevelId)
   const [education, setEducation] = useState([]);
   const [certificate, setCertificate] = useState([]);
   const [selectedEducationId, setSelectedEducationId] = useState("");
-  const [showDropDown, setShowDropDown] = useState(false);
-
-//   useEffect(() => {
-//     // dispatch(fetchSectorData())
-//     //   .unwrap()
-//     //   .then((data) => setSectors(data));
-//     fetchCertificate().then((data) => setCertificate(data))
-// }, []);
+  // const [showDropDown, setShowDropDown] = useState(false);
 
   useEffect(() => {
     if (educationalLevelId && educationalLevelId !== 'all') {
@@ -30,7 +23,7 @@ console.log(educationalLevelId)
     } else {
       setEducation([]);
         fetchEducationalLevel().then((data) => setEducation(data))
-      setShowDropDown(true);
+      // setShowDropDown(true);
     }
   }, [educationalLevelId]);
 
@@ -49,7 +42,7 @@ console.log(educationalLevelId)
             <img src='/img/mingcute_add-fill.png' alt='add' />
           </button>
 
-          {showDropDown && (
+          {/* {showDropDown && ( */}
             <div className="selects" style={{ display: 'flex', gap: '100px' }}>
               <div className="sector-select card flex justify-content-center">
                 <Dropdown
@@ -62,7 +55,7 @@ console.log(educationalLevelId)
                 />
               </div>
             </div>
-          )}
+          {/* )} */}
         </div>
 
         {educationalLevelId === 'all' && !selectedEducationId ? (

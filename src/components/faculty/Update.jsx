@@ -213,7 +213,9 @@ function Update({ data, onClose }) {
             borderRadius: '8px',
             fontWeight: 'bold',
             fontSize: '16px',
-            width: '100%'
+            width: '100%',
+            color: '#eee'
+
           }}
         />
       </Form>

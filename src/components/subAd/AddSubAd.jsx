@@ -1,49 +1,50 @@
 
 
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Form } from 'react-bootstrap';
 import { Button } from 'primereact/button';
 import '../faculty/AddFaculty.css';
-import { editGeneralData } from '../redux/GeneralAdReducer';
+import { addSubAdData } from '../redux/SubAdReducer';
 
-function EditSubAd({ onClose, data }) {
+function AddSubAd({ onClose, generalAdId }) {
   const [code, setCode] = useState('');
   const [name, setName] = useState('');
   const [level, setLevel] = useState(true);
   const [specialLevel, setSpecialLevel] = useState(false);
-  const [status, setStatus] = useState(0);
+  const [status, setStatus] = useState(1);
 
+  const general = useSelector((state) => state.generalSlice);
   const dispatch = useDispatch();
-
-  // ✅ تحديث الحقول عند فتح النافذة (أو عند تغيّر data)
-  useEffect(() => {
-    if (data) {
-      setCode(data.code || '');
-      setName(data.name || '');
-      setLevel(data.level ?? true); // استخدام nullish coalescing
-      setSpecialLevel(data.specialLevel ?? false);
-      setStatus(data.status ?? 0);
-    }
-  }, [data]);
+     console.log("subad ", generalAdId)
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    dispatch(editGeneralData({
-        id: data.id,
-      updateFaculty: {
-        name,
-        code,
-        level,
-        specialLevel,
-        status,
-        sectorID: data.sectorID
-      }
+    const newId = general.length > 0
+      ? Math.max(...general.map(item => +item.id)) + 1
+      : 1;
+
+      console.log("subad ", generalAdId)
+    dispatch(addSubAdData({
+      id: newId,
+      name,
+      code,
+      level,
+      specialLevel,
+      status,
+      generalAdId
     }));
 
-    onClose(); // إغلاق النافذة بعد الإرسال
+    // Reset fields
+    setName('');
+    setCode('');
+    setLevel(true);
+    setSpecialLevel(false);
+    setStatus(1);
+
+    onClose(); // Close dialog
   };
 
   return (
@@ -61,8 +62,8 @@ function EditSubAd({ onClose, data }) {
             required
           />
         </Form.Group>
-
- <Form.Group className="mb-3">
+        
+        <Form.Group className="mb-3">
           <Form.Label className="label">اسم الإدارة العامة</Form.Label>
           <Form.Control
             type="text"
@@ -72,6 +73,7 @@ function EditSubAd({ onClose, data }) {
             required
           />
         </Form.Group>
+
 
         <Form.Group className="mb-3 d-flex align-items-center gap-2">
           <Form.Check
@@ -97,8 +99,8 @@ function EditSubAd({ onClose, data }) {
             value={status}
             onChange={(e) => setStatus(Number(e.target.value))}
           >
-            <option value={2}>مستحدث</option>
-            <option value={1}>معتمد</option>
+            <option value={1}>مستحدث</option>
+            <option value={2}>معتمد</option>
           </Form.Select>
         </Form.Group>
 
@@ -123,4 +125,4 @@ function EditSubAd({ onClose, data }) {
   );
 }
 
-export default EditSubAd;
+export default AddSubAd;

@@ -1,49 +1,45 @@
 
 
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Form } from 'react-bootstrap';
 import { Button } from 'primereact/button';
 import '../faculty/AddFaculty.css';
-import { editGeneralData } from '../redux/GeneralAdReducer';
+import { editSubAdData } from '../redux/SubAdReducer';
 
-function EditSubAd({ onClose, data }) {
-  const [code, setCode] = useState('');
-  const [name, setName] = useState('');
-  const [level, setLevel] = useState(true);
-  const [specialLevel, setSpecialLevel] = useState(false);
-  const [status, setStatus] = useState(0);
+function EditSubAd({ onClose, subAd }) {
+  const [code, setCode] = useState(subAd.code);
+  const [name, setName] = useState(subAd.name);
+  const [level, setLevel] = useState(subAd.level);
+  const [specialLevel, setSpecialLevel] = useState(subAd.specialLevel);
+  const [status, setStatus] = useState(subAd.status);
 
   const dispatch = useDispatch();
-
-  // ✅ تحديث الحقول عند فتح النافذة (أو عند تغيّر data)
-  useEffect(() => {
-    if (data) {
-      setCode(data.code || '');
-      setName(data.name || '');
-      setLevel(data.level ?? true); // استخدام nullish coalescing
-      setSpecialLevel(data.specialLevel ?? false);
-      setStatus(data.status ?? 0);
-    }
-  }, [data]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    dispatch(editGeneralData({
-        id: data.id,
-      updateFaculty: {
-        name,
-        code,
-        level,
-        specialLevel,
-        status,
-        sectorID: data.sectorID
-      }
-    }));
+    const data = {
+      id: subAd.id,
+      name,
+      code,
+      level,
+      specialLevel,
+      status,
+      generalAdId: subAd.generalAdId
+    }
 
-    onClose(); // إغلاق النافذة بعد الإرسال
+    dispatch(editSubAdData(data));
+
+    // Reset fields
+    setName('');
+    setCode('');
+    setLevel(true);
+    setSpecialLevel(false);
+    setStatus(1);
+
+    onClose(); // Close dialog
   };
 
   return (
@@ -62,7 +58,8 @@ function EditSubAd({ onClose, data }) {
           />
         </Form.Group>
 
- <Form.Group className="mb-3">
+
+        <Form.Group className="mb-3">
           <Form.Label className="label">اسم الإدارة العامة</Form.Label>
           <Form.Control
             type="text"
@@ -97,8 +94,8 @@ function EditSubAd({ onClose, data }) {
             value={status}
             onChange={(e) => setStatus(Number(e.target.value))}
           >
-            <option value={2}>مستحدث</option>
-            <option value={1}>معتمد</option>
+            <option value={1}>مستحدث</option>
+            <option value={2}>معتمد</option>
           </Form.Select>
         </Form.Group>
 

@@ -151,7 +151,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { editFacultyData } from '../redux/FacultyReducers';
+import { editSectorData } from '../redux/SectorReducers';
 import { Form } from 'react-bootstrap';
 import { Button } from 'primereact/button';
 import './AddSectors.css';
@@ -160,18 +160,20 @@ function EditSectors({ data, onClose }) {
   const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [code, setCode] = useState('');
+  const [status, setStatus] = useState();
 
   useEffect(() => {
     if (data) {
       setName(data.name);
       setCode(data.code);
+      setStatus(data.status)
     }
   }, [data]);
 
   const handleSubmit = () => {
-    dispatch(editFacultyData({
+    dispatch(editSectorData({
       id: data.id,
-      updateFaculty: { name, code }
+      updateFaculty: { name, code,status }
     }));
     onClose();
   };
@@ -201,6 +203,17 @@ function EditSectors({ data, onClose }) {
           />
         </Form.Group>
 
+            <Form.Group className="mb-3">
+                          <Form.Label className="label">  النوع</Form.Label>
+                          <Form.Select
+                            value={status}
+                            onChange={(e) => setStatus((e.target.value))}
+                          >
+                            <option value={2}>مستحدث</option>
+                            <option value={1}>معتمد</option>
+                          </Form.Select>
+                        </Form.Group>
+
         <Button
           label="تحـديث"
           icon="pi pi-check"
@@ -213,7 +226,8 @@ function EditSectors({ data, onClose }) {
             borderRadius: '8px',
             fontWeight: 'bold',
             fontSize: '16px',
-            width: '100%'
+            width: '100%',
+            color: '#eee'
           }}
         />
       </Form>

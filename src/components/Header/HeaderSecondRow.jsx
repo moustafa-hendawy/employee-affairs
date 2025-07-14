@@ -99,8 +99,23 @@ function HeaderSecondRow() {
 const {sectorId} = useParams()
   const menuRef = useRef(null);
 const navigate = useNavigate();
+  // const toggleSetupMenu = () => {
+  //   setShowSetupMenu(!showSetupMenu);
+  // };
+
+  const [showEmployeeMenu, setShowEmployeeMenu] = useState(false);
+
+  const setupMenuRef = useRef(null);
+  const employeeMenuRef = useRef(null);
+
   const toggleSetupMenu = () => {
     setShowSetupMenu(!showSetupMenu);
+    setShowEmployeeMenu(false);
+  };
+
+  const toggleEmployeeMenu = () => {
+    setShowEmployeeMenu(!showEmployeeMenu);
+    setShowSetupMenu(false);
   };
 
   // إغلاق القائمة عند الضغط خارجها
@@ -189,9 +204,28 @@ const navigate = useNavigate();
           )}
         </div>
 
-        <div className="menu-item">
+        {/* <div className="menu-item">
           <span>بيانات الموظفين</span>
           <img src="/img/Iconly.png" alt="dropdown" />
+        </div> */}
+
+         <div
+          className="menu-item"
+          onClick={toggleEmployeeMenu}
+          ref={employeeMenuRef}
+        >
+          <span>بيانات الموظفين</span>
+          <img src="/img/Iconly.png" alt="dropdown" />
+          {showEmployeeMenu && (
+            <div className="dropdown-menu-container h-fit w-fit">
+              <a className="dropdown-item" href="/details-of-employees">
+                تفاصيل الموظفين
+              </a>
+              <a className="dropdown-item" href="/add-employee">
+                إضافة موظف
+              </a>
+            </div>
+          )}
         </div>
 
         <div className="menu-item">

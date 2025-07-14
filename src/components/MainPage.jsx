@@ -3,15 +3,10 @@ import { Link } from "react-router-dom";
 // import SettingsIcon from '@mui/icons-material/Settings';
 import "./MainPage.css";
 import Header from "./Header/Header";
-
+import SignIn from '../components/SignIn'
 function MainPage() {
   const dropdownRef = useRef(null);
-  // const [showSetup, setShowSetup] = useState(false);
-
-  // const handleToggle = () => {
-  //   setShowSetup(!showSetup);
-  // };
-
+  const token = localStorage.getItem("token");
   useEffect(() => {
     function handleClickOutside(event) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -27,7 +22,7 @@ function MainPage() {
 
   return (
     <div className="main-page">
-      <Header />
+     { token ? <Header /> : <SignIn />}
     </div>
   );
 }

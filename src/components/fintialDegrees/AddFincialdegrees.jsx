@@ -126,24 +126,28 @@ import { addFacultyData } from '../redux/FacultyReducers';
 import { Form } from 'react-bootstrap';
 import { Button } from 'primereact/button';
 import '../faculty/AddFaculty.css';
+import { addDegreeData } from '../redux/FinintialDegeeReducer';
 
 
-function AddFaculty({ onClose }) {
+function AddFintialDegrees({ onClose , types}) {
   const [code, setCode] = useState('');
   const [name, setName] = useState('');
-  const faculty = useSelector(state => state.faculty);
+  const [fincialDegreeTypeId, setFincialDegreeTypeId] = useState("");
+  const fintialDegree = useSelector(state => state.finintialDegree);
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
         e.preventDefault();
 
-    dispatch(addFacultyData({
-      id: (+faculty[faculty.length - 1]?.id + 1 || 1),
+    dispatch(addDegreeData({
+    //   id: (+faculty[faculty.length - 1]?.id + 1 || 1),
       name,
-      code
+      code,
+      fincialDegreeTypeId
     }));
     setName('');
     setCode('');
+    setFincialDegreeTypeId();
     onClose(); // غلق النافذة
   };
 
@@ -163,14 +167,42 @@ function AddFaculty({ onClose }) {
         </Form.Group>
 
         <Form.Group className="mb-3">
-          <Form.Label className="label">الكلية</Form.Label>
+          <Form.Label className="label">الدرجة</Form.Label>
           <Form.Control
             type="text"
-            placeholder="الكلية "
+            placeholder="الدرجة "
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
         </Form.Group>
+
+        {/* <Form.Group className="mb-3">
+          <Form.Label className="label"> نوع الدرجة</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="الدرجة "
+            value={name}
+            onChange={(e) => setFincialDegreeTypeId(e.target.value)}
+          />
+        </Form.Group> */}
+
+              <Form.Group className="mb-3">
+                      <Form.Label className="label">حالة الإدارة العامة</Form.Label>
+                      <Form.Select
+                        value={fincialDegreeTypeId}
+                        onChange={(e) => setFincialDegreeTypeId(e.target.value)}>
+                         <option disabled value=''>اختر الدرجة</option>
+
+                          {
+                            types.map((type) => (
+                                <option value={type.id}>{type.name}</option>
+
+                            ))
+                          }
+                      </Form.Select>
+                    </Form.Group>
+            
+
 
         <Button
           label="إرسال"
@@ -193,4 +225,4 @@ function AddFaculty({ onClose }) {
   );
 }
 
-export default AddFaculty;
+export default AddFintialDegrees;

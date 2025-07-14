@@ -26,10 +26,9 @@
 // }
 
 // export default VacationType
-import './faculty/Faculty.css';
+import '../faculty/Faculty.css';
 import React, { useEffect, useState } from 'react';
-import {fetchVacationType} from '../services/EmployeeService';
-import './faculty/Faculty.css'
+import {fetchVacationType} from '../../services/EmployeeService';
 
 function VacationType() {
 const [vacationType, VacationType] = useState([])
