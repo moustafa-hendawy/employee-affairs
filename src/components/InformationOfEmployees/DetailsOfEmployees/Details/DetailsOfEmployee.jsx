@@ -11,7 +11,7 @@ import SalaryDetails from "./SectionOfDetails/salaryDetails";
 import ThanksLetter from "./SectionOfDetails/thanksLetter";
 import MilitaryState from "./SectionOfDetails/militaryState";
 import PenaltyDetails from "./SectionOfDetails/penaltyDetails";
-import YearReportLawDetails from "./SectionOfDetails/yearReportLawDetails";
+
 import VacationDetails from "./SectionOfDetails/vacationDetails";
 import MandateDataDetails from "./SectionOfDetails/mandateDataDetails";
 import TrainingDetails from "./SectionOfDetails/trainingDetails";
@@ -121,7 +121,7 @@ const DetailsOfEmployee = () => {
           {" "}
           تفاصيل الموظف
         </div>
-        \
+
         <button
           className="bg-[#176D6A] text-white px-4 py-2  hover:opacity-90"
           style={{ borderRadius: "6px" }}
