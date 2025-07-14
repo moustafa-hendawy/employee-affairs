@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import Employees from "./components/Employees";
+// import Employees from "./components/Employees";
 import { Route, Routes } from "react-router-dom";
 import Faculty from "./components/faculty/Faculty";
 // import Update from "./components/faculty/Update";\
@@ -11,7 +11,7 @@ import JobGroups from "./components/JobGroups";
 import JobSubGroups from "./components/JobSubGroups";
 import JobNames from "./components/JobNames";
 import Department from "./components/Department";
-import GeneralAd from "./components/GeneralAd";
+import GeneralAd from "./components/generalAd/GeneralAd";
 import SubAd from "./components/SubAd";
 import NonExistanceType from "./components/NonExistanceType";
 import OfficialInTheRegion from "./components/OfficialInTheRegion";
@@ -33,7 +33,7 @@ function App() {
  <div>
     <MainPage />
 <Routes>
-    <Route path="/employee" element={<Employees />}/>
+    {/* <Route path="/employee" element={<Employees />}/> */}
     <Route path="/faculty" element={<Faculty />}/>
     <Route path="/job-groups" element={<JobGroups />}/>
     <Route path="/job-groups/:jobGroupsId/job-sub-groups" element={<JobSubGroups />}/>

@@ -36,7 +36,7 @@ const dispatch = useDispatch();
       if (selectedSectorId) {
         setGeneralAd([]); // تفريغ القائمة قبل التحديث
         setSelectedGeneralId(''); // إلغاء تحديد الإدارة العامة السابقة
-        fetchGeneralAd(selectedSectorId).then((data) => setGeneralAd(data));
+       dispatch( fetchGeneralAd(selectedSectorId)).then((data) => setGeneralAd(data));
         setSubAd([]); // مسح الإدارات الفرعية
       }
     }, [selectedSectorId]);

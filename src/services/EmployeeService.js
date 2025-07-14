@@ -65,12 +65,12 @@ export function fetchVacation() {
    .then((res) => res.json())
   )
  }
-export function fetchGeneralAd(sectorId) {
-  return(
-   fetch(`http://193.227.24.29:5000/api/GeneralAd/BySector/${sectorId}`)
-   .then((res) => res.json())
-  )
- }
+// export function fetchGeneralAd(sectorId) {
+//   return(
+//    fetch(`http://193.227.24.29:5000/api/GeneralAd/BySector/${sectorId}`)
+//    .then((res) => res.json())
+//   )
+//  }
 export function fetchSubAd(generalAdId) {
   return(
    fetch(`http://193.227.24.29:5000/api/SubAd/ByGeneralAd/${generalAdId}`)
