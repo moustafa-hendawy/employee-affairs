@@ -164,7 +164,7 @@ const Index = () => {
           )}
 
           {/* المجموعات النوعية */}
-          {form.jobGroupId != "" && (
+          {form.jobGroupId != "" && form.facultyId != "" && (
             <div className="flex items-center mb-4">
               <label className="w-48 text-right font-medium">
                 المجموعات النوعية
@@ -188,52 +188,57 @@ const Index = () => {
           )}
 
           {/* مسمي الوظيفة الحالية */}
-          {form.jobSubGroupId != "" && (
-            <div className="flex items-center mb-4">
-              <label className="w-48 text-right font-medium">
-                مسمي الوظيفة الحالية
-              </label>
-              <select
-                name="jobNameId"
-                value={form.jobNameId}
-                onChange={handleChange}
-                className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 ml-4"
-              >
-                <option value="">اختر مسمي وظيفي</option>
-                {jobNames
-                  .filter(
-                    (jobName) => jobName.jobSubGroupId == form.jobSubGroupId
-                  )
-                  .map((jobName) => (
-                    <option key={jobName.id} value={jobName.id}>
-                      {jobName.name}
-                    </option>
-                  ))}
-              </select>
-            </div>
-          )}
+          {form.jobSubGroupId != "" &&
+            form.jobGroupId != "" &&
+            form.facultyId != "" && (
+              <div className="flex items-center mb-4">
+                <label className="w-48 text-right font-medium">
+                  مسمي الوظيفة الحالية
+                </label>
+                <select
+                  name="jobNameId"
+                  value={form.jobNameId}
+                  onChange={handleChange}
+                  className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 ml-4"
+                >
+                  <option value="">اختر مسمي وظيفي</option>
+                  {jobNames
+                    .filter(
+                      (jobName) => jobName.jobSubGroupId == form.jobSubGroupId
+                    )
+                    .map((jobName) => (
+                      <option key={jobName.id} value={jobName.id}>
+                        {jobName.name}
+                      </option>
+                    ))}
+                </select>
+              </div>
+            )}
 
           {/* الدرجة الوظيفية */}
-          {form.jobNameId != "" && (
-            <div className="flex items-center mb-4">
-              <label className="w-48 text-right font-medium">
-                الدرجة الوظيفية
-              </label>
-              <select
-                name="fincialDegreeId"
-                value={form.fincialDegreeId}
-                onChange={handleChange}
-                className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 ml-4"
-              >
-                <option value="">اختر درجة وظيفية</option>
-                {fincialDegrees.map((fincialDegree) => (
-                  <option key={fincialDegree.id} value={fincialDegree.id}>
-                    {fincialDegree.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-          )}
+          {form.jobNameId != "" &&
+            form.jobSubGroupId != "" &&
+            form.jobGroupId != "" &&
+            form.facultyId != "" && (
+              <div className="flex items-center mb-4">
+                <label className="w-48 text-right font-medium">
+                  الدرجة الوظيفية
+                </label>
+                <select
+                  name="fincialDegreeId"
+                  value={form.fincialDegreeId}
+                  onChange={handleChange}
+                  className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 ml-4"
+                >
+                  <option value="">اختر درجة وظيفية</option>
+                  {fincialDegrees.map((fincialDegree) => (
+                    <option key={fincialDegree.id} value={fincialDegree.id}>
+                      {fincialDegree.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
         </div>
 
         <div className="flex items-center mb-4">
