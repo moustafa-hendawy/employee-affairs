@@ -22,46 +22,60 @@ import VacationType from "./components/vacations/VacationType";
 import DetailsOfEmployees from "./components/InformationOfEmployees/DetailsOfEmployees";
 import AddEmployee from "./components/InformationOfEmployees/AddEmployee";
 import DetailsOfEmployee from "./components/InformationOfEmployees/DetailsOfEmployees/Details/DetailsOfEmployee";
-import Sectors from './components/sectors/Sectors'
-import FintialDegrees from './components/fintialDegrees/FincialDegrees';
+import Sectors from "./components/sectors/Sectors";
+import FintialDegrees from "./components/fintialDegrees/FincialDegrees";
 import EducationalLevel from "./components/EducationalLevel";
 import Certificate from "./components/Certificate";
+import Search from "./components/Search/index";
 import SignIn from "./components/SignIn";
-
 
 function App() {
   return (
- <div>
-    <MainPage />
-    {/* <Route path="/" element={<SignIn />}/> */}
+    <div>
+      <MainPage />
+      {/* <Route path="/" element={<SignIn />}/> */}
 
-<Routes>
-    {/* <Route path="/employee" element={<Employees />}/> */}
-    <Route path="/faculty" element={<Faculty />}/>
-    <Route path="/job-groups" element={<JobGroups />}/>
-    <Route path="/job-groups/:jobGroupsId/job-sub-groups" element={<JobSubGroups />}/>
-    <Route path="/job-groups/job-sub-groups/:jobSubGroupsId/job-names" element={<JobNames />}/>
-    <Route path="/sectors" element={<Sectors />}/>
-    <Route path="/sectors/:sectorId/generalAd" element={<GeneralAd />}/>
-    <Route path="/sectors/generalAd/:generalAdId/subAd" element={<SubAd />}/>
-    <Route path="/sectors/generalAd/subAd/:subAdId/department" element={<Department />}/>
-    <Route path="/non-existance-type" element={<NonExistanceType />}/>
-    <Route path="/official-in-region" element={<OfficialInTheRegion />}/>
-    <Route path="/fintial-degrees" element={<FintialDegrees />}/>
-    <Route path="/military-state-type" element={<MilitaryStateType />}/>
-    <Route path="/qualification" element={<Qualification />}/>
-    <Route path="/vacation-type" element={<VacationType />}/>
-    <Route path="/educational-level" element={<EducationalLevel />}/>
-    <Route path="/educational-level/:educationalLevelId/certificate" element={<Certificate />}/>
-      <Route path="/details-of-employees" element={<DetailsOfEmployees />} />
-      <Route path="/add-employee" element={<AddEmployee />} />
-      <Route path="/details/:nationalId" element={<DetailsOfEmployee />} />
+      <Routes>
+        {/* <Route path="/employee" element={<Employees />}/> */}
+        <Route path="/faculty" element={<Faculty />} />
+        <Route path="/job-groups" element={<JobGroups />} />
+        <Route
+          path="/job-groups/:jobGroupsId/job-sub-groups"
+          element={<JobSubGroups />}
+        />
+        <Route
+          path="/job-groups/job-sub-groups/:jobSubGroupsId/job-names"
+          element={<JobNames />}
+        />
+        <Route path="/sectors" element={<Sectors />} />
+        <Route path="/sectors/:sectorId/generalAd" element={<GeneralAd />} />
+        <Route
+          path="/sectors/generalAd/:generalAdId/subAd"
+          element={<SubAd />}
+        />
+        <Route
+          path="/sectors/generalAd/subAd/:subAdId/department"
+          element={<Department />}
+        />
+        <Route path="/non-existance-type" element={<NonExistanceType />} />
+        <Route path="/official-in-region" element={<OfficialInTheRegion />} />
+        <Route path="/fintial-degrees" element={<FintialDegrees />} />
+        <Route path="/military-state-type" element={<MilitaryStateType />} />
+        <Route path="/qualification" element={<Qualification />} />
+        <Route path="/vacation-type" element={<VacationType />} />
+        <Route path="/educational-level" element={<EducationalLevel />} />
+        <Route
+          path="/educational-level/:educationalLevelId/certificate"
+          element={<Certificate />}
+        />
+        <Route path="/details-of-employees" element={<DetailsOfEmployees />} />
+        <Route path="/details-of-employee" element={<Search />} />
+        <Route path="/add-employee" element={<AddEmployee />} />
+        <Route path="/details/:nationalId" element={<DetailsOfEmployee />} />
+      </Routes>
+    </div>
 
-  </Routes>
-</div>
-    
-
-//   ) */}
+    //   ) */}
     // <div>
     //   <MainPage />
     //   <Routes>
