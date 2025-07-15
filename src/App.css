@@ -8,12 +8,14 @@
   /* text-align: center; */
   
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> f5a9309e7551d725748e92fc4ce22b73c4a14e99
 
 body {
   direction: rtl;
-   /* font-family: 'Cairo', sans-serif; */
-  /* background-color: #eee; */
+ 
 }
 
 @keyframes logo-spin {

@@ -42,7 +42,7 @@ function AddSubAd({ onClose, generalAdId }) {
     setCode('');
     setLevel(true);
     setSpecialLevel(false);
-    setStatus(1);
+    setStatus(0);
 
     onClose(); // Close dialog
   };
@@ -62,7 +62,7 @@ function AddSubAd({ onClose, generalAdId }) {
             required
           />
         </Form.Group>
-        
+
         <Form.Group className="mb-3">
           <Form.Label className="label">اسم الإدارة العامة</Form.Label>
           <Form.Control
@@ -89,7 +89,7 @@ function AddSubAd({ onClose, generalAdId }) {
             type="checkbox"
             checked={specialLevel}
             onChange={(e) => setSpecialLevel(e.target.checked)}
-            label="كائن خاص"
+            label="كادر خاص"
           />
         </Form.Group>
 

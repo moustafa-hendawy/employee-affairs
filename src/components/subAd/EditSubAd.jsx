@@ -13,7 +13,8 @@ function EditSubAd({ onClose, subAd }) {
   const [name, setName] = useState(subAd.name);
   const [level, setLevel] = useState(subAd.level);
   const [specialLevel, setSpecialLevel] = useState(subAd.specialLevel);
-  const [status, setStatus] = useState(subAd.status);
+  const [status, setStatus] = useState(1);
+//   const [status, setStatus] = useState(subAd.status);
 
   const dispatch = useDispatch();
 
@@ -37,9 +38,9 @@ function EditSubAd({ onClose, subAd }) {
     setCode('');
     setLevel(true);
     setSpecialLevel(false);
-    setStatus(1);
-
+    setStatus(0);
     onClose(); // Close dialog
+    window.location.reload();
   };
 
   return (
@@ -84,7 +85,7 @@ function EditSubAd({ onClose, subAd }) {
             type="checkbox"
             checked={specialLevel}
             onChange={(e) => setSpecialLevel(e.target.checked)}
-            label="كائن خاص"
+            label="كادر خاص"
           />
         </Form.Group>
 

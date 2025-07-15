@@ -44,6 +44,7 @@ function EditSubAd({ onClose, data }) {
     }));
 
     onClose(); // إغلاق النافذة بعد الإرسال
+    // window.location.reload();
   };
 
   return (
@@ -87,7 +88,7 @@ function EditSubAd({ onClose, data }) {
             type="checkbox"
             checked={specialLevel}
             onChange={(e) => setSpecialLevel(e.target.checked)}
-            label="كائن خاص"
+            label="كادر خاص"
           />
         </Form.Group>
 

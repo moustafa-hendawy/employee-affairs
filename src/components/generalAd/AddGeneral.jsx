@@ -443,7 +443,7 @@ function AddGeneral({ onClose , sectorId}) {
             type="checkbox"
             checked={specialLevel}
             onChange={(e) => setSpecialLevel(e.target.checked)}
-            label="كائن خاص"
+            label="كادر خاص"
           />
         </Form.Group>
 
@@ -454,7 +454,7 @@ function AddGeneral({ onClose , sectorId}) {
             onChange={(e) => setStatus(Number(e.target.value))}
           >
 
- <option value={2}>مستحدث</option>
+                        <option value={2}>مستحدث</option>
                         <option value={1}>معتمد</option>
 
             {/* <option value={0}>مستحدث</option>

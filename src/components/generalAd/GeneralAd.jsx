@@ -327,9 +327,7 @@ function GeneralAd() {
       setSelectedSectorId(sectorId);
       dispatch(fetchGeneralData(sectorId));
     } else {
-      // setShowDropDown(true);
       dispatch(fetchSectorData());
-    //  setShowDropDown(false)
     }
   }, [sectorId, dispatch]);
 
@@ -376,18 +374,9 @@ function GeneralAd() {
             <img src="/img/mingcute_add-fill.png" alt="add" />
           </button>
 
-          {/* {showDropDown && ( */}
             <div className="selects" style={{ display: 'flex', gap: '100px' }}>
               <div className="sector-select card flex justify-content-center">
-                {/* <Dropdown
-                  value={sectors.find((s) => s.id === selectedSectorId)}
-                  onChange={(e) => setSelectedSectorId(e.value.id)}
-                  options={sectors}
-                  optionLabel="name"
-                  placeholder="اختر القطاع"
-                  className="w-full md:w-14rem sector-option"
-                /> */}
-             
+           
              <Dropdown
                   value={Array.isArray(sectors) ? sectors.find((s) => s.id === +selectedSectorId) : null}
                   onChange={(e) => setSelectedSectorId(+e.value.id)}

@@ -18,8 +18,8 @@ function SubAd() {
 const subAd = useSelector(state => state.subAdSlice);
 console.log(subAd);
   const general = useSelector((state) => state.generalSlice);
-  const sectors = useSelector((state) => state.sectorSlice) || [];
-
+  const sectors = useSelector((state) => state.sectors);
+console.log(sectors);
   const [selectedSectorId, setSelectedSectorId] = useState('');
   const [selectedGeneralId, setSelectedGeneralId] = useState('');
   const [selectedSubAd, setSelectedSubAd] = useState(null);
@@ -38,8 +38,14 @@ const {generalAdId} = useParams();
      dispatch(setSubAd([])); // لو all خليه فاضي مبدئياً
      dispatch(fetchSectorData());
    }       
- }, [generalAdId]);
+ }, [dispatch, generalAdId]);
  
+  useEffect(() => {
+     if (selectedSectorId) {
+       dispatch(fetchGeneralData(selectedSectorId));
+     }
+   }, [selectedSectorId, dispatch]);
+
 
   // عند اختيار قطاع: جلب الادارات العامة
   useEffect(() => {
@@ -103,13 +109,19 @@ const {generalAdId} = useParams();
         </Dialog>
 
 
-
-
-        {/* {showDropDown && */}
   <div className="selects" style={{ display: 'flex', gap: '100px' }}>
     <div className="sector-select card flex justify-content-center">
-            <Dropdown value={sectors.find((s) => s.id === selectedSectorId)}  onChange={(e) => setSelectedSectorId(+e.value.id)} options={sectors} optionLabel="name" 
-                placeholder=" اختر القطاع " className="w-full md:w-14rem sector-option" />
+
+            <Dropdown
+              value={(sectors && sectors.find((s) => s.id === selectedSectorId)) || null}
+              onChange={(e) => setSelectedSectorId(e.value.id)}
+              options={sectors || []}
+              optionLabel="name"
+              placeholder="اختر القطاع"
+              className="w-full md:w-14rem"
+            />
+
+
         </div>
         
 
@@ -134,7 +146,7 @@ const {generalAdId} = useParams();
                 <th>كود الادارة الفرعية</th>
                 <th>اسم الادارة الفرعية</th>
                 <th>مستوى ادارة فرعية؟</th>
-                <th>كائن خاص</th>
+                <th>كادر خاص</th>
                 <th>حالة الادارة الفرعية</th>
                 <th>الإجراءات</th>
               </tr>
@@ -150,7 +162,8 @@ const {generalAdId} = useParams();
                   <td style={{ color: item.specialLevel ? 'green' : 'red' }}>
                     {item.specialLevel ? '✔' : '✖'}
                   </td>
-                  <td>{item.status}</td>
+                  {/* <td>{item.status}</td> */}
+                     {item.status == 1?<td>معتمد</td>: <td>مستحدث</td>}
                   <td className="edit-and-delete">
                     <img
                       src="/img/ic_sharp-edit.png"

@@ -1,106 +1,4 @@
 
-// import './faculty/Faculty.css'
-// import { useNavigate } from 'react-router-dom';
-// import React, { useEffect, useState } from 'react';
-// import { fetchJobSubGroups } from '../services/EmployeeService';
-// import { useParams } from 'react-router-dom';
-// import JobGroups from './JobGroups';
-
-// function JobSubGroups() {
-// const [jobSubGroups, setJobSubGroups] = useState([])
-// const [jobGroups, setJobGroups] = useState([]);
-// const navigate = useNavigate(); 
-// const { jobGroupsId } = useParams();
-//   const [slectedJobGroupId, setslectedJobGroupId] = useState("");
-//   const [showDropDown, setShowDropDown] = useState(false);
-
-
-//   useEffect(() => {
-//     fetchJobSubGroups(jobGroupsId).then((data) => setJobSubGroups(data))
-//   }, []);
-
-//   useEffect(() => {
-//     if (jobGroupsId && jobGroupsId !== 'all') {
-//       fetchJobSubGroups(jobGroupsId).then((data) => setJobSubGroups(data));
-//     } else {
-//       setJobGroups([]);
-//       setShowDropDown(true);
-//     }
-//   }, [jobGroupsId]);
-
-//   useEffect(() => {
-//     if (slectedJobGroupId) {
-//       fetchJobSubGroups(jobGroupsId).then((data) => setJobSubGroups(data));
-//     }
-//   }, [slectedJobGroupId]);
-
-
-//   return (
-//  <div className='faculty-container'>
-//               <h2 className='title'>  المجموعة النوعية</h2>
-//      <div className="button-and-table">
-       
-//       <button className='add-btn'>
-//         <img src='/img/mingcute_add-fill.png' alt='add' />
-//       </button>
-//     {showDropDown && (
-//             <div className="selects" style={{ display: 'flex', gap: '100px' }}>
-//               <div className="sector-select card flex justify-content-center">
-//                 <Dropdown
-//                   value={sectors.find((s) => s.id === slectedJobGroupId)}
-//                   onChange={(e) => setslectedJobGroupId(+e.value.id)}
-//                   options={sectors}
-//                   optionLabel="name"
-//                   placeholder=" اختر المجموعة الوظيفية "
-//                   className="w-full md:w-14rem sector-option"
-//                 />
-//               </div>
-//             </div>
-//           )}
-//           {jobGroupsId === 'all' && !selectedJobGroupsId ? (
-//           <p className="select-message">من فضلك اختر المجموعة الوظيفية أولا</p>
-//         ) : Array.isArray(JobGroups) && JobGroups.length > 0 ? (
-//       <table>
-//         <thead>
-//           <tr>
-//             <th>  المجموعة النوعية</th>
-//             <th> كود المجموعة النوعية </th>
-//             <th>الإجراءات</th>
-//           </tr>
-//         </thead>
-//         <tbody>
-//          {/* {Array.isArray(jobSubGroups) && jobSubGroups.map((i, index) => ( */}
-//             <tr key={index} onClick={() => navigate(`/job-groups/job-sub-groups/${jobGroupsId}/job-names`)} style={{cursor: 'pointer'}}>
-//               <td>{i.name}</td>
-//               <td>{i.code}</td>
-//               <td className='center-actions '>
-//                 <img
-//                 onClick={(e) => e.stopPropagation()}
-//                   src="/img/ic_sharp-edit.png"
-//                   alt="edit"
-//                   className="icon-action"
-//                 />
-//                 <img
-//                   onClick={(e) => e.stopPropagation()}
-//                   src="/img/ic_outline-delete.png"
-//                   alt="delete"
-//                   className="icon-action"
-//                 />
-//               </td>
-//             </tr>
-//           {/* ))} */}
-//         </tbody>
-//       </table>
-//         </table>
-//         ) : (
-//           selectedSectorId && <p className="select-message">لا توجد بيانات للإدارة العامة لهذا القطاع.</p>
-//         )}    
-//      </div>
-//         </div>
-//   );
-// }
-
-// export default JobSubGroups;
 
 import './subAd/SubAd.css';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -112,7 +10,7 @@ function JobSubGroups() {
   const [jobSubGroups, setJobSubGroups] = useState([]);
   const [jobGroups, setJobGroups] = useState([]);
   const [selectedJobGroupId, setSelectedJobGroupId] = useState('');
-  const [showDropDown, setShowDropDown] = useState(false);
+
 
   const navigate = useNavigate();
   const { jobGroupsId } = useParams();
@@ -120,9 +18,8 @@ function JobSubGroups() {
   useEffect(() => {
     if (jobGroupsId && jobGroupsId !== 'all') {
       fetchJobSubGroups(jobGroupsId).then((data) => setJobSubGroups(data));
-      setShowDropDown(false);
+     
     } else {
-      setShowDropDown(true);
       fetchJobGroups().then((data) => setJobGroups(data))
     }
   }, [jobGroupsId]);
@@ -141,8 +38,8 @@ function JobSubGroups() {
           <img src='/img/mingcute_add-fill.png' alt='add' />
         </button>
 
-        {showDropDown && (
-          <div className="selects" style={{ display: 'flex', gap: '100px' }}>
+       
+          <div className="sector-select" style={{ display: 'flex', gap: '100px' }}>
             <div className="sector-select card flex justify-content-center">
               <Dropdown
                 value={jobGroups.find((s) => s.id === selectedJobGroupId)}
@@ -154,7 +51,7 @@ function JobSubGroups() {
               />
             </div>
           </div>
-        )}
+      
 
         {jobGroupsId === 'all' && !selectedJobGroupId ? (
           <p className="select-message">من فضلك اختر المجموعة الوظيفية أولا</p>

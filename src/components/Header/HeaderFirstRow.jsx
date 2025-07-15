@@ -1,8 +1,9 @@
 import React from 'react'
 import './HeaderFirstRow.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 function HeaderFirstRow() {
+  const navigate = useNavigate();
   return (
     <div className="header-container">
       <div className="left-section">
@@ -23,6 +24,7 @@ function HeaderFirstRow() {
             <img src="/img/ri_arrow-down-s-fill.png" alt="arrow" />
           </div>
           <Link to='/sign-in' className="login-button" style={{textDecoration: 'none'}}>الدخول</Link>
+          <button className='login-button' onClick={() => navigate('/')}>الخروج</button>
         </div>
       </div>
   )
