@@ -21,6 +21,10 @@ const Index = () => {
   });
   const [searchResults, setSearchResults] = useState([]);
 
+  // إضافة state للـ pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(50);
+
   useEffect(() => {
     fetch("http://193.227.24.29:5000/api/Faculty")
       .then((res) => res.json())
@@ -141,7 +145,6 @@ const Index = () => {
           } else {
             console.error(`خطأ في الاستجابة: ${res.status}`);
           }
-          // إرجاع مصفوفة فارغة بدلاً من الرمي
           return [];
         }
         return res.json();
@@ -149,11 +152,72 @@ const Index = () => {
       .then((data) => {
         console.log(data);
         setSearchResults(Array.isArray(data) ? data : []);
+        setCurrentPage(1); // إعادة تعيين الصفحة للأولى عند البحث الجديد
       })
       .catch((error) => {
         console.error("حدث خطأ أثناء جلب البيانات: ", error);
-        setSearchResults([]); // تأكيد أن الداتا تصبح فاضية في حالة حدوث أي خطأ
+        setSearchResults([]);
       });
+  };
+
+  // حساب البيانات الخاصة بالـ pagination
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = searchResults.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.ceil(searchResults.length / itemsPerPage);
+
+  // دالة تغيير الصفحة
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  // دالة للصفحة السابقة
+  const previousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  // دالة للصفحة التالية
+  const nextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  // دالة لإنشاء أرقام الصفحات المعروضة
+  const getPageNumbers = () => {
+    const pageNumbers = [];
+    const maxPagesToShow = 5;
+
+    if (totalPages <= maxPagesToShow) {
+      for (let i = 1; i <= totalPages; i++) {
+        pageNumbers.push(i);
+      }
+    } else {
+      const startPage = Math.max(1, currentPage - 2);
+      const endPage = Math.min(totalPages, currentPage + 2);
+
+      if (startPage > 1) {
+        pageNumbers.push(1);
+        if (startPage > 2) {
+          pageNumbers.push("...");
+        }
+      }
+
+      for (let i = startPage; i <= endPage; i++) {
+        pageNumbers.push(i);
+      }
+
+      if (endPage < totalPages) {
+        if (endPage < totalPages - 1) {
+          pageNumbers.push("...");
+        }
+        pageNumbers.push(totalPages);
+      }
+    }
+
+    return pageNumbers;
   };
 
   return (
@@ -340,103 +404,177 @@ const Index = () => {
         </button>
       </div>
 
-      <div className="w-full mx-auto p-4 mt-6 " dir="rtl">
-        <h3 className="text-xl font-bold mb-4 text-right">نتائج البحث</h3>
-        <table className="min-w-full bg-white border border-gray-300">
-          <thead>
-            <tr>
-              <th className="px-6 py-3 border-b text-right font-semibold">م</th>
-              <th className="px-6 py-3 border-b text-right font-semibold">
-                اسم الموظف
-              </th>
-              <th className="px-6 py-3 border-b text-right font-semibold">
-                الرقم القومي
-              </th>
-              <th className="px-6 py-3 border-b text-right font-semibold">
-                الجهة
-              </th>
-              <th className="px-6 py-3 border-b text-right font-semibold">
-                الدرجة الوظيفية
-              </th>
-              <th className="px-6 py-3 border-b text-right font-semibold">
-                {" "}
-                تاريخ الدرجة
-              </th>
-              <th className="px-6 py-3 border-b text-right font-semibold">
-                المجموعة الوظيفية
-              </th>
-              <th className="px-6 py-3 border-b text-right font-semibold">
-                المجموعة النوعية
-              </th>
-              <th className="px-6 py-3 border-b text-right font-semibold">
-                المسمى الوظيفي
-              </th>
+      <div className="w-full mx-auto p-4 mt-6" dir="rtl">
+        <div className="flex justify-between items-center mb-4">
+          <h3 className="text-xl font-bold text-right">نتائج البحث</h3>
+          {searchResults.length > 0 && (
+            <div className="text-sm text-gray-600">
+              عرض {indexOfFirstItem + 1} -{" "}
+              {Math.min(indexOfLastItem, searchResults.length)} من{" "}
+              {searchResults.length} نتيجة
+            </div>
+          )}
+        </div>
 
-              <th className="px-6 py-3 border-b text-right font-semibold">
-                التفاصيل
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {searchResults.length == 0 ? (
+        <div className="overflow-x-auto">
+          <table className="min-w-full bg-white border border-gray-300">
+            <thead>
               <tr>
-                <td colSpan="10" className="text-center py-4">
-                  لا توجد نتائج مطابقة.
-                </td>
+                <th className="px-6 py-3 border-b text-right font-semibold">
+                  م
+                </th>
+                <th className="px-6 py-3 border-b text-right font-semibold">
+                  اسم الموظف
+                </th>
+                <th className="px-6 py-3 border-b text-right font-semibold">
+                  الرقم القومي
+                </th>
+                <th className="px-6 py-3 border-b text-right font-semibold">
+                  الجهة
+                </th>
+                <th className="px-6 py-3 border-b text-right font-semibold">
+                  الدرجة الوظيفية
+                </th>
+                <th className="px-6 py-3 border-b text-right font-semibold">
+                  تاريخ الدرجة
+                </th>
+                <th className="px-6 py-3 border-b text-right font-semibold">
+                  المجموعة الوظيفية
+                </th>
+                <th className="px-6 py-3 border-b text-right font-semibold">
+                  المجموعة النوعية
+                </th>
+                <th className="px-6 py-3 border-b text-right font-semibold">
+                  المسمى الوظيفي
+                </th>
+                <th className="px-6 py-3 border-b text-right font-semibold">
+                  التفاصيل
+                </th>
               </tr>
-            ) : (
-              searchResults.map((employee, i) => (
-                <tr key={employee.nationalId} className="hover:bg-gray-100">
-                  <td className="px-6 py-3 border-b text-black font-semibold">
-                    {i + 1 || "غير محدد"}
-                  </td>
-                  <td className="px-6 py-3 border-b text-black font-semibold">
-                    {employee.name}
-                  </td>
-                  <td className="px-6 py-3 border-b text-black font-semibold">
-                    {employee.nationalId}
-                  </td>
-                  <td className="px-6 py-3 border-b text-black font-semibold">
-                    {faculties.find(
-                      (faculty) => faculty.id === employee.facultyId
-                    )?.name || "غير محدد"}
-                  </td>
-                  <td className="px-6 py-3 border-b text-black font-semibold">
-                    {fincialDegrees.find(
-                      (degree) => degree.id === employee.fincialDegreeId
-                    )?.name || "غير محدد"}
-                  </td>
-                  <td className="px-6 py-3 border-b whitespace-nowrap text-black font-semibold">
-                    {employee.fincialDegreeDate || "غير محدد"}
-                  </td>
-                  <td className="px-6 py-3 border-b text-black font-semibold">
-                    {jobGroups.find((group) => group.id === employee.jobGroupId)
-                      ?.name || "غير محدد"}
-                  </td>
-                  <td className="px-6 py-3 border-b text-black font-semibold">
-                    {jobSubGroups.find(
-                      (subGroup) => subGroup.id === employee.jobSubGroupId
-                    )?.name || "غير محدد"}
-                  </td>
-                  <td className="px-6 py-3 border-b text-black font-semibold">
-                    {" "}
-                    {jobNames.find((job) => job.id === employee.jobNameId)
-                      ?.name || "غير محدد"}
-                  </td>
-                  <td className="px-6 py-3 border-b text-black font-semibold">
-                    <Link
-                      to={`/details/${employee.nationalId}`}
-                      className="text-blue-600"
-                      style={{ textDecoration: "none", color: "#176d6a" }}
-                    >
-                      التفاصيل
-                    </Link>
+            </thead>
+            <tbody>
+              {currentItems.length == 0 ? (
+                <tr>
+                  <td colSpan="10" className="text-center py-4">
+                    لا توجد نتائج مطابقة.
                   </td>
                 </tr>
-              ))
-            )}
-          </tbody>
-        </table>
+              ) : (
+                currentItems.map((employee, i) => (
+                  <tr key={employee.nationalId} className="hover:bg-gray-100">
+                    <td className="px-6 py-3 border-b text-black font-semibold">
+                      {indexOfFirstItem + i + 1 || "غير محدد"}
+                    </td>
+                    <td className="px-6 py-3 border-b text-black font-semibold">
+                      {employee.name}
+                    </td>
+                    <td className="px-6 py-3 border-b text-black font-semibold">
+                      {employee.nationalId}
+                    </td>
+                    <td className="px-6 py-3 border-b text-black font-semibold">
+                      {faculties.find(
+                        (faculty) => faculty.id === employee.facultyId
+                      )?.name || "غير محدد"}
+                    </td>
+                    <td className="px-6 py-3 border-b text-black font-semibold">
+                      {fincialDegrees.find(
+                        (degree) => degree.id === employee.fincialDegreeId
+                      )?.name || "غير محدد"}
+                    </td>
+                    <td className="px-6 py-3 border-b whitespace-nowrap text-black font-semibold">
+                      {employee.fincialDegreeDate || "غير محدد"}
+                    </td>
+                    <td className="px-6 py-3 border-b text-black font-semibold">
+                      {jobGroups.find(
+                        (group) => group.id === employee.jobGroupId
+                      )?.name || "غير محدد"}
+                    </td>
+                    <td className="px-6 py-3 border-b text-black font-semibold">
+                      {jobSubGroups.find(
+                        (subGroup) => subGroup.id === employee.jobSubGroupId
+                      )?.name || "غير محدد"}
+                    </td>
+                    <td className="px-6 py-3 border-b text-black font-semibold">
+                      {jobNames.find((job) => job.id === employee.jobNameId)
+                        ?.name || "غير محدد"}
+                    </td>
+                    <td className="px-6 py-3 border-b text-black font-semibold">
+                      <Link
+                        to={`/details/${employee.nationalId}`}
+                        className="text-blue-600"
+                        style={{ textDecoration: "none", color: "#176d6a" }}
+                      >
+                        التفاصيل
+                      </Link>
+                    </td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
+        </div>
+
+        {/* Pagination */}
+        {searchResults.length > 0 && totalPages > 1 && (
+          <div className="flex justify-center items-center mt-6 space-x-2 space-x-reverse">
+            {/* زر الصفحة السابقة */}
+            <button
+              onClick={previousPage}
+              disabled={currentPage === 1}
+              className={`px-3 py-2 rounded-md text-sm font-medium ${
+                currentPage === 1
+                  ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                  : "bg-[#176D6A] text-white hover:bg-opacity-90"
+              }`}
+            >
+              السابق
+            </button>
+
+            {/* أرقام الصفحات */}
+            <div className="flex space-x-1 space-x-reverse">
+              {getPageNumbers().map((page, index) => (
+                <span key={index}>
+                  {page === "..." ? (
+                    <span className="px-3 py-2 text-gray-500">...</span>
+                  ) : (
+                    <button
+                      onClick={() => paginate(page)}
+                      className={`px-3 py-2 rounded-md text-sm font-medium ${
+                        currentPage === page
+                          ? "bg-[#176D6A] text-white"
+                          : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                      }`}
+                    >
+                      {page}
+                    </button>
+                  )}
+                </span>
+              ))}
+            </div>
+
+            {/* زر الصفحة التالية */}
+            <button
+              onClick={nextPage}
+              disabled={currentPage === totalPages}
+              className={`px-3 py-2 rounded-md text-sm font-medium ${
+                currentPage === totalPages
+                  ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                  : "bg-[#176D6A] text-white hover:bg-opacity-90"
+              }`}
+            >
+              التالي
+            </button>
+          </div>
+        )}
+
+        {/* معلومات الصفحة للشاشات الصغيرة */}
+        {searchResults.length > 0 && totalPages > 1 && (
+          <div className="flex justify-center mt-4 md:hidden">
+            <span className="text-sm text-gray-600">
+              صفحة {currentPage} من {totalPages}
+            </span>
+          </div>
+        )}
       </div>
     </>
   );
