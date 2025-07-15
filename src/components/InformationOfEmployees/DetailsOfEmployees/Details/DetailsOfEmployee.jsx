@@ -34,7 +34,7 @@ const sections = [
   { key: "finicial", label: "  بيانات الذمة المالية", Component: FinicialZema },
   {
     key: "yearReport",
-    label: "      بيانات سنة التقارير",
+    label: " بيانات التقارير السنوية ",
     Component: YearReportDetails,
   },
   { key: "lagna", label: "        بيانات اللجنة", Component: LagnaDetails },
