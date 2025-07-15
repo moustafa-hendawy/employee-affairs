@@ -65,7 +65,51 @@ const Index = () => {
   }, []);
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+
+    // لو المستخدم اختار جهة فاضية، نصفر الحقول اللي بعدها
+    if (name === "facultyId" && value === "") {
+      setForm((prevForm) => ({
+        ...prevForm,
+        facultyId: "",
+        jobGroupId: "",
+        jobSubGroupId: "",
+        jobNameId: "",
+        fincialDegreeId: "",
+      }));
+    }
+    // لو المستخدم غيّر المجموعة الوظيفية، نصفر اللي بعدها
+    else if (name === "jobGroupId" && value === "") {
+      setForm((prevForm) => ({
+        ...prevForm,
+        jobGroupId: "",
+        jobSubGroupId: "",
+        jobNameId: "",
+        fincialDegreeId: "",
+      }));
+    }
+    // لو المستخدم غيّر المجموعة النوعية، نصفر اللي بعدها
+    else if (name === "jobSubGroupId" && value === "") {
+      setForm((prevForm) => ({
+        ...prevForm,
+        jobSubGroupId: "",
+        jobNameId: "",
+        fincialDegreeId: "",
+      }));
+    }
+    // لو المستخدم غيّر المسمى الوظيفي، نصفر الدرجة الوظيفية
+    else if (name === "jobNameId" && value === "") {
+      setForm((prevForm) => ({
+        ...prevForm,
+        jobNameId: "",
+        fincialDegreeId: "",
+      }));
+    } else {
+      setForm((prevForm) => ({
+        ...prevForm,
+        [name]: value,
+      }));
+    }
   };
 
   const handleSearch = () => {
@@ -78,7 +122,6 @@ const Index = () => {
     if (form.mobile.trim() !== "") params.append("mobile", form.mobile.trim());
     params.append("currentDegree", form.currentDegree);
 
-    // منطق إرسال البيانات حسب الاختيارات
     if (form.jobGroupId && form.jobSubGroupId && form.jobNameId) {
       params.append("jobNameId", form.jobNameId);
     } else if (form.jobGroupId && form.jobSubGroupId) {
@@ -91,12 +134,26 @@ const Index = () => {
     console.log("جاري جلب البيانات من:", url);
 
     fetch(url)
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) {
+          if (res.status === 404) {
+            console.warn("لم يتم العثور على بيانات (404)");
+          } else {
+            console.error(`خطأ في الاستجابة: ${res.status}`);
+          }
+          // إرجاع مصفوفة فارغة بدلاً من الرمي
+          return [];
+        }
+        return res.json();
+      })
       .then((data) => {
         console.log(data);
-        setSearchResults(data);
+        setSearchResults(Array.isArray(data) ? data : []);
       })
-      .catch((error) => console.error("حدث خطأ أثناء جلب البيانات:", error));
+      .catch((error) => {
+        console.error("حدث خطأ أثناء جلب البيانات: ", error);
+        setSearchResults([]); // تأكيد أن الداتا تصبح فاضية في حالة حدوث أي خطأ
+      });
   };
 
   return (
@@ -321,7 +378,7 @@ const Index = () => {
             </tr>
           </thead>
           <tbody>
-            {searchResults.length === 0 ? (
+            {searchResults.length == 0 ? (
               <tr>
                 <td colSpan="10" className="text-center py-4">
                   لا توجد نتائج مطابقة.
