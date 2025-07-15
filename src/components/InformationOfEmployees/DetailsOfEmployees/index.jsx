@@ -264,134 +264,102 @@ const Index = () => {
 
           {/* المجموعات الوظيفية */}
           {/* {form.facultyId != "" && ( */}
-            <div className="flex items-center mb-4">
-              <label className="w-48 text-right font-medium">
-                المجموعات الوظيفية
-              </label>
-              <select
-                name="jobGroupId"
-                value={form.jobGroupId}
-                onChange={handleChange}
-                className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 ml-4"
-              >
-                <option value="">اختر مجموعة وظيفية</option>
-                {jobGroups.map((jobGroup) => (
-                  <option key={jobGroup.id} value={jobGroup.id}>
-                    {jobGroup.name}
-                  </option>
-                ))}
-              </select>
-            </div>
+          <div className="flex items-center mb-4">
+            <label className="w-48 text-right font-medium">
+              المجموعات الوظيفية
+            </label>
+            <select
+              name="jobGroupId"
+              value={form.jobGroupId}
+              onChange={handleChange}
+              className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 ml-4"
+            >
+              <option value="">اختر مجموعة وظيفية</option>
+              {jobGroups.map((jobGroup) => (
+                <option key={jobGroup.id} value={jobGroup.id}>
+                  {jobGroup.name}
+                </option>
+              ))}
+            </select>
+          </div>
           {/* )} */}
 
           {/* المجموعات النوعية */}
           {/* {form.jobGroupId != "" && form.facultyId != "" && ( */}
-            <div className="flex items-center mb-4">
-              <label className="w-48 text-right font-medium">
-                المجموعات النوعية
-              </label>
-              <select
-                name="jobSubGroupId"
-                value={form.jobSubGroupId}
-                onChange={handleChange}
-                className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 ml-4"
-              >
-                <option value="">اختر مجموعة نوعية</option>
-                {jobSubGroups
-                  .filter((subGroup) => subGroup.jobGroupId == form.jobGroupId)
-                  .map((subGroup) => (
-                    <option key={subGroup.id} value={subGroup.id}>
-                      {subGroup.name}
-                    </option>
-                  ))}
-              </select>
-            </div>
+          <div className="flex items-center mb-4">
+            <label className="w-48 text-right font-medium">
+              المجموعات النوعية
+            </label>
+            <select
+              name="jobSubGroupId"
+              value={form.jobSubGroupId}
+              onChange={handleChange}
+              className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 ml-4"
+            >
+              <option value="">اختر مجموعة نوعية</option>
+              {jobSubGroups
+                .filter((subGroup) => subGroup.jobGroupId == form.jobGroupId)
+                .map((subGroup) => (
+                  <option key={subGroup.id} value={subGroup.id}>
+                    {subGroup.name}
+                  </option>
+                ))}
+            </select>
+          </div>
           {/* )} */}
 
           {/* مسمي الوظيفة الحالية */}
           {/* {form.jobSubGroupId != "" &&
             form.jobGroupId != "" &&
             form.facultyId != "" && ( */}
-              <div className="flex items-center mb-4">
-                <label className="w-48 text-right font-medium">
-                  مسمي الوظيفة الحالية
-                </label>
-                <select
-                  name="jobNameId"
-                  value={form.jobNameId}
-                  onChange={handleChange}
-                  className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 ml-4"
-                >
-                  <option value="">اختر مسمي وظيفي</option>
-                  {jobNames
-                    .filter(
-                      (jobName) => jobName.jobSubGroupId == form.jobSubGroupId
-                    )
-                    .map((jobName) => (
-                      <option key={jobName.id} value={jobName.id}>
-                        {jobName.name}
-                      </option>
-                    ))}
-                </select>
-              </div>
-            {/* )} */}
+          <div className="flex items-center mb-4">
+            <label className="w-48 text-right font-medium">
+              مسمي الوظيفة الحالية
+            </label>
+            <select
+              name="jobNameId"
+              value={form.jobNameId}
+              onChange={handleChange}
+              className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 ml-4"
+            >
+              <option value="">اختر مسمي وظيفي</option>
+              {jobNames
+                .filter(
+                  (jobName) => jobName.jobSubGroupId == form.jobSubGroupId
+                )
+                .map((jobName) => (
+                  <option key={jobName.id} value={jobName.id}>
+                    {jobName.name}
+                  </option>
+                ))}
+            </select>
+          </div>
+          {/* )} */}
 
           {/* الدرجة الوظيفية */}
           {/* {form.jobNameId != "" &&
             form.jobSubGroupId != "" &&
             form.jobGroupId != "" &&
             form.facultyId != "" && ( */}
-              <div className="flex items-center mb-4">
-                <label className="w-48 text-right font-medium">
-                  الدرجة الوظيفية
-                </label>
-                <select
-                  name="fincialDegreeId"
-                  value={form.fincialDegreeId}
-                  onChange={handleChange}
-                  className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 ml-4"
-                >
-                  <option value="">اختر درجة وظيفية</option>
-                  {fincialDegrees.map((fincialDegree) => (
-                    <option key={fincialDegree.id} value={fincialDegree.id}>
-                      {fincialDegree.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            {/* )} */}
-        </div>
-
-        <div className="flex items-center mb-4">
-          <label className="w-48 text-right font-medium">الاسم</label>
-          <input
-            type="text"
-            name="name"
-            value={form.name}
-            onChange={handleChange}
-            className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 ml-4"
-          />
-        </div>
-        <div className="flex items-center mb-4">
-          <label className="w-48 text-right font-medium">الرقم القومي</label>
-          <input
-            type="text"
-            name="nationalId"
-            value={form.nationalId}
-            onChange={handleChange}
-            className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 ml-4"
-          />
-        </div>
-
-        <div className="flex items-center mb-4">
-          <label className="w-48 text-right font-medium">رقم الهاتف</label>
-          <input
-            type="text"
-            name="mobile"
-            value={form.mobile}
-            onChange={handleChange}
-            className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 ml-4"
-          />
+          <div className="flex items-center mb-4">
+            <label className="w-48 text-right font-medium">
+              الدرجة الوظيفية
+            </label>
+            <select
+              name="fincialDegreeId"
+              value={form.fincialDegreeId}
+              onChange={handleChange}
+              className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 ml-4"
+            >
+              <option value="">اختر درجة وظيفية</option>
+              {fincialDegrees.map((fincialDegree) => (
+                <option key={fincialDegree.id} value={fincialDegree.id}>
+                  {fincialDegree.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          {/* )} */}
         </div>
       </div>
 
