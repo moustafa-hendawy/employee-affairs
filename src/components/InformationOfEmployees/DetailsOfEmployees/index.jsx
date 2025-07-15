@@ -263,7 +263,7 @@ const Index = () => {
           </div>
 
           {/* المجموعات الوظيفية */}
-          {form.facultyId != "" && (
+          {/* {form.facultyId != "" && ( */}
             <div className="flex items-center mb-4">
               <label className="w-48 text-right font-medium">
                 المجموعات الوظيفية
@@ -282,10 +282,10 @@ const Index = () => {
                 ))}
               </select>
             </div>
-          )}
+          {/* )} */}
 
           {/* المجموعات النوعية */}
-          {form.jobGroupId != "" && form.facultyId != "" && (
+          {/* {form.jobGroupId != "" && form.facultyId != "" && ( */}
             <div className="flex items-center mb-4">
               <label className="w-48 text-right font-medium">
                 المجموعات النوعية
@@ -306,12 +306,12 @@ const Index = () => {
                   ))}
               </select>
             </div>
-          )}
+          {/* )} */}
 
           {/* مسمي الوظيفة الحالية */}
-          {form.jobSubGroupId != "" &&
+          {/* {form.jobSubGroupId != "" &&
             form.jobGroupId != "" &&
-            form.facultyId != "" && (
+            form.facultyId != "" && ( */}
               <div className="flex items-center mb-4">
                 <label className="w-48 text-right font-medium">
                   مسمي الوظيفة الحالية
@@ -334,13 +334,13 @@ const Index = () => {
                     ))}
                 </select>
               </div>
-            )}
+            {/* )} */}
 
           {/* الدرجة الوظيفية */}
-          {form.jobNameId != "" &&
+          {/* {form.jobNameId != "" &&
             form.jobSubGroupId != "" &&
             form.jobGroupId != "" &&
-            form.facultyId != "" && (
+            form.facultyId != "" && ( */}
               <div className="flex items-center mb-4">
                 <label className="w-48 text-right font-medium">
                   الدرجة الوظيفية
@@ -359,7 +359,7 @@ const Index = () => {
                   ))}
                 </select>
               </div>
-            )}
+            {/* )} */}
         </div>
 
         <div className="flex items-center mb-4">

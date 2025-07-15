@@ -145,3 +145,81 @@ tbody tr .edit-and-delete {
 .swal2-cancel {
   width: 70px;
 }
+
+/* شكل عام للمُرَقِّم */
+.p-paginator {
+  direction: rtl;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1.5rem;
+  gap: 0.3rem;
+  border: none;
+  background: none;
+  font-family: 'Cairo', sans-serif; /* لو بتستخدم خط عربي */
+}
+
+/* أزرار الصفحات */
+.p-paginator-page,
+.p-paginator-next,
+.p-paginator-prev,
+.p-paginator-first,
+.p-paginator-last {
+  background-color: #f3f3f3;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+  color: #333;
+  font-weight: 600;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.custom-paginator {
+  direction: rtl;
+  justify-content: center;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+  font-family: 'Cairo', sans-serif;
+  position: absolute;
+    bottom: -60px;
+    right: 32%;
+}
+
+.custom-paginator .p-paginator-page,
+.custom-paginator .p-paginator-next,
+.custom-paginator .p-paginator-prev,
+.custom-paginator .p-paginator-first,
+.custom-paginator .p-paginator-last,
+.custom-paginator .p-dropdown {
+  margin: 0 0.25rem;
+}
+
+.custom-paginator .p-paginator-page {
+  background-color: #f1f1f1;
+  border: none;
+  border-radius: 6px;
+  padding: 0.4rem 0.7rem;
+  font-weight: 600;
+  color: #333;
+  transition: 0.3s ease;
+}
+
+.custom-paginator .p-paginator-page.p-highlight {
+  background-color: #2196f3;
+  color: white;
+}
+
+.custom-paginator .p-paginator-page:hover,
+.custom-paginator .p-paginator-next:hover,
+.custom-paginator .p-paginator-prev:hover,
+.custom-paginator .p-paginator-first:hover,
+.custom-paginator .p-paginator-last:hover {
+  background-color: #0d6efd;
+  color: white;
+  cursor: pointer;
+}
+
+.custom-paginator .p-dropdown {
+  border-radius: 6px;
+  font-weight: 500;
+}
