@@ -106,7 +106,9 @@ const DetailsOfEmployee = () => {
 
   const toggleSection = (key) => {
     const updatedSections = new Set(openSections);
-    if (updatedSections.has(key)) {
+    if (key == "personal") {
+      updatedSections.add(key);
+    } else if (updatedSections.has(key)) {
       updatedSections.delete(key);
     } else {
       updatedSections.add(key);
@@ -135,34 +137,47 @@ const DetailsOfEmployee = () => {
       {employee &&
         employee.map((emp, index) => (
           <div key={index}>
-            {sections.map(({ key, label, Component }) => {
-              const isOpen = openSections.has(key);
-              return (
-                <div
-                  key={key}
-                  className="mb-4 border rounded-lg shadow-sm overflow-hidden"
-                >
+            {/* عرض البيانات الشخصية دائمًا */}
+            <div className="mb-4 border rounded-lg shadow-sm overflow-hidden">
+              <div className="bg-gray-100 px-5 py-3 flex justify-between items-center">
+                <span className="text-right text-gray-800">
+                  البيانات الشخصية
+                </span>
+              </div>
+              <div className="p-5 bg-white">
+                <PersonalInformationDisplay formData={emp} />
+              </div>
+            </div>
+
+            {/* باقي الأقسام */}
+            {sections
+              .filter(({ key }) => key !== "personal")
+              .map(({ key, label, Component }) => {
+                const isOpen = openSections.has(key);
+                return (
                   <div
-                    className="bg-gray-100 hover:bg-gray-200 cursor-pointer px-5 py-3 flex justify-between items-center"
-                    onClick={() => toggleSection(key)}
+                    key={key}
+                    className="mb-4 border rounded-lg shadow-sm overflow-hidden"
                   >
-                    <span className="text-right  text-gray-800">{label}</span>
-                    <span className="text-xl">{isOpen ? "▲" : "▼"}</span>
-                  </div>
-                  {isOpen && (
-                    <div className="p-5 bg-white">
-                      {key === "personal" ||
-                      key === "job" ||
-                      key === "experience" ? (
-                        <Component formData={emp} />
-                      ) : (
-                        <Component empId={emp.nationalId} />
-                      )}
+                    <div
+                      className="bg-gray-100 hover:bg-gray-200 cursor-pointer px-5 py-3 flex justify-between items-center"
+                      onClick={() => toggleSection(key)}
+                    >
+                      <span className="text-right  text-gray-800">{label}</span>
+                      <span className="text-xl">{isOpen ? "▲" : "▼"}</span>
                     </div>
-                  )}
-                </div>
-              );
-            })}
+                    {isOpen && (
+                      <div className="p-5 bg-white">
+                        {key === "job" || key === "experience" ? (
+                          <Component formData={emp} />
+                        ) : (
+                          <Component empId={emp.nationalId} />
+                        )}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
           </div>
         ))}
     </div>
