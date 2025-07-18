@@ -21,7 +21,6 @@ const Index = () => {
   });
   const [searchResults, setSearchResults] = useState([]);
 
-  // إضافة state للـ pagination
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(50);
 
@@ -71,7 +70,6 @@ const Index = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    // لو المستخدم اختار جهة فاضية، نصفر الحقول اللي بعدها
     if (name === "facultyId" && value === "") {
       setForm((prevForm) => ({
         ...prevForm,
@@ -81,9 +79,7 @@ const Index = () => {
         jobNameId: "",
         fincialDegreeId: "",
       }));
-    }
-    // لو المستخدم غيّر المجموعة الوظيفية، نصفر اللي بعدها
-    else if (name === "jobGroupId" && value === "") {
+    } else if (name === "jobGroupId" && value === "") {
       setForm((prevForm) => ({
         ...prevForm,
         jobGroupId: "",
@@ -91,18 +87,14 @@ const Index = () => {
         jobNameId: "",
         fincialDegreeId: "",
       }));
-    }
-    // لو المستخدم غيّر المجموعة النوعية، نصفر اللي بعدها
-    else if (name === "jobSubGroupId" && value === "") {
+    } else if (name === "jobSubGroupId" && value === "") {
       setForm((prevForm) => ({
         ...prevForm,
         jobSubGroupId: "",
         jobNameId: "",
         fincialDegreeId: "",
       }));
-    }
-    // لو المستخدم غيّر المسمى الوظيفي، نصفر الدرجة الوظيفية
-    else if (name === "jobNameId" && value === "") {
+    } else if (name === "jobNameId" && value === "") {
       setForm((prevForm) => ({
         ...prevForm,
         jobNameId: "",
@@ -152,7 +144,7 @@ const Index = () => {
       .then((data) => {
         console.log(data);
         setSearchResults(Array.isArray(data) ? data : []);
-        setCurrentPage(1); // إعادة تعيين الصفحة للأولى عند البحث الجديد
+        setCurrentPage(1);
       })
       .catch((error) => {
         console.error("حدث خطأ أثناء جلب البيانات: ", error);
@@ -166,26 +158,22 @@ const Index = () => {
   const currentItems = searchResults.slice(indexOfFirstItem, indexOfLastItem);
   const totalPages = Math.ceil(searchResults.length / itemsPerPage);
 
-  // دالة تغيير الصفحة
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
 
-  // دالة للصفحة السابقة
   const previousPage = () => {
     if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
     }
   };
 
-  // دالة للصفحة التالية
   const nextPage = () => {
     if (currentPage < totalPages) {
       setCurrentPage(currentPage + 1);
     }
   };
 
-  // دالة لإنشاء أرقام الصفحات المعروضة
   const getPageNumbers = () => {
     const pageNumbers = [];
     const maxPagesToShow = 5;
@@ -244,7 +232,6 @@ const Index = () => {
             marginBottom: "20px",
           }}
         >
-          {/* الجهة */}
           <div className="flex items-center mb-4">
             <label className="w-48 text-right font-medium">الجهة</label>
             <select
@@ -262,8 +249,6 @@ const Index = () => {
             </select>
           </div>
 
-          {/* المجموعات الوظيفية */}
-          {/* {form.facultyId != "" && ( */}
           <div className="flex items-center mb-4">
             <label className="w-48 text-right font-medium">
               المجموعات الوظيفية
@@ -282,10 +267,7 @@ const Index = () => {
               ))}
             </select>
           </div>
-          {/* )} */}
 
-          {/* المجموعات النوعية */}
-          {/* {form.jobGroupId != "" && form.facultyId != "" && ( */}
           <div className="flex items-center mb-4">
             <label className="w-48 text-right font-medium">
               المجموعات النوعية
@@ -306,12 +288,7 @@ const Index = () => {
                 ))}
             </select>
           </div>
-          {/* )} */}
 
-          {/* مسمي الوظيفة الحالية */}
-          {/* {form.jobSubGroupId != "" &&
-            form.jobGroupId != "" &&
-            form.facultyId != "" && ( */}
           <div className="flex items-center mb-4">
             <label className="w-48 text-right font-medium">
               مسمي الوظيفة الحالية
@@ -334,13 +311,7 @@ const Index = () => {
                 ))}
             </select>
           </div>
-          {/* )} */}
 
-          {/* الدرجة الوظيفية */}
-          {/* {form.jobNameId != "" &&
-            form.jobSubGroupId != "" &&
-            form.jobGroupId != "" &&
-            form.facultyId != "" && ( */}
           <div className="flex items-center mb-4">
             <label className="w-48 text-right font-medium">
               الدرجة الوظيفية

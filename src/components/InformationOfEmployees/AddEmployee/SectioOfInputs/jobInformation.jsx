@@ -12,84 +12,102 @@ const JobInformation = ({ formData, handleChange, setFormData }) => {
   const [existaceCases, setExistaceCases] = useState([]);
   const [sectoreId, setSectorId] = useState("");
   const [generalId, setGeneralId] = useState("");
-  const [jobTypes, setJobTypes] = useState([]);
-  const [jobDegredation, setJobDegredation] = useState([]);
 
+  // Fetch all data on component mount
   useEffect(() => {
-    fetch("http://193.227.24.29:5000/api/Sector")
-      .then((res) => res.json())
-      .then((data) => setSectors(data))
-      .catch((error) => console.error("حدث خطأ أثناء جلب  القطاعات:", error));
-  }, []);
+    const fetchData = async () => {
+      try {
+        // Fetch all data in parallel
+        const [
+          sectorsRes,
+          generalAdsRes,
+          subAdsRes,
+          departmentsRes,
+          jobGroupsRes,
+          jobSubGroupsRes,
+          jobNamesRes,
+          fincialDegreesRes,
+          existaceCasesRes,
+        ] = await Promise.all([
+          fetch("http://193.227.24.29:5000/api/Sector"),
+          fetch("http://193.227.24.29:5000/api/GeneralAd"),
+          fetch("http://193.227.24.29:5000/api/SubAd"),
+          fetch("http://193.227.24.29:5000/api/Department"),
+          fetch("http://193.227.24.29:5000/api/JobGroup"),
+          fetch("http://193.227.24.29:5000/api/JobSubGroup"),
+          fetch("http://193.227.24.29:5000/api/JobNames"),
+          fetch("http://193.227.24.29:5000/api/FincialDegrees"),
+          fetch("http://193.227.24.29:5000/api/ExistaceCase"),
+        ]);
 
-  useEffect(() => {
-    fetch("http://193.227.24.29:5000/api/GeneralAd")
-      .then((res) => res.json())
-      .then((data) => setGeneralAds(data))
-      .catch((error) =>
-        console.error("حدث خطأ أثناء جلب  الادارات العامة:", error)
-      );
-  }, []);
+        const [
+          sectorsData,
+          generalAdsData,
+          subAdsData,
+          departmentsData,
+          jobGroupsData,
+          jobSubGroupsData,
+          jobNamesData,
+          fincialDegreesData,
+          existaceCasesData,
+        ] = await Promise.all([
+          sectorsRes.json(),
+          generalAdsRes.json(),
+          subAdsRes.json(),
+          departmentsRes.json(),
+          jobGroupsRes.json(),
+          jobSubGroupsRes.json(),
+          jobNamesRes.json(),
+          fincialDegreesRes.json(),
+          existaceCasesRes.json(),
+        ]);
 
-  useEffect(() => {
-    fetch("http://193.227.24.29:5000/api/SubAd")
-      .then((res) => res.json())
-      .then((data) => setSubAds(data))
-      .catch((error) =>
-        console.error("حدث خطأ أثناء جلب  الادارات الفرعية:", error)
-      );
-  }, []);
-  useEffect(() => {
-    fetch("http://193.227.24.29:5000/api/Department")
-      .then((res) => res.json())
-      .then((data) => setDepartments(data))
-      .catch((error) => console.error("حدث خطأ أثناء جلب  الأقسام:", error));
-  }, []);
+        setSectors(sectorsData);
+        setGeneralAds(generalAdsData);
+        setSubAds(subAdsData);
+        setDepartments(departmentsData);
+        setJobGroups(jobGroupsData);
+        setJobSubGroups(jobSubGroupsData);
+        setJobNames(jobNamesData);
+        setFincialDegrees(fincialDegreesData);
+        setExistaceCases(existaceCasesData);
+      } catch (error) {
+        console.error("حدث خطأ أثناء جلب البيانات:", error);
+      }
+    };
 
-  useEffect(() => {
-    fetch("http://193.227.24.29:5000/api/JobGroup")
-      .then((res) => res.json())
-      .then((data) => setJobGroups(data))
-      .catch((error) =>
-        console.error("حدث خطأ أثناء جلب  مجموعات الوظائف:", error)
-      );
-  }, []);
-
-  useEffect(() => {
-    fetch("http://193.227.24.29:5000/api/JobSubGroup")
-      .then((res) => res.json())
-      .then((data) => setJobSubGroups(data))
-      .catch((error) =>
-        console.error("حدث خطأ أثناء جلب  مجموعات الوظائف الفرعية:", error)
-      );
-  }, []);
-
-  useEffect(() => {
-    fetch("http://193.227.24.29:5000/api/JobNames")
-      .then((res) => res.json())
-      .then((data) => setJobNames(data))
-      .catch((error) =>
-        console.error("حدث خطأ أثناء جلب  أسماء الوظائف:", error)
-      );
-  }, []);
-
-  useEffect(() => {
-    fetch("http://193.227.24.29:5000/api/FincialDegrees")
-      .then((res) => res.json())
-      .then((data) => setFincialDegrees(data))
-      .catch((error) =>
-        console.error("حدث خطأ أثناء جلب  الدرجات الوظيفية:", error)
-      );
+    fetchData();
   }, []);
 
+  // Set initial sector and general ad values when data is loaded
   useEffect(() => {
-    fetch("http://193.227.24.29:5000/api/ExistaceCase")
-      .then((res) => res.json())
-      .then((data) => setExistaceCases(data))
-      .catch((error) =>
-        console.error("حدث خطأ أثناء جلب  حالات الوجود:", error)
-      );
-  }, []);
+    if (
+      formData.subAdId &&
+      subAds.length > 0 &&
+      generalAds.length > 0 &&
+      sectors.length > 0
+    ) {
+      // Find the selected subAd
+      const selectedSubAd = subAds.find((item) => item.id == formData.subAdId);
+      if (selectedSubAd) {
+        // Find the corresponding general ad
+        const selectedGeneralAd = generalAds.find(
+          (item) => item.id == selectedSubAd.generalAdId
+        );
+        if (selectedGeneralAd) {
+          setGeneralId(selectedGeneralAd.id.toString());
+
+          // Find the corresponding sector
+          const selectedSector = sectors.find(
+            (item) => item.code == selectedGeneralAd.sectorID
+          );
+          if (selectedSector) {
+            setSectorId(selectedSector.code.toString());
+          }
+        }
+      }
+    }
+  }, [formData.subAdId, subAds, generalAds, sectors]);
 
   const handleSectorChange = (e) => {
     const value = e.target.value;
@@ -138,6 +156,15 @@ const JobInformation = ({ formData, handleChange, setFormData }) => {
       jobNameId: value,
     }));
   };
+
+  // Get selected items for display
+  const selectedSubAd = subAds.find((item) => item.id == formData.subAdId);
+  const selectedGeneralAd = generalAds.find(
+    (item) => item.id == selectedSubAd?.generalAdId
+  );
+  const selectedSector = sectors.find(
+    (item) => item.code == selectedGeneralAd?.sectorID
+  );
 
   return (
     <>
@@ -289,10 +316,11 @@ const JobInformation = ({ formData, handleChange, setFormData }) => {
               <select
                 className="border border-gray-300 rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-500"
                 onChange={handleSectorChange}
+                value={sectoreId}
               >
                 <option value="">اختر قطاع</option>
-                {sectors.map((sector) => (
-                  <option key={sector.code} value={sector.code}>
+                {sectors.map((sector, index) => (
+                  <option key={`sector-${index}`} value={sector.code}>
                     {sector.name}
                   </option>
                 ))}
@@ -307,12 +335,13 @@ const JobInformation = ({ formData, handleChange, setFormData }) => {
                 <select
                   className="border border-gray-300 rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-500"
                   onChange={handleGeneralChange}
+                  value={generalId}
                 >
                   <option value="">اختر اداره</option>
                   {generalAds
                     .filter((ad) => ad.sectorID == sectoreId)
-                    .map((ad) => (
-                      <option key={ad.id} value={ad.id}>
+                    .map((ad, index) => (
+                      <option key={`ad-${ad.id || index}`} value={ad.id}>
                         {ad.name}
                       </option>
                     ))}
@@ -334,8 +363,11 @@ const JobInformation = ({ formData, handleChange, setFormData }) => {
                   <option value="">اختر اداره فرعية</option>
                   {subAds
                     .filter((subAd) => subAd.generalAdId == generalId)
-                    .map((subAd) => (
-                      <option key={subAd.id} value={subAd.id}>
+                    .map((subAd, index) => (
+                      <option
+                        key={`subAd-${subAd.id || index}`}
+                        value={subAd.id}
+                      >
                         {subAd.name}
                       </option>
                     ))}
@@ -343,7 +375,7 @@ const JobInformation = ({ formData, handleChange, setFormData }) => {
               </div>
             )}
 
-            {formData.subAdId !== "" && (
+            {formData.subAdId !== "" && formData.subAdId !== "0" && (
               <div>
                 <label className="block text-right font-medium mb-1">
                   4- القسم
@@ -359,8 +391,11 @@ const JobInformation = ({ formData, handleChange, setFormData }) => {
                     .filter(
                       (department) => department.subAdID == formData.subAdId
                     )
-                    .map((department) => (
-                      <option key={department.id} value={department.id}>
+                    .map((department, index) => (
+                      <option
+                        key={`department-${department.id || index}`}
+                        value={department.id}
+                      >
                         {department.name}
                       </option>
                     ))}
@@ -368,7 +403,6 @@ const JobInformation = ({ formData, handleChange, setFormData }) => {
               </div>
             )}
 
-            {/* المجموعات الوظيفية */}
             {/* المجموعات الوظيفية */}
             <div>
               <label className="block text-right font-medium mb-1">
@@ -381,8 +415,11 @@ const JobInformation = ({ formData, handleChange, setFormData }) => {
                 className="border border-gray-300 rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-500"
               >
                 <option value="">اختر مجموعة وظيفية</option>
-                {jobGroups.map((jobGroup) => (
-                  <option key={jobGroup.id} value={jobGroup.id}>
+                {jobGroups.map((jobGroup, index) => (
+                  <option
+                    key={`jobGroup-${jobGroup.id || index}`}
+                    value={jobGroup.id}
+                  >
                     {jobGroup.name}
                   </option>
                 ))}
@@ -390,7 +427,7 @@ const JobInformation = ({ formData, handleChange, setFormData }) => {
             </div>
 
             {/* المجموعات النوعية */}
-            {formData.jobGroupId !== "" && (
+            {formData.jobGroupId !== "" && formData.jobGroupId !== "0" && (
               <div>
                 <label className="block text-right font-medium mb-1">
                   المجموعات النوعية
@@ -406,8 +443,11 @@ const JobInformation = ({ formData, handleChange, setFormData }) => {
                     .filter(
                       (subGroup) => subGroup.jobGroupId == formData.jobGroupId
                     )
-                    .map((subGroup) => (
-                      <option key={subGroup.id} value={subGroup.id}>
+                    .map((subGroup, index) => (
+                      <option
+                        key={`subGroup-${subGroup.id || index}`}
+                        value={subGroup.id}
+                      >
                         {subGroup.name}
                       </option>
                     ))}
@@ -416,31 +456,35 @@ const JobInformation = ({ formData, handleChange, setFormData }) => {
             )}
 
             {/* مسمي الوظيفة */}
-            {formData.jobSubGroupId !== "" && (
-              <div>
-                <label className="block text-right font-medium mb-1">
-                  مسمي الوظيفة الحالية
-                </label>
-                <select
-                  name="jobNameId"
-                  value={formData.jobNameId}
-                  onChange={handleJobNameChange}
-                  className="border border-gray-300 rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-500"
-                >
-                  <option value="">اختر مسمي وظيفي</option>
-                  {jobNames
-                    .filter(
-                      (jobName) =>
-                        jobName.jobSubGroupId == formData.jobSubGroupId
-                    )
-                    .map((jobName) => (
-                      <option key={jobName.id} value={jobName.id}>
-                        {jobName.name}
-                      </option>
-                    ))}
-                </select>
-              </div>
-            )}
+            {formData.jobSubGroupId !== "" &&
+              formData.jobSubGroupId !== "0" && (
+                <div>
+                  <label className="block text-right font-medium mb-1">
+                    مسمي الوظيفة الحالية
+                  </label>
+                  <select
+                    name="jobNameId"
+                    value={formData.jobNameId}
+                    onChange={handleJobNameChange}
+                    className="border border-gray-300 rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-500"
+                  >
+                    <option value="">اختر مسمي وظيفي</option>
+                    {jobNames
+                      .filter(
+                        (jobName) =>
+                          jobName.jobSubGroupId == formData.jobSubGroupId
+                      )
+                      .map((jobName, index) => (
+                        <option
+                          key={`jobName-${jobName.id || index}`}
+                          value={jobName.id}
+                        >
+                          {jobName.name}
+                        </option>
+                      ))}
+                  </select>
+                </div>
+              )}
 
             <div>
               <label className="block text-right font-medium mb-1">
@@ -452,9 +496,12 @@ const JobInformation = ({ formData, handleChange, setFormData }) => {
                 value={formData.fincialDegreeId}
                 onChange={handleChange}
               >
-                <option>اختر درجة وظيفية</option>
-                {fincialDegrees.map((fincialDegree) => (
-                  <option key={fincialDegree.id} value={fincialDegree.id}>
+                <option value="">اختر درجة وظيفية</option>
+                {fincialDegrees.map((fincialDegree, index) => (
+                  <option
+                    key={`fincialDegree-${fincialDegree.id || index}`}
+                    value={fincialDegree.id}
+                  >
                     {fincialDegree.name}
                   </option>
                 ))}
@@ -511,44 +558,53 @@ const JobInformation = ({ formData, handleChange, setFormData }) => {
                 className="border border-gray-300 rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-500"
               >
                 <option value="">اختر حالة الوجود</option>
-                {existaceCases.map((caseItem) => (
-                  <option key={caseItem.id} value={caseItem.id}>
+                {existaceCases.map((caseItem, index) => (
+                  <option
+                    key={`case-${caseItem.id || index}`}
+                    value={caseItem.id}
+                  >
                     {caseItem.name}
                   </option>
                 ))}
               </select>
             </div>
           </div>
-          <div className="bg-[#176D6A] text-white p-4 rounded-lg ">
-            <div className="block text-right font-medium mb-1 ">
+          <div className="bg-[#176D6A] text-white p-4 rounded-lg mt-4">
+            <div className="block text-right font-medium mb-1">
               المده المحتفظ بها للموظف
             </div>
-            <div className="inputs flex justify-between">
-              <div>
-                <label className="mb-1 text-white semi-bold">يوم</label>
+            <div className="inputs flex justify-between gap-4">
+              <div className="flex-1">
+                <label className="block mb-1 text-white font-semibold">
+                  يوم
+                </label>
                 <input
-                  type="text"
-                  className="border border-gray-300 rounded-md p-2 w-full"
+                  type="number"
+                  className="border border-gray-300 rounded-md p-2 w-full text-black"
                   name="reservedDays"
                   value={formData.reservedDays}
                   onChange={handleChange}
                 />
               </div>
-              <div>
-                <label className="mb-1 text-white semi-bold">شهر</label>
+              <div className="flex-1">
+                <label className="block mb-1 text-white font-semibold">
+                  شهر
+                </label>
                 <input
-                  type="text"
-                  className="border border-gray-300 rounded-md p-2 w-full"
+                  type="number"
+                  className="border border-gray-300 rounded-md p-2 w-full text-black"
                   name="reservedMonths"
                   value={formData.reservedMonths}
                   onChange={handleChange}
                 />
               </div>
-              <div>
-                <label className="mb-1 text-white semi-bold">سنة</label>
+              <div className="flex-1">
+                <label className="block mb-1 text-white font-semibold">
+                  سنة
+                </label>
                 <input
-                  type="text"
-                  className="border border-gray-300 rounded-md p-2 w-full"
+                  type="number"
+                  className="border border-gray-300 rounded-md p-2 w-full text-black"
                   name="reservedYears"
                   value={formData.reservedYears}
                   onChange={handleChange}

@@ -71,6 +71,7 @@ function App() {
         <Route path="/details-of-employees" element={<DetailsOfEmployees />} />
         <Route path="/details-of-employee" element={<Search />} />
         <Route path="/add-employee" element={<AddEmployee />} />
+        <Route path="/edit/:id" element={<AddEmployee />} />
         <Route path="/details/:nationalId" element={<DetailsOfEmployee />} />
       </Routes>
     </div>

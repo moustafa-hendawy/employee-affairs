@@ -1,4 +1,22 @@
-const ExperienceDisplay = ({ formData }) => {
+import { useState, useEffect } from "react";
+const ExperienceDisplay = ({ nationalId }) => {
+  const [employee, setEmployee] = useState({});
+
+  useEffect(() => {
+    const fetchEmployeeDetails = async () => {
+      try {
+        const response = await fetch(
+          `http://193.227.24.29:5000/api/Employee?nationalId=${nationalId}`
+        );
+        const data = await response.json();
+        setEmployee(data[0] || {});
+      } catch (error) {
+        console.error("Error fetching employee details:", error);
+      }
+    };
+
+    fetchEmployeeDetails();
+  }, [nationalId]);
   return (
     <>
       <div className="experince-information w-[98%] mx-auto mt-3">
@@ -12,10 +30,10 @@ const ExperienceDisplay = ({ formData }) => {
             </label>
             <div className="flex gap-2">
               <span className="p-2 w-1/2 border border-gray-300 rounded-md bg-gray-100 text-right">
-                {formData.experanceDate}
+                {employee.experanceDate}
               </span>
               <span className="p-2 w-1/2 border border-gray-300 rounded-md bg-gray-100 text-right">
-                {formData.experanceDateTxt}
+                {employee.experanceDateTxt}
               </span>
             </div>
           </div>
@@ -26,7 +44,7 @@ const ExperienceDisplay = ({ formData }) => {
             </label>
             <div>
               <span className="p-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
-                {formData.experanceDN}
+                {employee.experanceDN}
               </span>
             </div>
           </div>
@@ -37,7 +55,7 @@ const ExperienceDisplay = ({ formData }) => {
             </label>
             <div>
               <span className="p-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
-                {formData.yearEmp}
+                {employee.yearEmp}
               </span>
             </div>
           </div>
@@ -48,7 +66,7 @@ const ExperienceDisplay = ({ formData }) => {
             </label>
             <div>
               <span className="p-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
-                {formData.experanceDomain}
+                {employee.experanceDomain}
               </span>
             </div>
           </div>
@@ -59,7 +77,7 @@ const ExperienceDisplay = ({ formData }) => {
             </label>
             <div>
               <span className="p-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
-                {formData.boundDegree}
+                {employee.boundDegree}
               </span>
             </div>
           </div>
@@ -70,7 +88,7 @@ const ExperienceDisplay = ({ formData }) => {
             </label>
             <div>
               <span className="p-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
-                {formData.workEndDate}
+                {employee.workEndDate}
               </span>
             </div>
           </div>
@@ -81,7 +99,7 @@ const ExperienceDisplay = ({ formData }) => {
             </label>
             <div>
               <span className="p-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
-                {formData.workEndDec}
+                {employee.workEndDec}
               </span>
             </div>
           </div>
@@ -92,7 +110,7 @@ const ExperienceDisplay = ({ formData }) => {
             </label>
             <div>
               <span className="p-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
-                {formData.workEndDeDate}
+                {employee.workEndDeDate}
               </span>
             </div>
           </div>

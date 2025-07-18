@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { FaEdit, FaTrash } from "react-icons/fa";
 import ExperienceDisplay from "./SectionOfDetails/expertinceDisplay";
 import JobInformationDisplay from "./SectionOfDetails/jobInformationDetails";
 import PersonalInformationDisplay from "./SectionOfDetails/personalInformationDetails";
@@ -85,7 +86,7 @@ const sections = [
 const DetailsOfEmployee = () => {
   const { nationalId } = useParams();
   const navigate = useNavigate();
-  const [employee, setEmployee] = useState(null);
+  const [employee, setEmployee] = useState({});
   const [openSections, setOpenSections] = useState(new Set());
 
   useEffect(() => {
@@ -95,7 +96,7 @@ const DetailsOfEmployee = () => {
           `http://193.227.24.29:5000/api/Employee?nationalId=${nationalId}`
         );
         const data = await response.json();
-        setEmployee(data);
+        setEmployee(data[0]);
       } catch (error) {
         console.error("Error fetching employee details:", error);
       }
@@ -116,6 +117,41 @@ const DetailsOfEmployee = () => {
     setOpenSections(updatedSections);
   };
 
+  const handleDelete = async () => {
+    if (window.confirm("هل أنت متأكد من حذف هذا الموظف؟")) {
+      try {
+        const updatedEmployee = {
+          ...employee,
+          isExist: true,
+        };
+
+        const response = await fetch(
+          `http://193.227.24.29:5000/api/Employee/UpdateEmployee/${nationalId}`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(updatedEmployee),
+          }
+        );
+
+        const resText = await response.text();
+        console.log("Response:", resText);
+
+        if (response.ok) {
+          setEmployee(updatedEmployee);
+          alert("تم حذف الموظف بنجاح");
+        } else {
+          alert("حدث خطأ أثناء حذف الموظف: " + resText);
+        }
+      } catch (error) {
+        console.error("Error deleting employee:", error);
+        alert("حدث خطأ أثناء حذف الموظف");
+      }
+    }
+  };
+
   return (
     <div className="mt-6 px-4">
       <div className=" mb-8   flex justify-between">
@@ -134,52 +170,60 @@ const DetailsOfEmployee = () => {
           العودة
         </button>
       </div>
-      {employee &&
-        employee.map((emp, index) => (
-          <div key={index}>
-            {/* عرض البيانات الشخصية دائمًا */}
-            <div className="mb-4 border rounded-lg shadow-sm overflow-hidden">
-              <div className="bg-gray-100 px-5 py-3 flex justify-between items-center">
-                <span className="text-right text-gray-800">
-                  البيانات الشخصية
-                </span>
-              </div>
-              <div className="p-5 bg-white">
-                <PersonalInformationDisplay formData={emp} />
-              </div>
+      <div>
+        <div className="mb-4 border rounded-lg shadow-sm overflow-hidden">
+          <div className="bg-gray-100 px-5 py-3 flex justify-between items-center">
+            <span className="text-right text-gray-800">البيانات الشخصية</span>
+            <div className="flex items-center justify-center gap-2">
+              <button
+                onClick={() => navigate(`/edit/${nationalId}`)}
+                className="text-blue-600 p-1 hover:bg-blue-100 rounded"
+              >
+                <FaEdit size={16} />
+              </button>
+              <button
+                onClick={() => handleDelete()}
+                className="text-red-600 p-1 hover:bg-red-100 rounded"
+              >
+                <FaTrash size={16} />
+              </button>
             </div>
+          </div>
+          <div className="p-5 bg-white">
+            <PersonalInformationDisplay nationalId={nationalId} />
+          </div>
+        </div>
 
-            {/* باقي الأقسام */}
-            {sections
-              .filter(({ key }) => key !== "personal")
-              .map(({ key, label, Component }) => {
-                const isOpen = openSections.has(key);
-                return (
-                  <div
-                    key={key}
-                    className="mb-4 border rounded-lg shadow-sm overflow-hidden"
-                  >
-                    <div
-                      className="bg-gray-100 hover:bg-gray-200 cursor-pointer px-5 py-3 flex justify-between items-center"
-                      onClick={() => toggleSection(key)}
-                    >
-                      <span className="text-right  text-gray-800">{label}</span>
-                      <span className="text-xl">{isOpen ? "▲" : "▼"}</span>
-                    </div>
-                    {isOpen && (
-                      <div className="p-5 bg-white">
-                        {key === "job" || key === "experience" ? (
-                          <Component formData={emp} />
-                        ) : (
-                          <Component empId={emp.nationalId} />
-                        )}
-                      </div>
+        {sections
+          .filter(({ key }) => key !== "personal")
+          .map(({ key, label, Component }) => {
+            const isOpen = openSections.has(key);
+            return (
+              <div
+                key={key}
+                className="mb-4 border rounded-lg shadow-sm overflow-hidden"
+              >
+                <div
+                  className="bg-gray-100 hover:bg-gray-200 cursor-pointer px-5 py-3 flex justify-between items-center"
+                  onClick={() => toggleSection(key)}
+                >
+                  <span className="text-right  text-gray-800">{label}</span>
+                  <span className="text-xl">{isOpen ? "▲" : "▼"}</span>
+                </div>
+                {isOpen && (
+                  <div className="p-5 bg-white">
+                    {key === "job" || key === "experience" ? (
+                      <Component nationalId={nationalId} />
+                    ) : (
+                      <Component empId={nationalId} />
                     )}
                   </div>
-                );
-              })}
-          </div>
-        ))}
+                )}
+              </div>
+            );
+          })}
+      </div>
+      )
     </div>
   );
 };

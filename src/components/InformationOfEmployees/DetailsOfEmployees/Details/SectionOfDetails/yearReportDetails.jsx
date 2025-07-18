@@ -43,7 +43,7 @@ const YearReportDetails = ({ empId }) => {
   return (
     <div className="w-[98%] mx-auto mt-3">
       <div className="text-[15px] text-white   p-3 bg-[#176d6a] text-right ">
-        بيانات سنة التقارير
+        بيانات التقارير السنوية
       </div>
 
       {filteredData.length > 0 ? (

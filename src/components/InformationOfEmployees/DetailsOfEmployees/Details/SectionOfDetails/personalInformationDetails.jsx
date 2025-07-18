@@ -1,10 +1,28 @@
 import { useEffect, useState } from "react";
 
-const PersonalInformationDisplay = ({ formData }) => {
+const PersonalInformationDisplay = ({ nationalId }) => {
   const [faculties, setFaculties] = useState([]);
   const [healthStates, setHealthStates] = useState([]);
   const [socialStates, setSocialStates] = useState([]);
   const [governrates, setGovernrates] = useState([]);
+
+  const [employee, setEmployee] = useState({});
+
+  useEffect(() => {
+    const fetchEmployeeDetails = async () => {
+      try {
+        const response = await fetch(
+          `http://193.227.24.29:5000/api/Employee?nationalId=${nationalId}`
+        );
+        const data = await response.json();
+        setEmployee(data[0] || {});
+      } catch (error) {
+        console.error("Error fetching employee details:", error);
+      }
+    };
+
+    fetchEmployeeDetails();
+  }, [nationalId]);
 
   useEffect(() => {
     fetch("http://193.227.24.29:5000/api/Faculty")
@@ -53,14 +71,14 @@ const PersonalInformationDisplay = ({ formData }) => {
           <div className="mb-4">
             <label className="block text-right font-medium mb-1">الاسم</label>
             <span className="p-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
-              {formData.name || "غير محدد"}
+              {employee.name || "غير محدد"}
             </span>
           </div>
 
           <div className="mb-4">
             <label className="block text-right font-medium mb-1">الجهة</label>
             <span className="p-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
-              {getNameById(formData.facultyId, faculties)}
+              {getNameById(employee?.facultyId, faculties)}
             </span>
           </div>
 
@@ -69,7 +87,7 @@ const PersonalInformationDisplay = ({ formData }) => {
               رقم الملف
             </label>
             <span className="p-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
-              {formData.fileId || "غير محدد"}
+              {employee?.fileId || "غير محدد"}
             </span>
           </div>
         </div>
@@ -80,7 +98,7 @@ const PersonalInformationDisplay = ({ formData }) => {
               الرقم القومي
             </label>
             <span className="p-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
-              {formData.nationalId || "غير محدد"}
+              {employee?.nationalId || "غير محدد"}
             </span>
           </div>
 
@@ -89,7 +107,7 @@ const PersonalInformationDisplay = ({ formData }) => {
               الحالة الصحية
             </label>
             <span className="p-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
-              {getNameById(formData.healthStateId, healthStates)}
+              {getNameById(employee?.healthStateId, healthStates)}
             </span>
           </div>
 
@@ -98,7 +116,7 @@ const PersonalInformationDisplay = ({ formData }) => {
               نوع الإعاقة
             </label>
             <span className="p-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
-              {formData.disabilityType || "غير محدد"}
+              {employee?.disabilityType || "غير محدد"}
             </span>
           </div>
 
@@ -107,7 +125,7 @@ const PersonalInformationDisplay = ({ formData }) => {
               الحالة الاجتماعية
             </label>
             <span className="p-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
-              {getNameById(formData.socialStateId, socialStates)}
+              {getNameById(employee?.socialStateId, socialStates)}
             </span>
           </div>
 
@@ -116,7 +134,7 @@ const PersonalInformationDisplay = ({ formData }) => {
               عدد أفراد الأسرة
             </label>
             <span className="p-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
-              {formData.disabilityFamilyMember || "0"}
+              {employee?.disabilityFamilyMember || "0"}
             </span>
           </div>
 
@@ -125,7 +143,7 @@ const PersonalInformationDisplay = ({ formData }) => {
               محل الميلاد
             </label>
             <span className="p-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
-              {formData.birthPlace || "غير محدد"}
+              {employee?.birthPlace || "غير محدد"}
             </span>
           </div>
 
@@ -134,14 +152,14 @@ const PersonalInformationDisplay = ({ formData }) => {
               تاريخ الميلاد
             </label>
             <span className="p-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
-              {formData.birthDate || "غير محدد"}
+              {employee?.birthDate || "غير محدد"}
             </span>
           </div>
 
           <div>
             <label className="block text-right font-medium mb-1">المحمول</label>
             <span className="p-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
-              {formData.mobile || "غير محدد"}
+              {employee?.mobile || "غير محدد"}
             </span>
           </div>
 
@@ -150,16 +168,16 @@ const PersonalInformationDisplay = ({ formData }) => {
               هاتف السكن
             </label>
             <span className="p-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
-              {formData.tel || "غير محدد"}
+              {employee?.tel || "غير محدد"}
             </span>
           </div>
 
           <div>
             <label className="block text-right font-medium mb-1">النوع</label>
             <span className="p-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
-              {formData.gender == "0"
+              {employee?.gender == "0"
                 ? "ذكر"
-                : formData.gender == "1"
+                : employee?.gender == "1"
                 ? "أنثى"
                 : "غير محدد"}
             </span>
@@ -170,7 +188,7 @@ const PersonalInformationDisplay = ({ formData }) => {
               الرقم التأميني
             </label>
             <span className="p-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
-              {formData.taminNo || "غير محدد"}
+              {employee?.taminNo || "غير محدد"}
             </span>
           </div>
 
@@ -179,28 +197,28 @@ const PersonalInformationDisplay = ({ formData }) => {
               المحافظة
             </label>
             <span className="p-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
-              {getNameById(formData.governrateId, governrates)}
+              {getNameById(employee?.governrateId, governrates)}
             </span>
           </div>
 
           <div>
             <label className="block text-right font-medium mb-1">المركز</label>
             <span className="p-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
-              {formData.city || "غير محدد"}
+              {employee?.city || "غير محدد"}
             </span>
           </div>
 
           <div>
             <label className="block text-right font-medium mb-1">القرية</label>
             <span className="p-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
-              {formData.village || "غير محدد"}
+              {employee?.village || "غير محدد"}
             </span>
           </div>
 
           <div>
             <label className="block text-right font-medium mb-1">العنوان</label>
             <span className="p-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
-              {formData.address || "غير محدد"}
+              {employee?.address || "غير محدد"}
             </span>
           </div>
         </div>

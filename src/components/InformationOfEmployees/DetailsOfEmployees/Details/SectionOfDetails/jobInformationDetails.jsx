@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const JobInformationDisplay = ({ formData }) => {
+const JobInformationDisplay = ({ nationalId }) => {
   const [sectors, setSectors] = useState([]);
   const [generalAds, setGeneralAds] = useState([]);
   const [subAds, setSubAds] = useState([]);
@@ -10,6 +10,23 @@ const JobInformationDisplay = ({ formData }) => {
   const [jobNames, setJobNames] = useState([]);
   const [fincialDegrees, setFincialDegrees] = useState([]);
   const [existaceCases, setExistaceCases] = useState([]);
+  const [employee, setEmployee] = useState({});
+
+  useEffect(() => {
+    const fetchEmployeeDetails = async () => {
+      try {
+        const response = await fetch(
+          `http://193.227.24.29:5000/api/Employee?nationalId=${nationalId}`
+        );
+        const data = await response.json();
+        setEmployee(data[0]);
+      } catch (error) {
+        console.error("Error fetching employee details:", error);
+      }
+    };
+
+    fetchEmployeeDetails();
+  }, [nationalId]);
 
   useEffect(() => {
     fetch("http://193.227.24.29:5000/api/Sector")
@@ -88,7 +105,7 @@ const JobInformationDisplay = ({ formData }) => {
       );
   }, []);
 
-  const selectedSubAd = subAds.find((item) => item.id == formData.subAdId);
+  const selectedSubAd = subAds.find((item) => item.id == employee.subAdId);
   const selectedGeneralAd = generalAds.find(
     (item) => item.id == selectedSubAd?.generalAdId
   );
@@ -115,7 +132,7 @@ const JobInformationDisplay = ({ formData }) => {
               رقم قرار التعيين
             </label>
             <span className="p-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
-              {formData.appointDN || "غير محدد"}
+              {employee.appointDN || "غير محدد"}
             </span>
           </div>
 
@@ -126,10 +143,10 @@ const JobInformationDisplay = ({ formData }) => {
             </label>
             <div className="flex gap-2">
               <span className="p-2 w-1/2 border border-gray-300 rounded-md bg-gray-100 text-right">
-                {formData.appointDate || "غير محدد"}
+                {employee.appointDate || "غير محدد"}
               </span>
               <span className="p-2 w-1/2 border border-gray-300 rounded-md bg-gray-100 text-right">
-                {formData.appointDateTxt || "غير محدد"}
+                {employee.appointDateTxt || "غير محدد"}
               </span>
             </div>
           </div>
@@ -141,10 +158,10 @@ const JobInformationDisplay = ({ formData }) => {
             </label>
             <div className="flex gap-2">
               <span className="p-2 w-1/2 border border-gray-300 rounded-md bg-gray-100 text-right">
-                {formData.reAppointDate || "غير محدد"}
+                {employee.reAppointDate || "غير محدد"}
               </span>
               <span className="p-2 w-1/2 border border-gray-300 rounded-md bg-gray-100 text-right">
-                {formData.reAppointDateTxt || "غير محدد"}
+                {employee.reAppointDateTxt || "غير محدد"}
               </span>
             </div>
           </div>
@@ -156,10 +173,10 @@ const JobInformationDisplay = ({ formData }) => {
             </label>
             <div className="flex gap-2">
               <span className="p-2 w-1/2 border border-gray-300 rounded-md bg-gray-100 text-right">
-                {formData.combinationDate || "غير محدد"}
+                {employee.combinationDate || "غير محدد"}
               </span>
               <span className="p-2 w-1/2 border border-gray-300 rounded-md bg-gray-100 text-right">
-                {formData.combinationDateTxt || "غير محدد"}
+                {employee.combinationDateTxt || "غير محدد"}
               </span>
             </div>
           </div>
@@ -171,10 +188,10 @@ const JobInformationDisplay = ({ formData }) => {
             </label>
             <div className="flex gap-2">
               <span className="p-2 w-1/2 border border-gray-300 rounded-md bg-gray-100 text-right">
-                {formData.workDateFt || "غير محدد"}
+                {employee.workDateFt || "غير محدد"}
               </span>
               <span className="p-2 w-1/2 border border-gray-300 rounded-md bg-gray-100 text-right">
-                {formData.workDateFtTxt || "غير محدد"}
+                {employee.workDateFtTxt || "غير محدد"}
               </span>
             </div>
           </div>
@@ -186,10 +203,10 @@ const JobInformationDisplay = ({ formData }) => {
             </label>
             <div className="flex gap-2">
               <span className="p-2 w-1/2 border border-gray-300 rounded-md bg-gray-100 text-right">
-                {formData.workDate || "غير محدد"}
+                {employee.workDate || "غير محدد"}
               </span>
               <span className="p-2 w-1/2 border border-gray-300 rounded-md bg-gray-100 text-right">
-                {formData.workDateTxt || "غير محدد"}
+                {employee.workDateTxt || "غير محدد"}
               </span>
             </div>
           </div>
@@ -233,7 +250,7 @@ const JobInformationDisplay = ({ formData }) => {
                 4- القسم
               </label>
               <span className="p-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
-                {getNameById(formData.departmentId, departments)}
+                {getNameById(employee.departmentId, departments)}
               </span>
             </div>
 
@@ -243,7 +260,7 @@ const JobInformationDisplay = ({ formData }) => {
                 المجموعات الوظيفية
               </label>
               <span className="p-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
-                {getNameById(formData.jobGroupId, jobGroups)}
+                {getNameById(employee.jobGroupId, jobGroups)}
               </span>
             </div>
 
@@ -253,7 +270,7 @@ const JobInformationDisplay = ({ formData }) => {
                 المجموعات النوعية
               </label>
               <span className="p-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
-                {getNameById(formData.jobSubGroupId, jobSubGroups)}
+                {getNameById(employee.jobSubGroupId, jobSubGroups)}
               </span>
             </div>
 
@@ -263,7 +280,7 @@ const JobInformationDisplay = ({ formData }) => {
                 مسمي الوظيفة الحالية
               </label>
               <span className="p-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
-                {getNameById(formData.jobNameId, jobNames)}
+                {getNameById(employee.jobNameId, jobNames)}
               </span>
             </div>
 
@@ -272,7 +289,7 @@ const JobInformationDisplay = ({ formData }) => {
                 الدرجة الوظيفية
               </label>
               <span className="p-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
-                {getNameById(formData.fincialDegreeId, fincialDegrees)}
+                {getNameById(employee.fincialDegreeId, fincialDegrees)}
               </span>
             </div>
 
@@ -281,7 +298,7 @@ const JobInformationDisplay = ({ formData }) => {
                 تاريخ الدرجة
               </label>
               <span className="p-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
-                {formData.fincialDegreeDate || "غير محدد"}
+                {employee.fincialDegreeDate || "غير محدد"}
               </span>
             </div>
 
@@ -290,7 +307,7 @@ const JobInformationDisplay = ({ formData }) => {
                 لديه الدرجة الحالية ؟
               </label>
               <span className="p-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
-                {formData.currentDegree ? "نعم" : "لا"}
+                {employee.currentDegree ? "نعم" : "لا"}
               </span>
             </div>
 
@@ -299,7 +316,7 @@ const JobInformationDisplay = ({ formData }) => {
                 تاريخ الوظيفة المسكن عليها
               </label>
               <span className="p-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
-                {formData.fJobDate || "غير محدد"}
+                {employee.fJobDate || "غير محدد"}
               </span>
             </div>
 
@@ -308,7 +325,7 @@ const JobInformationDisplay = ({ formData }) => {
                 الوجود في العمل
               </label>
               <span className="p-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
-                {formData.isExist ? "نعم" : "لا"}
+                {employee.isExist ? "نعم" : "لا"}
               </span>
             </div>
 
@@ -317,7 +334,7 @@ const JobInformationDisplay = ({ formData }) => {
                 حالة الموظف
               </label>
               <span className="p-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
-                {getNameById(formData.existaceCaseId, existaceCases)}
+                {getNameById(employee.existaceCaseId, existaceCases)}
               </span>
             </div>
           </div>
@@ -330,19 +347,19 @@ const JobInformationDisplay = ({ formData }) => {
               <div>
                 <label className="mb-1 text-white semi-bold">يوم</label>
                 <span className="px-4 py-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
-                  {formData.reservedDays || "0"}
+                  {employee.reservedDays || "0"}
                 </span>
               </div>
               <div>
                 <label className="mb-1 text-white semi-bold">شهر</label>
                 <span className="px-4 py-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
-                  {formData.reservedMonths || "0"}
+                  {employee.reservedMonths || "0"}
                 </span>
               </div>
               <div>
                 <label className="mb-1 text-white semi-bold">سنة</label>
                 <span className="px-4 py-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
-                  {formData.reservedYears || "0"}
+                  {employee.reservedYears || "0"}
                 </span>
               </div>
             </div>
