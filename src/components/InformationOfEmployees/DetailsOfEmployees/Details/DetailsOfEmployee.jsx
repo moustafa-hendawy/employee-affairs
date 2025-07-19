@@ -42,7 +42,7 @@ const sections = [
   { key: "salary", label: "        بيانات المرتب", Component: SalaryDetails },
   {
     key: "thanks",
-    label: "        بيانات خطابات الشكر",
+    label: "بيانات خطابات الشكر",
     Component: ThanksLetter,
   },
   {
@@ -223,7 +223,6 @@ const DetailsOfEmployee = () => {
             );
           })}
       </div>
-      )
     </div>
   );
 };
