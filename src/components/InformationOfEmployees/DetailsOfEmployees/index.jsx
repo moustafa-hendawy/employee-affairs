@@ -211,7 +211,7 @@ const Index = () => {
   return (
     <>
       <div className="max-w-5xl mx-auto p-4 flex justify-between" dir="rtl">
-        <h2 className="text-2xl font-bold mb-6 text-right">تفاصيل الموظفين </h2>
+        <h2 className="text-2xl font-bold mb-6 text-right">بيانات الموظفين </h2>
         <button
           className="bg-[#176D6A] text-white px-4 py-2  hover:opacity-90"
           style={{ borderRadius: "6px" }}

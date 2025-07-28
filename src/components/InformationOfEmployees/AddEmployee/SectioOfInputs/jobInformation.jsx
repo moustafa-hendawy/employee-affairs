@@ -176,10 +176,13 @@ const JobInformation = ({ formData, handleChange, setFormData }) => {
         <div className="bg-white p-6 rounded-lg shadow-md grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4">
           <div>
             <label className="block text-right font-medium mb-1">
+              {" "}
+              <span className="text-red-500">*</span>
               رقم قرار التعيين
             </label>
             <input
               type="number"
+              required
               name="appointDN"
               value={formData.appointDN}
               onChange={handleChange}
@@ -190,11 +193,14 @@ const JobInformation = ({ formData, handleChange, setFormData }) => {
           {/* تاريخ التعيين + نصه */}
           <div>
             <label className="block text-right font-medium mb-1">
+              {" "}
+              <span className="text-red-500">*</span>
               تاريخ التعيين
             </label>
             <div className="flex gap-2">
               <input
                 type="date"
+                required
                 name="appointDate"
                 value={formData.appointDate}
                 onChange={handleChange}
@@ -202,6 +208,7 @@ const JobInformation = ({ formData, handleChange, setFormData }) => {
               />
               <input
                 type="text"
+                required
                 name="appointDateTxt"
                 value={formData.appointDateTxt}
                 onChange={handleChange}
@@ -213,11 +220,14 @@ const JobInformation = ({ formData, handleChange, setFormData }) => {
           {/* تاريخ إعادة التعيين + نصه */}
           <div>
             <label className="block text-right font-medium mb-1">
+              {" "}
+              <span className="text-red-500">*</span>
               تاريخ إعادة التعيين
             </label>
             <div className="flex gap-2">
               <input
                 type="date"
+                required
                 name="reAppointDate"
                 value={formData.reAppointDate}
                 onChange={handleChange}
@@ -225,6 +235,7 @@ const JobInformation = ({ formData, handleChange, setFormData }) => {
               />
               <input
                 type="text"
+                required
                 name="reAppointDateTxt"
                 value={formData.reAppointDateTxt}
                 onChange={handleChange}
@@ -236,11 +247,14 @@ const JobInformation = ({ formData, handleChange, setFormData }) => {
           {/* تاريخ التعيين بالضم + نصه */}
           <div>
             <label className="block text-right font-medium mb-1">
+              {" "}
+              <span className="text-red-500">*</span>
               تاريخ التعيين بالضم
             </label>
             <div className="flex gap-2">
               <input
                 type="date"
+                required
                 name="combinationDate"
                 value={formData.combinationDate}
                 onChange={handleChange}
@@ -248,6 +262,7 @@ const JobInformation = ({ formData, handleChange, setFormData }) => {
               />
               <input
                 type="text"
+                required
                 name="combinationDateTxt"
                 value={formData.combinationDateTxt}
                 onChange={handleChange}
@@ -259,11 +274,14 @@ const JobInformation = ({ formData, handleChange, setFormData }) => {
           {/* تاريخ استلام العمل أول مرة + نصه */}
           <div>
             <label className="block text-right font-medium mb-1">
+              {" "}
+              <span className="text-red-500">*</span>
               تاريخ استلام العمل أول مرة
             </label>
             <div className="flex gap-2">
               <input
                 type="date"
+                required
                 name="workDateFt"
                 value={formData.workDateFt}
                 onChange={handleChange}
@@ -271,6 +289,7 @@ const JobInformation = ({ formData, handleChange, setFormData }) => {
               />
               <input
                 type="text"
+                required
                 name="workDateFtTxt"
                 value={formData.workDateFtTxt}
                 onChange={handleChange}
@@ -282,11 +301,14 @@ const JobInformation = ({ formData, handleChange, setFormData }) => {
           {/* تاريخ استلام العمل بالجامعة + نصه */}
           <div>
             <label className="block text-right font-medium mb-1">
+              {" "}
+              <span className="text-red-500">*</span>
               تاريخ استلام العمل بالجامعة
             </label>
             <div className="flex gap-2">
               <input
                 type="date"
+                required
                 name="workDate"
                 value={formData.workDate}
                 onChange={handleChange}
@@ -294,6 +316,7 @@ const JobInformation = ({ formData, handleChange, setFormData }) => {
               />
               <input
                 type="text"
+                required
                 name="workDateTxt"
                 value={formData.workDateTxt}
                 onChange={handleChange}
@@ -311,9 +334,12 @@ const JobInformation = ({ formData, handleChange, setFormData }) => {
           <div className="bg-white p-6 rounded-lg shadow-md grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 rtl">
             <div>
               <label className="block text-right font-medium mb-1">
+                {" "}
+                <span className="text-red-500">*</span>
                 1- القطاع التنظيمي
               </label>
               <select
+                required
                 className="border border-gray-300 rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-500"
                 onChange={handleSectorChange}
                 value={sectoreId}
@@ -330,9 +356,12 @@ const JobInformation = ({ formData, handleChange, setFormData }) => {
             {sectoreId !== "" && sectoreId !== "0" && (
               <div>
                 <label className="block text-right font-medium mb-1">
+                  {" "}
+                  <span className="text-red-500">*</span>
                   2- الإدارة العامة أو الوحدة التابعة للقطاع
                 </label>
                 <select
+                  required
                   className="border border-gray-300 rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-500"
                   onChange={handleGeneralChange}
                   value={generalId}
@@ -352,9 +381,12 @@ const JobInformation = ({ formData, handleChange, setFormData }) => {
             {generalId !== "" && generalId !== "0" && (
               <div>
                 <label className="block text-right font-medium mb-1">
+                  {" "}
+                  <span className="text-red-500">*</span>
                   3- الإدارة الفرعية
                 </label>
                 <select
+                  required
                   name="subAdId"
                   value={formData.subAdId}
                   onChange={handleChange}
@@ -378,9 +410,12 @@ const JobInformation = ({ formData, handleChange, setFormData }) => {
             {formData.subAdId !== "" && formData.subAdId !== "0" && (
               <div>
                 <label className="block text-right font-medium mb-1">
+                  {" "}
+                  <span className="text-red-500">*</span>
                   4- القسم
                 </label>
                 <select
+                  required
                   name="departmentId"
                   value={formData.departmentId}
                   onChange={handleChange}
@@ -406,9 +441,12 @@ const JobInformation = ({ formData, handleChange, setFormData }) => {
             {/* المجموعات الوظيفية */}
             <div>
               <label className="block text-right font-medium mb-1">
+                {" "}
+                <span className="text-red-500">*</span>
                 المجموعات الوظيفية
               </label>
               <select
+                required
                 name="jobGroupId"
                 value={formData.jobGroupId}
                 onChange={handleJobGroupChange}
@@ -430,9 +468,12 @@ const JobInformation = ({ formData, handleChange, setFormData }) => {
             {formData.jobGroupId !== "" && formData.jobGroupId !== "0" && (
               <div>
                 <label className="block text-right font-medium mb-1">
+                  {" "}
+                  <span className="text-red-500">*</span>
                   المجموعات النوعية
                 </label>
                 <select
+                  required
                   name="jobSubGroupId"
                   value={formData.jobSubGroupId}
                   onChange={handleJobSubGroupChange}
@@ -460,9 +501,12 @@ const JobInformation = ({ formData, handleChange, setFormData }) => {
               formData.jobSubGroupId !== "0" && (
                 <div>
                   <label className="block text-right font-medium mb-1">
+                    {" "}
+                    <span className="text-red-500">*</span>
                     مسمي الوظيفة الحالية
                   </label>
                   <select
+                    required
                     name="jobNameId"
                     value={formData.jobNameId}
                     onChange={handleJobNameChange}
@@ -488,9 +532,12 @@ const JobInformation = ({ formData, handleChange, setFormData }) => {
 
             <div>
               <label className="block text-right font-medium mb-1">
+                {" "}
+                <span className="text-red-500">*</span>
                 الدرجة الوظيفية
               </label>
               <select
+                required
                 className="border border-gray-300 rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-500"
                 name="fincialDegreeId"
                 value={formData.fincialDegreeId}
@@ -509,10 +556,13 @@ const JobInformation = ({ formData, handleChange, setFormData }) => {
             </div>
             <div>
               <label className="block text-right font-medium mb-1">
+                {" "}
+                <span className="text-red-500">*</span>
                 تاريخ الدرجة
               </label>
               <input
                 type="date"
+                required
                 className="border border-gray-300 rounded-md p-2 w-full"
                 name="fincialDegreeDate"
                 value={formData.fincialDegreeDate}
@@ -522,10 +572,13 @@ const JobInformation = ({ formData, handleChange, setFormData }) => {
 
             <div>
               <label className="block text-right font-medium mb-1">
+                {" "}
+                <span className="text-red-500">*</span>
                 تاريخ الوظيفة المسكن عليها
               </label>
               <input
                 type="date"
+                required
                 className="border border-gray-300 rounded-md p-2 w-full"
                 name="fJobDate"
                 value={formData.fJobDate}
@@ -534,10 +587,12 @@ const JobInformation = ({ formData, handleChange, setFormData }) => {
             </div>
             <div>
               <label className="block text-right font-medium mb-1">
+                {" "}
+                <span className="text-red-500">*</span>
                 الوجود في العمل
               </label>
               <input
-                type="checkbox"
+                type="checkbo requiredx"
                 className="border border-gray-300 rounded-md p-2 w-full"
                 name="isExist"
                 checked={formData.isExist}
@@ -549,9 +604,12 @@ const JobInformation = ({ formData, handleChange, setFormData }) => {
 
             <div>
               <label className="block text-right font-medium mb-1">
+                {" "}
+                <span className="text-red-500">*</span>
                 حالة الموظف
               </label>
               <select
+                required
                 name="existaceCaseId"
                 value={formData.existaceCaseId}
                 onChange={handleChange}
@@ -568,47 +626,56 @@ const JobInformation = ({ formData, handleChange, setFormData }) => {
                 ))}
               </select>
             </div>
-          </div>
-          <div className="bg-[#176D6A] text-white p-4 rounded-lg mt-4">
-            <div className="block text-right font-medium mb-1">
-              المده المحتفظ بها للموظف
-            </div>
-            <div className="inputs flex justify-between gap-4">
-              <div className="flex-1">
-                <label className="block mb-1 text-white font-semibold">
-                  يوم
-                </label>
-                <input
-                  type="number"
-                  className="border border-gray-300 rounded-md p-2 w-full text-black"
-                  name="reservedDays"
-                  value={formData.reservedDays}
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="flex-1">
-                <label className="block mb-1 text-white font-semibold">
-                  شهر
-                </label>
-                <input
-                  type="number"
-                  className="border border-gray-300 rounded-md p-2 w-full text-black"
-                  name="reservedMonths"
-                  value={formData.reservedMonths}
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="flex-1">
-                <label className="block mb-1 text-white font-semibold">
-                  سنة
-                </label>
-                <input
-                  type="number"
-                  className="border border-gray-300 rounded-md p-2 w-full text-black"
-                  name="reservedYears"
-                  value={formData.reservedYears}
-                  onChange={handleChange}
-                />
+            <div>
+              <label className="block text-right font-medium mb-1 text-gray-800">
+                المده المحتفظ بها للموظف
+              </label>
+              <div className="inputs flex justify-between gap-4">
+                <div className="flex-1">
+                  <label className="block mb-1 font-semibold text-gray-800">
+                    {" "}
+                    <span className="text-red-500">*</span>
+                    يوم
+                  </label>
+                  <input
+                    type="number"
+                    required
+                    className="border border-gray-300 rounded-md p-2 w-full text-black"
+                    name="reservedDays"
+                    value={formData.reservedDays}
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className="flex-1">
+                  <label className="block mb-1 font-semibold text-gray-800">
+                    {" "}
+                    <span className="text-red-500">*</span>
+                    شهر
+                  </label>
+                  <input
+                    type="number"
+                    required
+                    className="border border-gray-300 rounded-md p-2 w-full text-black"
+                    name="reservedMonths"
+                    value={formData.reservedMonths}
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className="flex-1">
+                  <label className="block mb-1 font-semibold text-gray-800">
+                    {" "}
+                    <span className="text-red-500">*</span>
+                    سنة
+                  </label>
+                  <input
+                    type="number"
+                    required
+                    className="border border-gray-300 rounded-md p-2 w-full text-black"
+                    name="reservedYears"
+                    value={formData.reservedYears}
+                    onChange={handleChange}
+                  />
+                </div>
               </div>
             </div>
           </div>

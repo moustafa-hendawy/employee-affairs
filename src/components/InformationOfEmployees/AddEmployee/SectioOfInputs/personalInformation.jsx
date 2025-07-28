@@ -6,6 +6,26 @@ const PersonalInformation = ({ formData, handleChange }) => {
   const [socialStates, setSocialStates] = useState([]);
   const [governrates, setGovernrates] = useState([]);
 
+  const extractDataFromNationalId = (nationalId) => {
+    if (!/^\d{14}$/.test(nationalId)) return null;
+
+    const centuryCode = nationalId.charAt(0);
+    const year = nationalId.substring(1, 3);
+    const month = nationalId.substring(3, 5);
+    const day = nationalId.substring(5, 7);
+    const genderDigit = parseInt(nationalId.charAt(12));
+
+    let fullYear = "";
+    if (centuryCode === "2") fullYear = `19${year}`;
+    else if (centuryCode === "3") fullYear = `20${year}`;
+    else return null;
+
+    const birthDate = `${fullYear}-${month}-${day}`;
+    const gender = genderDigit % 2 === 0 ? "1" : "0";
+
+    return { birthDate, gender };
+  };
+
   useEffect(() => {
     fetch("http://193.227.24.29:5000/api/Faculty")
       .then((res) => res.json())
@@ -45,6 +65,8 @@ const PersonalInformation = ({ formData, handleChange }) => {
         <div className="bg-white p-6 rounded-lg shadow-md grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 gap-4">
           <div className="mb-4 flex">
             <label className="block w-fit text-right font-medium mb-2 ml-2">
+              {" "}
+              <span className="text-red-500">*</span>
               الاسم
             </label>
             <input
@@ -52,18 +74,22 @@ const PersonalInformation = ({ formData, handleChange }) => {
               name="name"
               value={formData.name}
               onChange={handleChange}
+              required
               className="border border-gray-300 rounded-md p-2 w-full"
             />
           </div>
 
           <div className="mb-4 flex">
             <label className="block w-fit whitespace-nowrap text-right font-medium mb-2 ml-2">
+              {" "}
+              <span className="text-red-500">*</span>
               الجهة
             </label>
             <select
               name="facultyId"
               value={formData.facultyId}
               onChange={handleChange}
+              required
               className="border border-gray-300 rounded-md p-2 w-full"
             >
               <option value="">اختر جهة</option>
@@ -77,6 +103,8 @@ const PersonalInformation = ({ formData, handleChange }) => {
 
           <div className="mb-4 flex">
             <label className="block w-fit whitespace-nowrap text-right font-medium mb-2 ml-2">
+              {" "}
+              <span className="text-red-500">*</span>
               رقم الملف
             </label>
             <input
@@ -84,6 +112,7 @@ const PersonalInformation = ({ formData, handleChange }) => {
               name="fileId"
               value={formData.fileId}
               onChange={handleChange}
+              required
               className="border border-gray-300 rounded-md p-2 w-full"
             />
           </div>
@@ -97,26 +126,44 @@ const PersonalInformation = ({ formData, handleChange }) => {
         <div className="bg-white p-6 rounded-lg shadow-md grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           <div>
             <label className="block text-right font-medium mb-1">
+              {" "}
+              <span className="text-red-500">*</span>
               الرقم القومي
             </label>
             <input
               type="text"
               name="nationalId"
+              required
               value={formData.nationalId}
-              onChange={handleChange}
+              onChange={(e) => {
+                const { name, value } = e.target;
+                handleChange(e);
+
+                const extracted = extractDataFromNationalId(value);
+                if (extracted) {
+                  handleChange({
+                    target: { name: "birthDate", value: extracted.birthDate },
+                  });
+                  handleChange({
+                    target: { name: "gender", value: extracted.gender },
+                  });
+                }
+              }}
               className="border border-gray-300 rounded-md p-2 w-full"
             />
           </div>
 
-          {/* الحالة الصحية */}
           <div>
             <label className="block text-right font-medium mb-1">
+              {" "}
+              <span className="text-red-500">*</span>
               الحالة الصحية
             </label>
             <select
               name="healthStateId"
               value={formData.healthStateId}
               onChange={handleChange}
+              required
               className="border border-gray-300 rounded-md p-2 w-full"
             >
               <option value="">اختر حالة صحية</option>
@@ -128,7 +175,6 @@ const PersonalInformation = ({ formData, handleChange }) => {
             </select>
           </div>
 
-          {/* نوع الإعاقة (يظهر فقط إذا كان معاق، مثلاً healthStateId == '2') */}
           {["2", "3"].includes(formData.healthStateId) && (
             <div>
               <label className="block text-right font-medium mb-1">
@@ -144,15 +190,17 @@ const PersonalInformation = ({ formData, handleChange }) => {
             </div>
           )}
 
-          {/* الحالة الاجتماعية */}
           <div>
             <label className="block text-right font-medium mb-1">
+              {" "}
+              <span className="text-red-500">*</span>
               الحالة الاجتماعية
             </label>
             <select
               name="socialStateId"
               value={formData.socialStateId}
               onChange={handleChange}
+              required
               className="border border-gray-300 rounded-md p-2 w-full"
             >
               <option value="">اختر حالة اجتماعية</option>
@@ -181,11 +229,14 @@ const PersonalInformation = ({ formData, handleChange }) => {
 
           <div>
             <label className="block text-right font-medium mb-1">
+              {" "}
+              <span className="text-red-500">*</span>
               محل الميلاد
             </label>
             <input
               type="text"
               name="birthPlace"
+              required
               value={formData.birthPlace}
               onChange={handleChange}
               className="border border-gray-300 rounded-md p-2 w-full"
@@ -194,22 +245,13 @@ const PersonalInformation = ({ formData, handleChange }) => {
 
           <div>
             <label className="block text-right font-medium mb-1">
-              تاريخ الميلاد
+              {" "}
+              <span className="text-red-500">*</span>المحمول
             </label>
-            <input
-              type="date"
-              name="birthDate"
-              value={formData.birthDate}
-              onChange={handleChange}
-              className="border border-gray-300 rounded-md p-2 w-full"
-            />
-          </div>
-
-          <div>
-            <label className="block text-right font-medium mb-1">المحمول</label>
             <input
               type="text"
               name="mobile"
+              required
               value={formData.mobile}
               onChange={handleChange}
               onBlur={(e) => {
@@ -223,6 +265,8 @@ const PersonalInformation = ({ formData, handleChange }) => {
 
           <div>
             <label className="block text-right font-medium mb-1">
+              {" "}
+              <span className="text-red-500">*</span>
               هاتف السكن
             </label>
             <input
@@ -230,6 +274,7 @@ const PersonalInformation = ({ formData, handleChange }) => {
               name="tel"
               value={formData.tel}
               onChange={handleChange}
+              required
               onBlur={(e) => {
                 if (e.target.value && !/^\d+$/.test(e.target.value)) {
                   alert("الرجاء إدخال أرقام فقط في حقل هاتف السكن");
@@ -240,21 +285,9 @@ const PersonalInformation = ({ formData, handleChange }) => {
           </div>
 
           <div>
-            <label className="block text-right font-medium mb-1">النوع</label>
-            <select
-              name="gender"
-              value={formData.gender}
-              onChange={handleChange}
-              className="border border-gray-300 rounded-md p-2 w-full"
-            >
-              <option value="">اختر النوع</option>
-              <option value="0">ذكر</option>
-              <option value="1">أنثى</option>
-            </select>
-          </div>
-
-          <div>
             <label className="block text-right font-medium mb-1">
+              {" "}
+              <span className="text-red-500">*</span>
               الرقم التأميني
             </label>
             <input
@@ -262,18 +295,22 @@ const PersonalInformation = ({ formData, handleChange }) => {
               name="taminNo"
               value={formData.taminNo}
               onChange={handleChange}
+              required
               className="border border-gray-300 rounded-md p-2 w-full"
             />
           </div>
 
           <div>
             <label className="block text-right font-medium mb-1">
+              {" "}
+              <span className="text-red-500">*</span>
               المحافظة
             </label>
             <select
               name="governrateId"
               value={formData.governrateId}
               onChange={handleChange}
+              required
               className="border border-gray-300 rounded-md p-2 w-full"
             >
               <option value="">اختر محافظة</option>
@@ -286,34 +323,46 @@ const PersonalInformation = ({ formData, handleChange }) => {
           </div>
 
           <div>
-            <label className="block text-right font-medium mb-1">المركز</label>
+            <label className="block text-right font-medium mb-1">
+              {" "}
+              <span className="text-red-500">*</span>المركز{" "}
+            </label>
             <input
               type="text"
               name="city"
               value={formData.city}
               onChange={handleChange}
+              required
               className="border border-gray-300 rounded-md p-2 w-full"
             />
           </div>
 
           <div>
-            <label className="block text-right font-medium mb-1">القرية</label>
+            <label className="block text-right font-medium mb-1">
+              {" "}
+              <span className="text-red-500">*</span>القرية
+            </label>
             <input
               type="text"
               name="village"
               value={formData.village}
               onChange={handleChange}
+              required
               className="border border-gray-300 rounded-md p-2 w-full"
             />
           </div>
 
           <div>
-            <label className="block text-right font-medium mb-1">العنوان</label>
+            <label className="block text-right font-medium mb-1">
+              {" "}
+              <span className="text-red-500">*</span> العنوان
+            </label>
             <input
               type="text"
               name="address"
               value={formData.address}
               onChange={handleChange}
+              required
               className="border border-gray-300 rounded-md p-2 w-full"
             />
           </div>

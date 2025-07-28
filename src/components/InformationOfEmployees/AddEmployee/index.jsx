@@ -20,7 +20,7 @@ const Index = () => {
     jobNameId: "",
     subAdId: "",
     departmentId: 0,
-    isExist: false,
+    isExist: true,
     existaceCaseId: 0,
     nonExistanceTypeId: 0,
     taminNo: 0,
@@ -199,12 +199,13 @@ const Index = () => {
       const url = id
         ? `http://193.227.24.29:5000/api/Employee/UpdateEmployee/${id}`
         : "http://193.227.24.29:5000/api/Employee";
-
+      console.log(cleanedData[0]);
       const response = await fetch(url, {
         method,
         headers: {
           "Content-Type": "application/json",
         },
+
         body: JSON.stringify(cleanedData),
       });
 

@@ -157,7 +157,7 @@ const DetailsOfEmployee = () => {
       <div className=" mb-8   flex justify-between">
         <div className="text-3xl text-right font-bold text-gray-800">
           {" "}
-          تفاصيل الموظف
+          بيانات الموظف
         </div>
 
         <button

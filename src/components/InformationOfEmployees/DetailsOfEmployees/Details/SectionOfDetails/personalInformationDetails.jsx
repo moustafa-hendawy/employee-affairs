@@ -111,14 +111,16 @@ const PersonalInformationDisplay = ({ nationalId }) => {
             </span>
           </div>
 
-          <div>
-            <label className="block text-right font-medium mb-1">
-              نوع الإعاقة
-            </label>
-            <span className="p-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
-              {employee?.disabilityType || "غير محدد"}
-            </span>
-          </div>
+          {employee?.healthStateId != 1 && (
+            <div>
+              <label className="block text-right font-medium mb-1">
+                نوع الإعاقة
+              </label>
+              <span className="p-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
+                {employee?.disabilityType || "غير محدد"}
+              </span>
+            </div>
+          )}
 
           <div>
             <label className="block text-right font-medium mb-1">
@@ -129,14 +131,16 @@ const PersonalInformationDisplay = ({ nationalId }) => {
             </span>
           </div>
 
-          <div>
-            <label className="block text-right font-medium mb-1">
-              عدد أفراد الأسرة
-            </label>
-            <span className="p-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
-              {employee?.disabilityFamilyMember || "0"}
-            </span>
-          </div>
+          {employee?.socialStateId != 1 && (
+            <div>
+              <label className="block text-right font-medium mb-1">
+                عدد أفراد الأسرة
+              </label>
+              <span className="p-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
+                {employee?.disabilityFamilyMember || "0"}
+              </span>
+            </div>
+          )}
 
           <div>
             <label className="block text-right font-medium mb-1">

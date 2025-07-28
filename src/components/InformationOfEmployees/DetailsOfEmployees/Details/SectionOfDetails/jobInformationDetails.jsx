@@ -210,13 +210,79 @@ const JobInformationDisplay = ({ nationalId }) => {
               </span>
             </div>
           </div>
+
+          <div>
+            <label className="block text-right font-medium mb-1">
+              المجموعات النوعية
+            </label>
+            <span className="p-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
+              {getNameById(employee.jobSubGroupId, jobSubGroups)}
+            </span>
+          </div>
+
+          {/* مسمي الوظيفة */}
+          <div>
+            <label className="block text-right font-medium mb-1">
+              مسمي الوظيفة الحالية
+            </label>
+            <span className="p-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
+              {getNameById(employee.jobNameId, jobNames)}
+            </span>
+          </div>
+
+          <div>
+            <label className="block text-right font-medium mb-1">
+              الدرجة الوظيفية
+            </label>
+            <span className="p-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
+              {getNameById(employee.fincialDegreeId, fincialDegrees)}
+            </span>
+          </div>
+
+          <div>
+            <label className="block text-right font-medium mb-1">
+              تاريخ الدرجة
+            </label>
+            <span className="p-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
+              {employee.fincialDegreeDate || "غير محدد"}
+            </span>
+          </div>
+
+          <div>
+            <label className="block text-right font-medium mb-1">
+              تاريخ الوظيفة المسكن عليها
+            </label>
+            <span className="p-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
+              {employee.fJobDate || "غير محدد"}
+            </span>
+          </div>
+
+          <div>
+            <label className="block text-right font-medium mb-1">
+              الوجود في العمل
+            </label>
+            <span className="p-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
+              {employee.isExist ? "نعم" : "لا"}
+            </span>
+          </div>
+
+          <div>
+            <label className="block text-right font-medium mb-1">
+              حالة الموظف
+            </label>
+            <span className="p-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
+              {getNameById(employee.existaceCaseId, existaceCases)}
+            </span>
+          </div>
         </div>
 
-        <div className="structure-of-employee">
-          <div className="text-[15px] text-white mb-6 p-3 bg-[#176d6a] text-right">
+        <div className="structure-of-employee space-y-6">
+          {/* عنوان رئيسي */}
+          <div className="text-[15px] text-white p-3 bg-[#176d6a] text-right rounded-md">
             الهيكل التنظيمي للموظف
           </div>
 
+          {/* المستطيل الأبيض يحتوي على جميع الحقول */}
           <div className="bg-white p-6 rounded-lg shadow-md grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 rtl">
             <div>
               <label className="block text-right font-medium mb-1">
@@ -254,7 +320,6 @@ const JobInformationDisplay = ({ nationalId }) => {
               </span>
             </div>
 
-            {/* المجموعات الوظيفية */}
             <div>
               <label className="block text-right font-medium mb-1">
                 المجموعات الوظيفية
@@ -264,103 +329,30 @@ const JobInformationDisplay = ({ nationalId }) => {
               </span>
             </div>
 
-            {/* المجموعات النوعية */}
+            {/* المدة المحتفظ بها في صف واحد */}
             <div>
               <label className="block text-right font-medium mb-1">
-                المجموعات النوعية
+                المدة المحتفظ بها
               </label>
-              <span className="p-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
-                {getNameById(employee.jobSubGroupId, jobSubGroups)}
-              </span>
-            </div>
-
-            {/* مسمي الوظيفة */}
-            <div>
-              <label className="block text-right font-medium mb-1">
-                مسمي الوظيفة الحالية
-              </label>
-              <span className="p-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
-                {getNameById(employee.jobNameId, jobNames)}
-              </span>
-            </div>
-
-            <div>
-              <label className="block text-right font-medium mb-1">
-                الدرجة الوظيفية
-              </label>
-              <span className="p-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
-                {getNameById(employee.fincialDegreeId, fincialDegrees)}
-              </span>
-            </div>
-
-            <div>
-              <label className="block text-right font-medium mb-1">
-                تاريخ الدرجة
-              </label>
-              <span className="p-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
-                {employee.fincialDegreeDate || "غير محدد"}
-              </span>
-            </div>
-
-            <div>
-              <label className="block text-right font-medium mb-1">
-                لديه الدرجة الحالية ؟
-              </label>
-              <span className="p-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
-                {employee.currentDegree ? "نعم" : "لا"}
-              </span>
-            </div>
-
-            <div>
-              <label className="block text-right font-medium mb-1">
-                تاريخ الوظيفة المسكن عليها
-              </label>
-              <span className="p-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
-                {employee.fJobDate || "غير محدد"}
-              </span>
-            </div>
-
-            <div>
-              <label className="block text-right font-medium mb-1">
-                الوجود في العمل
-              </label>
-              <span className="p-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
-                {employee.isExist ? "نعم" : "لا"}
-              </span>
-            </div>
-
-            <div>
-              <label className="block text-right font-medium mb-1">
-                حالة الموظف
-              </label>
-              <span className="p-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
-                {getNameById(employee.existaceCaseId, existaceCases)}
-              </span>
-            </div>
-          </div>
-
-          <div className="text-[15px] text-white mb-6 p-3 bg-[#176d6a] text-right">
-            <div className="block text-right font-medium mb-1 ">
-              المده المحتفظ بها للموظف
-            </div>
-            <div className="inputs flex justify-between text-black">
-              <div>
-                <label className="mb-1 text-white semi-bold">يوم</label>
-                <span className="px-4 py-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
-                  {employee.reservedDays || "0"}
-                </span>
-              </div>
-              <div>
-                <label className="mb-1 text-white semi-bold">شهر</label>
-                <span className="px-4 py-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
-                  {employee.reservedMonths || "0"}
-                </span>
-              </div>
-              <div>
-                <label className="mb-1 text-white semi-bold">سنة</label>
-                <span className="px-4 py-2 w-full block border border-gray-300 rounded-md bg-gray-100 text-right">
-                  {employee.reservedYears || "0"}
-                </span>
+              <div className="flex flex-wrap gap-4">
+                <div className="flex items-center gap-2">
+                  <label className="text-right font-medium">يوم</label>
+                  <span className="p-2 min-w-[60px] text-center block border border-gray-300 rounded-md bg-gray-100">
+                    {employee.reservedDays || "0"}
+                  </span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <label className="text-right font-medium">شهر</label>
+                  <span className="p-2 min-w-[60px] text-center block border border-gray-300 rounded-md bg-gray-100">
+                    {employee.reservedMonths || "0"}
+                  </span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <label className="text-right font-medium">سنة</label>
+                  <span className="p-2 min-w-[60px] text-center block border border-gray-300 rounded-md bg-gray-100">
+                    {employee.reservedYears || "0"}
+                  </span>
+                </div>
               </div>
             </div>
           </div>
