@@ -24,7 +24,7 @@ const SalaryDetails = ({ empId }) => {
       try {
         const response = await fetch(`http://193.227.24.29:5000/api/Salary`);
         const data = await response.json();
-        console.log("Salary data:", data);
+
         setSalaryData(data);
       } catch (error) {
         console.error("Error fetching salary data:", error);

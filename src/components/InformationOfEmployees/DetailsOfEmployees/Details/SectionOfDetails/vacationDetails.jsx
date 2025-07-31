@@ -26,7 +26,7 @@ const VacationDetails = ({ empId }) => {
       try {
         const response = await fetch(`http://193.227.24.29:5000/api/Vacation`);
         const data = await response.json();
-        console.log("Vacation data:", data);
+
         setVacationData(data);
       } catch (error) {
         console.error("Error fetching vacation data:", error);
@@ -43,7 +43,7 @@ const VacationDetails = ({ empId }) => {
           `http://193.227.24.29:5000/api/VacationType`
         );
         const data = await response.json();
-        console.log("Vacation data type:", data);
+
         setVacationDataType(data);
       } catch (error) {
         console.error("Error fetching vacation data type:", error);

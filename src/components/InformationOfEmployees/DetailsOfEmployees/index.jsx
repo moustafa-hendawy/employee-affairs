@@ -127,7 +127,6 @@ const Index = () => {
     }
 
     const url = `http://193.227.24.29:5000/api/Employee?${params.toString()}`;
-    console.log("جاري جلب البيانات من:", url);
 
     fetch(url)
       .then((res) => {
@@ -142,7 +141,6 @@ const Index = () => {
         return res.json();
       })
       .then((data) => {
-        console.log(data);
         setSearchResults(Array.isArray(data) ? data : []);
         setCurrentPage(1);
       })

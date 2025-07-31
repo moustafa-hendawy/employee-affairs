@@ -115,7 +115,6 @@ const MandateDataDetails = ({ empId }) => {
       ...formData,
       empId: empId,
     };
-    console.log(payload);
 
     try {
       let response;

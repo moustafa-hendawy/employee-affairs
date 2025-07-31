@@ -23,7 +23,7 @@ const MilitaryState = ({ empId }) => {
           `http://193.227.24.29:5000/api/MilitaryState`
         );
         const data = await response.json();
-        console.log("Military data:", data);
+
         setMilitaryData(data);
       } catch (error) {
         console.error("Error fetching military data:", error);
@@ -40,7 +40,7 @@ const MilitaryState = ({ empId }) => {
           `http://193.227.24.29:5000/api/MilitaryStateType`
         );
         const data = await response.json();
-        console.log("Military data:", data);
+
         setMilitaryDataType(data);
       } catch (error) {
         console.error("Error fetching military state type:", error);

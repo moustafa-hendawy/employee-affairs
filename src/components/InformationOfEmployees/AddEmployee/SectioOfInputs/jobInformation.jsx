@@ -592,7 +592,8 @@ const JobInformation = ({ formData, handleChange, setFormData }) => {
                 الوجود في العمل
               </label>
               <input
-                type="checkbo requiredx"
+                required
+                type="checkbox"
                 className="border border-gray-300 rounded-md p-2 w-full"
                 name="isExist"
                 checked={formData.isExist}

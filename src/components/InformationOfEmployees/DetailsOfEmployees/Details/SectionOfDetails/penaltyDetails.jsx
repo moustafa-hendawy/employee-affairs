@@ -28,7 +28,7 @@ const PenaltyDetails = ({ empId }) => {
       try {
         const response = await fetch(`http://193.227.24.29:5000/api/Penalty`);
         const data = await response.json();
-        console.log("Penalty data:", data);
+
         setPenaltyData(data);
       } catch (error) {
         console.error("Error fetching penalty data:", error);
@@ -44,7 +44,7 @@ const PenaltyDetails = ({ empId }) => {
           `http://193.227.24.29:5000/api/PenaltyCase`
         );
         const data = await response.json();
-        console.log("Penalty data:", data);
+
         setPenaltyDataCase(data);
       } catch (error) {
         console.error("Error fetching penalty data case:", error);
@@ -60,7 +60,7 @@ const PenaltyDetails = ({ empId }) => {
           `http://193.227.24.29:5000/api/PenaltyType`
         );
         const data = await response.json();
-        console.log("Penalty data:", data);
+
         setPenaltyDataType(data);
       } catch (error) {
         console.error("Error fetching penalty data type:", error);

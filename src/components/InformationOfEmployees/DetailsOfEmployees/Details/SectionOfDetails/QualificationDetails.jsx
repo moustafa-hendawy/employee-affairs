@@ -112,7 +112,6 @@ const QualificationDetails = ({ empId }) => {
       nationalID: empId,
       id: editingId,
     };
-    console.log(payload);
 
     try {
       let response;

@@ -122,7 +122,7 @@ const DetailsOfEmployee = () => {
       try {
         const updatedEmployee = {
           ...employee,
-          isExist: true,
+          isExist: false,
         };
 
         const response = await fetch(

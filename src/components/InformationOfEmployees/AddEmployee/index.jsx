@@ -66,7 +66,7 @@ const Index = () => {
     reservedMonths: 0,
     reservedYears: 0,
     disabilityType: "",
-    disabilityFamilyMember: "",
+    disabilityFamilyMember: "1",
     degreeDate: "",
     currentDegree: false,
     fincialDegreeDate: "",
@@ -97,7 +97,6 @@ const Index = () => {
         }
 
         const data = await response.json();
-        console.log("Fetched data:", data);
 
         // Process the data properly
 
@@ -117,32 +116,32 @@ const Index = () => {
     try {
       const cleanedData = {
         ...formData,
-        facultyId: parseInt(formData.facultyId) || 0,
-        jobGroupId: parseInt(formData.jobGroupId) || 0,
-        jobSubGroupId: parseInt(formData.jobSubGroupId) || 0,
-        jobNameId: parseInt(formData.jobNameId) || 0,
-        subAdId: parseInt(formData.subAdId) || 0,
-        departmentId: parseInt(formData.departmentId) || 0,
-        existaceCaseId: parseInt(formData.existaceCaseId) || 0,
-        taminNo: parseInt(formData.taminNo) || 0,
-        appointDN: parseInt(formData.appointDN) || 0,
-        experanceDN: parseInt(formData.experanceDN) || 0,
-        healthStateId: parseInt(formData.healthStateId) || 0,
-        socialStateId: parseInt(formData.socialStateId) || 0,
-        governrateId: parseInt(formData.governrateId) || 0,
-        workEndDec: parseInt(formData.workEndDec) || 0,
-        reservedDays: parseInt(formData.reservedDays) || 0,
-        reservedMonths: parseInt(formData.reservedMonths) || 0,
-        reservedYears: parseInt(formData.reservedYears) || 0,
-        fincialDegreeId: parseInt(formData.fincialDegreeId) || 0,
-        gender: parseInt(formData.gender) || 0,
-        nonExistanceTypeId: formData.nonExistanceTypeId || 0,
+        facultyId: parseInt(formData.facultyId) || 1,
+        jobGroupId: parseInt(formData.jobGroupId) || 1,
+        jobSubGroupId: parseInt(formData.jobSubGroupId) || 1,
+        jobNameId: parseInt(formData.jobNameId) || 1,
+        subAdId: parseInt(formData.subAdId) || 1,
+        departmentId: parseInt(formData.departmentId) || 1,
+        existaceCaseId: parseInt(formData.existaceCaseId) || 1,
+        taminNo: parseInt(formData.taminNo) || 1,
+        appointDN: parseInt(formData.appointDN) || 1,
+        experanceDN: parseInt(formData.experanceDN) || 1,
+        healthStateId: parseInt(formData.healthStateId) || 1,
+        socialStateId: parseInt(formData.socialStateId) || 1,
+        governrateId: parseInt(formData.governrateId) || 1,
+        workEndDec: parseInt(formData.workEndDec) || 1,
+        reservedDays: parseInt(formData.reservedDays) || 1,
+        reservedMonths: parseInt(formData.reservedMonths) || 1,
+        reservedYears: parseInt(formData.reservedYears) || 1,
+        fincialDegreeId: parseInt(formData.fincialDegreeId) || 1,
+        gender: parseInt(formData.gender),
+        nonExistanceTypeId: formData.nonExistanceTypeId || 1,
         serial: formData.serial || Math.floor(Math.random() * 10000) + 1000,
-        code: formData.code || 0,
-        lastBalance: formData.lastBalance || 0,
-        currentBalance: formData.currentBalance || 0,
-        lastYearBalance: formData.lastYearBalance || 0,
-        sickBalance: formData.sickBalance || 0,
+        code: formData.code || 1,
+        lastBalance: formData.lastBalance || 1,
+        currentBalance: formData.currentBalance || 1,
+        lastYearBalance: formData.lastYearBalance || 1,
+        sickBalance: formData.sickBalance || 1,
         degreeDate:
           formData.degreeDate ||
           formData.fincialDegreeDate ||
@@ -199,7 +198,7 @@ const Index = () => {
       const url = id
         ? `http://193.227.24.29:5000/api/Employee/UpdateEmployee/${id}`
         : "http://193.227.24.29:5000/api/Employee";
-      console.log(cleanedData[0]);
+
       const response = await fetch(url, {
         method,
         headers: {
@@ -239,7 +238,7 @@ const Index = () => {
       }
 
       const result = response;
-      console.log("Success:", result);
+
       alert(id ? "تم تحديث البيانات بنجاح!" : "تم حفظ البيانات بنجاح!");
       navigate(-1); // Go back after successful submission
     } catch (error) {

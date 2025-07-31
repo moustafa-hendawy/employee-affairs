@@ -20,7 +20,7 @@ const LagnaDetails = ({ empId }) => {
       try {
         const response = await fetch(`http://193.227.24.29:5000/api/Lagna`);
         const data = await response.json();
-        console.log("Lagna data:", data);
+
         setLagnaData(data);
       } catch (error) {
         console.error("Error fetching lagna data:", error);
@@ -218,7 +218,7 @@ const LagnaDetails = ({ empId }) => {
                 </label>
                 <input
                   id="decisionNo"
-                  type="text"
+                  type="number"
                   name="decisionNo"
                   placeholder="أدخل رقم قرار اللجنة"
                   value={formData.decisionNo || ""}

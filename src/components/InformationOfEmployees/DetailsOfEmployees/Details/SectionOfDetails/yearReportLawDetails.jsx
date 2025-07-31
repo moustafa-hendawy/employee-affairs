@@ -9,7 +9,7 @@ const YearReportLawDetails = ({ empId }) => {
         `http://193.227.24.29:5000/api/YearReportLaw`
       );
       const data = await response.json();
-      console.log("Year Report Law details:", data);
+
       setYearReportLawDetails(data);
     } catch (error) {
       console.error("Error fetching year report law details:", error);

@@ -22,7 +22,7 @@ const ThanksLetter = ({ empId }) => {
           `http://193.227.24.29:5000/api/ThanksLetter`
         );
         const data = await response.json();
-        console.log("Thanks letter data:", data);
+
         setThanksLetterData(data);
       } catch (error) {
         console.error("Error fetching thanks letter data:", error);
